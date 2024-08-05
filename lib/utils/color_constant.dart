@@ -31,6 +31,30 @@ class ColorNeutral {
   static Color neutral50 = const Color(0xFFFAFAFA);
 }
 
+class ColorInfo {
+  static Color info900 = const Color(0xFF142631);
+  static Color info800 = const Color(0xFF294C62);
+  static Color info700 = const Color(0xFF3D7293);
+  static Color info600 = const Color(0xFF5298C4);
+  static Color info500 = const Color(0xFF66BEF5);
+  static Color info400 = const Color(0xFF85CBF7);
+  static Color info300 = const Color(0xFFA3D8F9);
+  static Color info200 = const Color(0xFFC2E5FB);
+  static Color info100 = const Color(0xFFE0F2FD);
+}
+
+class ColorDanger {
+  static Color danger900 = const Color(0xFF270903);
+  static Color danger800 = const Color(0xFF4E1207);
+  static Color danger700 = const Color(0xFF761A0A);
+  static Color danger600 = const Color(0xFF9D230E);
+  static Color danger500 = const Color(0xFFC42C11);
+  static Color danger400 = const Color(0xFFD05641);
+  static Color danger300 = const Color(0xFFDC8070);
+  static Color danger200 = const Color(0xFFE7ABA0);
+  static Color danger100 = const Color(0xFFF3D5CF);
+}
+
 class ColorCollection {
   static Color transparent = Colors.transparent;
   static Color active = const Color(0xFF5BE981);
