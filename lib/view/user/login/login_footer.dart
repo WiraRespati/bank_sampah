@@ -1,6 +1,10 @@
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+
+import '../register/register_page.dart';
 
 class LoginFooter extends StatelessWidget {
   const LoginFooter({super.key});
@@ -31,7 +35,7 @@ class LoginFooter extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  // Get.to(() => const RegisterPage());
+                  Get.to(() => const RegisterPage());
                 },
               ),
             ],
