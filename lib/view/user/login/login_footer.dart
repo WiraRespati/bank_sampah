@@ -15,7 +15,7 @@ class LoginFooter extends StatelessWidget {
       children: [
         Padding(
           padding:
-              const EdgeInsets.only(left: 24, right: 24, bottom: 32, top: 16),
+              const EdgeInsets.only(left: 24, right: 24, bottom: 18, top: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
