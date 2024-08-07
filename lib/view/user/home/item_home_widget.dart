@@ -8,7 +8,8 @@ class ItemHomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 20, top: 15, bottom: 10),
+      margin: const EdgeInsets.only(left: 20, top: 15, bottom: 10,),
+      padding: const EdgeInsets.only(right: 8),
       decoration: BoxDecoration(
         color: const Color(0xFFFAFAFA),
         borderRadius: BorderRadius.circular(8),

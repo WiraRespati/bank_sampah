@@ -1,5 +1,7 @@
 import 'package:bank_sampah/firebase_options.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
+import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
+import 'package:bank_sampah/view/user/home/home_page.dart';
 import 'package:bank_sampah/view/user/onboarding/onboarding_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home:  const OnboardingPage(),
+      home: BottomNavbar(),
     );
   }
 }

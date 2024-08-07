@@ -1,6 +1,7 @@
 import 'package:bank_sampah/controller/user/bottom_navbar_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
+import 'package:bank_sampah/view/user/history/history_page.dart';
 import 'package:bank_sampah/view/user/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,35 +40,35 @@ class BottomNavbar extends StatelessWidget {
               },
               items: [
                 SalomonBottomBarItem(
-                  icon: const Icon(Icons.home_filled),
-                  title: Text(
-                    "Beranda",
-                    style: TextStyleCollection.captionBold.copyWith(
-                      fontSize: 16,
+                    icon: const Icon(Icons.home_filled),
+                    title: Text(
+                      "Beranda",
+                      style: TextStyleCollection.captionBold.copyWith(
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  selectedColor: ColorPrimary.primary100,
-                ),
+                    selectedColor: ColorPrimary.primary100,
+                    unselectedColor: ColorNeutral.neutral700),
                 SalomonBottomBarItem(
-                  icon: const Icon(Icons.history),
-                  title: Text(
-                    "Riwayat",
-                    style: TextStyleCollection.captionBold.copyWith(
-                      fontSize: 16,
+                    icon: const Icon(Icons.history),
+                    title: Text(
+                      "Riwayat",
+                      style: TextStyleCollection.captionBold.copyWith(
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  selectedColor: ColorPrimary.primary100,
-                ),
+                    selectedColor: ColorPrimary.primary100,
+                    unselectedColor: ColorNeutral.neutral700),
                 SalomonBottomBarItem(
-                  icon: const Icon(Icons.person),
-                  title: Text(
-                    "Profil",
-                    style: TextStyleCollection.captionBold.copyWith(
-                      fontSize: 16,
+                    icon: const Icon(Icons.person),
+                    title: Text(
+                      "Profil",
+                      style: TextStyleCollection.captionBold.copyWith(
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  selectedColor: ColorPrimary.primary100,
-                ),
+                    selectedColor: ColorPrimary.primary100,
+                    unselectedColor: ColorNeutral.neutral700),
               ],
             ),
           )),
@@ -79,7 +80,7 @@ class BottomNavbar extends StatelessWidget {
       case 0:
         return const Center(child: HomePage());
       case 1:
-        return const Center(child: Text("History Page"));
+        return const Center(child: HistoryPage());
       case 2:
         return const Center(child: Text("Profile Page"));
       default:
