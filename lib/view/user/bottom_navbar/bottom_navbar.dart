@@ -1,3 +1,4 @@
+// ignore_for_file: deprecated_member_use
 import 'package:bank_sampah/controller/user/bottom_navbar_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
@@ -5,6 +6,7 @@ import 'package:bank_sampah/view/user/history/history_page.dart';
 import 'package:bank_sampah/view/user/home/home_page.dart';
 import 'package:bank_sampah/view/user/profile/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -41,7 +43,14 @@ class BottomNavbar extends StatelessWidget {
               },
               items: [
                 SalomonBottomBarItem(
-                    icon: const Icon(Icons.home_filled),
+                    icon: SvgPicture.asset(
+                      "assets/images/logo_home.svg",
+                      height: 24,
+                      width: 24,
+                      color: controller.currentIndex.value == 0
+                          ? ColorPrimary.primary100
+                          : ColorNeutral.neutral700,
+                    ),
                     title: Text(
                       "Beranda",
                       style: TextStyleCollection.captionBold.copyWith(
@@ -51,7 +60,14 @@ class BottomNavbar extends StatelessWidget {
                     selectedColor: ColorPrimary.primary100,
                     unselectedColor: ColorNeutral.neutral700),
                 SalomonBottomBarItem(
-                    icon: const Icon(Icons.history),
+                    icon: SvgPicture.asset(
+                      "assets/images/logo_history.svg",
+                      height: 24,
+                      width: 24,
+                      color: controller.currentIndex.value == 1
+                          ? ColorPrimary.primary100
+                          : ColorNeutral.neutral700,
+                    ),
                     title: Text(
                       "Riwayat",
                       style: TextStyleCollection.captionBold.copyWith(
@@ -61,7 +77,14 @@ class BottomNavbar extends StatelessWidget {
                     selectedColor: ColorPrimary.primary100,
                     unselectedColor: ColorNeutral.neutral700),
                 SalomonBottomBarItem(
-                    icon: const Icon(Icons.person),
+                    icon: SvgPicture.asset(
+                      "assets/images/logo_profile.svg",
+                      height: 24,
+                      width: 24,
+                      color: controller.currentIndex.value == 2
+                          ? ColorPrimary.primary100
+                          : ColorNeutral.neutral700,
+                    ),
                     title: Text(
                       "Profil",
                       style: TextStyleCollection.captionBold.copyWith(

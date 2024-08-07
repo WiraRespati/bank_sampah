@@ -15,18 +15,18 @@ class ProfilePage extends StatelessWidget {
           children: [
             const BannerProfileWidget(),
             ItemProfileWidget(
-              title: 'Ubah Informasi Profile',
-              icon: Icons.edit_outlined,
+              title: 'Ubah Informasi Profil',
+              logo: 'assets/images/logo_settings.svg',
               onTap: () {},
             ),
             ItemProfileWidget(
               title: 'Tentang Aplikasi',
-              icon: Icons.warning_rounded,
+              logo: 'assets/images/logo_about.svg',
               onTap: () {},
             ),
             ItemProfileWidget(
               title: 'Keluar dari Akun',
-              icon: Icons.exit_to_app_outlined,
+              logo: 'assets/images/logo_exit.svg',
               onTap: () {},
             ),
           ],
