@@ -1,5 +1,4 @@
 import 'package:bank_sampah/utils/color_constant.dart';
-import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:bank_sampah/view/user/profile/banner_profile_widget.dart';
 import 'package:bank_sampah/view/user/profile/item_profile_widget.dart';
 import 'package:flutter/material.dart';
