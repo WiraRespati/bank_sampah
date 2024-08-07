@@ -1,5 +1,8 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
+import 'package:bank_sampah/view/user/history/item_history_convert_widget.dart';
 import 'package:bank_sampah/view/user/home/banner_home_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -48,27 +51,19 @@ class HistoryPage extends StatelessWidget {
                       child: TabBarView(
                         children: [
                           ListView.builder(
+                            padding: EdgeInsets.zero,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemCount: 5,
+                            itemCount: 7,
                             itemBuilder: (context, index) {
-                              return const ListTile(
-                                title: Text('Tukar Koin'),
-                                subtitle: Text('10 Koin'),
-                                leading: Icon(Icons.history),
-                                trailing: Icon(Icons.arrow_forward_ios),
-                              );
+                              return const ItemHistoryConvertWidget();
                             },
                           ),
                           ListView.builder(
+                            padding: EdgeInsets.zero,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemCount: 5,
+                            itemCount: 7,
                             itemBuilder: (context, index) {
-                              return const ListTile(
-                                title: Text('Kumpul Sampah'),
-                                subtitle: Text('10 Kg'),
-                                leading: Icon(Icons.history),
-                                trailing: Icon(Icons.arrow_forward_ios),
-                              );
+                              return const ItemHistoryConvertWidget();
                             },
                           ),
                         ],

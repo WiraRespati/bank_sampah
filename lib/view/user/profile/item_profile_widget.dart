@@ -1,14 +1,19 @@
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ItemProfileWidget extends StatelessWidget {
-  const ItemProfileWidget(
-      {super.key, this.onTap, required this.title, required this.icon});
+  const ItemProfileWidget({
+    super.key,
+    this.onTap,
+    required this.title,
+    required this.logo,
+  });
 
   final Function()? onTap;
   final String title;
-  final IconData icon;
+  final String logo;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +44,10 @@ class ItemProfileWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  icon,
-                  size: 24,
-                  color: ColorPrimary.primary100,
+                SvgPicture.asset(
+                  logo,
+                  height: 24,
+                  width: 24,
                 ),
                 const SizedBox(
                   width: 12,
