@@ -3,6 +3,7 @@ import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:bank_sampah/view/user/history/history_page.dart';
 import 'package:bank_sampah/view/user/home/home_page.dart';
+import 'package:bank_sampah/view/user/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -82,9 +83,9 @@ class BottomNavbar extends StatelessWidget {
       case 1:
         return const Center(child: HistoryPage());
       case 2:
-        return const Center(child: Text("Profile Page"));
+        return const Center(child: ProfilePage());
       default:
-        return const Center(child: Text("Home Page"));
+        return const Center(child: HomePage());
     }
   }
 }
