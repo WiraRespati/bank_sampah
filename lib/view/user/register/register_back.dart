@@ -17,7 +17,7 @@ class RegisterBack extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8),
           child: IconButton(
             onPressed: () {
-              Get.to(() => const LoginPage());
+              Get.to(() =>  LoginPage());
             },
             style: ButtonStyle(
               overlayColor: WidgetStatePropertyAll(ColorNeutral.neutral100),

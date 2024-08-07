@@ -1,5 +1,6 @@
 import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -80,7 +81,9 @@ class LoginController extends GetxController {
           backgroundColor: Colors.red,
           colorText: Colors.white,
         );
-        print(e.code);
+        if (kDebugMode) {
+          print(e.code);
+        }
       }
     }
   }

@@ -17,7 +17,7 @@ class OnboardingButtonWidget extends StatelessWidget {
         width: double.infinity,
         child: ButtonWidget(
           onPressed: () {
-            Get.to(() => const LoginPage());
+            Get.to(() =>  LoginPage());
           },
           text: 'Mari Menabung Sampah',
           textColor: ColorCollection.white,

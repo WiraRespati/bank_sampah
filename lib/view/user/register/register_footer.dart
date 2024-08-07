@@ -23,7 +23,7 @@ class RegisterFooter extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Get.to(() => const LoginPage());
+              Get.to(() =>  LoginPage());
             },
             child: Text(
               'Masuk',

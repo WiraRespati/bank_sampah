@@ -18,38 +18,60 @@ class RegisterPage extends StatelessWidget {
     );
     return Scaffold(
       backgroundColor: ColorNeutral.neutral50,
-      body: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const RegisterBack(),
-                  const RegisterBanner(),
-                  RegisterForm(),
-                ],
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: MediaQuery.of(context).size.height,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  RegisterButton(
-                    onPressed: () {
-                      registerController.register();
-                    },
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const RegisterBack(),
+                      const RegisterBanner(),
+                      RegisterForm(),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-                  const RegisterFooter(),
-                  const SizedBox(height: 19),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RegisterButton(
+                        onPressed: () {
+                          registerController.register();
+                        },
+                      ),
+                      const SizedBox(height: 16),
+                      const RegisterFooter(),
+                      const SizedBox(height: 19),
+                    ],
+                  ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+          Obx(
+            () {
+              if (registerController.isLoadingRegister.value) {
+                return Container(
+                  color: ColorNeutral.neutral50.withOpacity(0.5),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        ColorPrimary.primary100,
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                return const SizedBox.shrink();
+              }
+            },
+          ),
+        ],
       ),
     );
   }

@@ -76,12 +76,16 @@ class RegisterController extends GetxController {
         'role': 'user',
       });
       isLoadingRegister.value = false;
+      nameController.clear();
+      emailController.clear();
+      nikController.clear();
+      passwordController.clear();
       Get.snackbar(
         'Berhasil',
         'Pendaftaran berhasil, silahkan login',
         snackPosition: SnackPosition.TOP,
       );
-      Get.to(() => const LoginPage());
+      Get.offAll(() =>  LoginPage());
     } on FirebaseAuthException catch (e) {
       isLoadingRegister.value = false;
       if (e.code == 'weak-password') {
