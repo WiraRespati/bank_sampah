@@ -1,6 +1,5 @@
 import 'package:bank_sampah/controller/user/login_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
-import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
 import 'package:bank_sampah/view/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +19,7 @@ class LoginButton extends StatelessWidget {
         height: 48,
         child: ButtonWidget(
           onPressed: () async {
-            Get.to(BottomNavbar());
+            loginController.login();
           },
           text: 'Masuk',
           textColor: ColorNeutral.neutral100,
