@@ -1,6 +1,8 @@
+import 'package:bank_sampah/view/user/login/login_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
   final errorMessageEmail = Rxn<String>();
@@ -14,6 +16,9 @@ class RegisterController extends GetxController {
   TextEditingController nikController = TextEditingController();
 
   RxBool isLoadingRegister = false.obs;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   final RegExp emailRegExp = RegExp(
     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
@@ -54,6 +59,44 @@ class RegisterController extends GetxController {
       errorMessageNIK.value = "NIK harus 16 huruf";
     } else {
       errorMessageNIK.value = null;
+    }
+  }
+
+  void register() async {
+    try {
+      isLoadingRegister.value = true;
+      await _auth.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
+        'name': nameController.text,
+        'email': emailController.text,
+        'nik': nikController.text,
+        'role': 'user',
+      });
+      isLoadingRegister.value = false;
+      Get.snackbar(
+        'Berhasil',
+        'Pendaftaran berhasil, silahkan login',
+        snackPosition: SnackPosition.TOP,
+      );
+      Get.to(() => const LoginPage());
+    } on FirebaseAuthException catch (e) {
+      isLoadingRegister.value = false;
+      if (e.code == 'weak-password') {
+        Get.snackbar(
+          'Kata sandi lemah',
+          'Kata sandi harus lebih dari 6 huruf',
+          snackPosition: SnackPosition.TOP,
+        );
+      } else if (e.code == 'email-already-in-use') {
+        Get.snackbar(
+          'Email sudah terdaftar',
+          'Email sudah terdaftar, silahkan gunakan email lain',
+          snackPosition: SnackPosition.TOP,
+        );
+      }
     }
   }
 

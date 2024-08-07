@@ -14,13 +14,13 @@ class RegisterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SizedBox(
         width: double.infinity,
         height: 48,
         child: ButtonWidget(
-          onPressed: () async {},
+          onPressed: onPressed,
           text: 'Daftar',
           textColor: ColorNeutral.neutral100,
         ),
