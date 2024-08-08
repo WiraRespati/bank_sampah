@@ -1,7 +1,10 @@
 import 'package:bank_sampah/utils/color_constant.dart';
+import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:bank_sampah/view/user/profile/banner_profile_widget.dart';
+import 'package:bank_sampah/view/user/profile/edit_profile/edit_profile_page.dart';
 import 'package:bank_sampah/view/user/profile/item_profile_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -15,13 +18,13 @@ class ProfilePage extends StatelessWidget {
           children: [
             const BannerProfileWidget(),
             ItemProfileWidget(
-              title: 'Ubah Informasi Profil',
-              logo: 'assets/images/logo_settings.svg',
+              title: 'Ubah Informasi Profile',
+              icon: Icons.edit_outlined,
               onTap: () {},
             ),
             ItemProfileWidget(
               title: 'Tentang Aplikasi',
-              logo: 'assets/images/logo_about.svg',
+              icon: Icons.warning_rounded,
               onTap: () {},
             ),
             ItemProfileWidget(
@@ -29,6 +32,7 @@ class ProfilePage extends StatelessWidget {
               logo: 'assets/images/logo_exit.svg',
               onTap: () {},
             ),
+            
           ],
         ),
       ),
