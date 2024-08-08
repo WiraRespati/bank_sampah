@@ -116,14 +116,20 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              '07/08/2024 09:00',
-                              style: TextStyleCollection.captionMedium.copyWith(
-                                fontSize: 16,
-                                color: ColorPrimary.primary100,
+                            Center(
+                              child: Text(
+                                '07/08/2024 09:00',
+                                style: TextStyleCollection.captionMedium.copyWith(
+                                  fontSize: 16,
+                                  color: ColorPrimary.primary100,
+                                ),
                               ),
                             ),
+                            const SizedBox(
+                              height: 8,
+                            ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
                                   'assets/images/koin.png',
@@ -143,9 +149,14 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            const SizedBox(
+                              height: 8,
+                            ),
                             Text(
-                              'Beras Mangga 10 Kg ',
+                              'Beras Mangga 10Kg Beras Mangga 10Kg BerasMangga10KgBerasMangga10KgBerasMangga 10 Kg',
+                              textAlign: TextAlign.justify,
                               maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyleCollection.captionMedium.copyWith(
                                 fontSize: 16,
                                 color: ColorPrimary.primary100,
