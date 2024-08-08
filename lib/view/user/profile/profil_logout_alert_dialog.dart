@@ -1,5 +1,6 @@
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
+import 'package:bank_sampah/view/user/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,7 +46,7 @@ class ProfilLogoutAlertDialog extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                // logoutController.logout();
+                Get.to(() => LoginPage());
               },
               child: Container(
                 width: 112,

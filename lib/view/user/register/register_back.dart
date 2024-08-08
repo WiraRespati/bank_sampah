@@ -1,11 +1,15 @@
+import 'package:bank_sampah/controller/user/register_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/view/user/login/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 
 class RegisterBack extends StatelessWidget {
-  const RegisterBack({super.key});
+  RegisterBack({super.key});
+
+  final RegisterController registerController = Get.put(
+    RegisterController(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,8 @@ class RegisterBack extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8),
           child: IconButton(
             onPressed: () {
-              Get.to(() =>  LoginPage());
+              Get.to(() => LoginPage());
+              registerController.clearText();
             },
             style: ButtonStyle(
               overlayColor: WidgetStatePropertyAll(ColorNeutral.neutral100),

@@ -1,4 +1,4 @@
-import 'package:bank_sampah/services/user/login.dart';
+import 'package:bank_sampah/services/user/login_service.dart';
 import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,52 +37,62 @@ class LoginController extends GetxController {
   }
 
   void login() async {
+    validatorEmail(emailController.text);
+    validatorPassword(passwordController.text);
+
+    if (errorMessageEmail.value != null || errorMessagePassword.value != null) {
+      Get.snackbar(
+        'Error',
+        'Silahkan perbaiki kesalahan pada form',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
+
     try {
       isLoadingLogin.value = true;
-      LoginService()
-          .signInWithEmailAndPassword(
-              emailController.text, passwordController.text)
-          .then((value) {
-        if (value == 'success') {
-          isLoadingLogin.value = false;
-          Get.snackbar(
-            'Berhasil',
-            'Login berhasil',
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: Colors.green,
-            colorText: Colors.white,
-          );
-          Get.offAll(() => BottomNavbar());
-        } else if (value == 'user-not-found') {
-          isLoadingLogin.value = false;
-          Get.snackbar(
-            'Gagal',
-            'Pengguna tidak ditemukan',
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: Colors.red,
-            colorText: Colors.white,
-          );
-        } else if (value == 'wrong-password') {
-          isLoadingLogin.value = false;
-          Get.snackbar(
-            'Gagal',
-            'Kata sandi salah',
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: Colors.red,
-            colorText: Colors.white,
-          );
-        } else {
-          isLoadingLogin.value = false;
-          Get.snackbar(
-            'Gagal',
-            'Email atau kata sandi salah',
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: Colors.red,
-            colorText: Colors.white,
-          );
-        }
-      });
+      String result = await LoginService().signInWithEmailAndPassword(
+          emailController.text, passwordController.text);
       isLoadingLogin.value = false;
+
+      if (result == 'success') {
+        Get.snackbar(
+          'Berhasil',
+          'Login berhasil',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+        Get.offAll(() => BottomNavbar());
+        emailController.clear();
+        passwordController.clear();
+      } else if (result == 'user-not-found') {
+        Get.snackbar(
+          'Gagal',
+          'Pengguna tidak ditemukan',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      } else if (result == 'wrong-password') {
+        Get.snackbar(
+          'Gagal',
+          'Kata sandi salah',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      } else {
+        Get.snackbar(
+          'Gagal',
+          'Email atau kata sandi salah',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      }
     } catch (e) {
       isLoadingLogin.value = false;
       Get.snackbar(

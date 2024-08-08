@@ -31,7 +31,7 @@ class RegisterPage extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const RegisterBack(),
+                      RegisterBack(),
                       const RegisterBanner(),
                       RegisterForm(),
                     ],

@@ -1,4 +1,4 @@
-import 'package:bank_sampah/services/user/register.dart';
+import 'package:bank_sampah/services/user/register_service.dart';
 import 'package:bank_sampah/view/user/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -59,6 +59,25 @@ class RegisterController extends GetxController {
   }
 
   void register() async {
+    validatorEmail(emailController.text);
+    validatorPassword(passwordController.text);
+    validatorName(nameController.text);
+    validatorNIK(nikController.text);
+
+    if (errorMessageEmail.value != null ||
+        errorMessagePassword.value != null ||
+        errorMessageName.value != null ||
+        errorMessageNIK.value != null) {
+      Get.snackbar(
+        'Error',
+        'Silahkan perbaiki kesalahan pada form',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
+
     try {
       isLoadingRegister.value = true;
       RegisterService()
@@ -70,11 +89,7 @@ class RegisterController extends GetxController {
       )
           .then((value) {
         if (value == 'success') {
-          isLoadingRegister.value = false;
-          nameController.clear();
-          emailController.clear();
-          nikController.clear();
-          passwordController.clear();
+          clearText();
           Get.snackbar(
             'Berhasil',
             'Pendaftaran berhasil, silahkan login',
@@ -82,7 +97,6 @@ class RegisterController extends GetxController {
           );
           Get.offAll(() => LoginPage());
         } else if (value == 'weak-password') {
-          isLoadingRegister.value = false;
           Get.snackbar(
             'Kata sandi lemah',
             'Kata sandi harus lebih dari 5 huruf',
@@ -91,7 +105,6 @@ class RegisterController extends GetxController {
             colorText: Colors.white,
           );
         } else if (value == 'email-already-in-use') {
-          isLoadingRegister.value = false;
           Get.snackbar(
             'Email sudah terdaftar',
             'Email sudah terdaftar, silahkan gunakan email lain',
@@ -100,8 +113,8 @@ class RegisterController extends GetxController {
             colorText: Colors.white,
           );
         }
+        isLoadingRegister.value = false;
       });
-      isLoadingRegister.value = false;
     } catch (e) {
       isLoadingRegister.value = false;
       Get.snackbar(
@@ -110,6 +123,13 @@ class RegisterController extends GetxController {
         snackPosition: SnackPosition.TOP,
       );
     }
+  }
+
+  void clearText() {
+    nameController.clear();
+    emailController.clear();
+    nikController.clear();
+    passwordController.clear();
   }
 
   @override
