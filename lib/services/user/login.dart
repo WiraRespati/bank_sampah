@@ -10,16 +10,15 @@ class LoginService {
         email: email,
         password: password,
       );
-      return 'Login berhasil';
+      return 'success';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        return 'Pengguna tidak ditemukan';
+        return 'user-not-found';
       } else if (e.code == 'wrong-password') {
-        return 'Kata sandi salah';
+        return 'wrong-password';
       } else {
-        print('Email atau kata sandi salah');
+        return 'Email atau kata sandi salah';
       }
     }
-    return 'Email atau kata sandi salah';
   }
 }
