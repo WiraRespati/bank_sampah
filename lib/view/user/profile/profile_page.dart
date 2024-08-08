@@ -1,9 +1,9 @@
 import 'package:bank_sampah/utils/color_constant.dart';
-import 'package:bank_sampah/view/user/login/login_page.dart';
 import 'package:bank_sampah/view/user/profile/about/about_profile_page.dart';
 import 'package:bank_sampah/view/user/profile/banner_profile_widget.dart';
 import 'package:bank_sampah/view/user/profile/edit_profile/edit_profile_page.dart';
 import 'package:bank_sampah/view/user/profile/item_profile_widget.dart';
+import 'package:bank_sampah/view/user/profile/profil_logout_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +36,10 @@ class ProfilePage extends StatelessWidget {
               title: 'Keluar dari Akun',
               logo: 'assets/images/logo_exit.svg',
               onTap: () {
-                Get.to(() => LoginPage());
+                showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (context) => const ProfilLogoutAlertDialog());
               },
             ),
           ],
