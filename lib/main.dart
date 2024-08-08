@@ -1,8 +1,6 @@
 import 'package:bank_sampah/firebase_options.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
-import 'package:bank_sampah/view/user/home/home_page.dart';
-import 'package:bank_sampah/view/user/onboarding/onboarding_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
