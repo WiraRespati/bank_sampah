@@ -116,14 +116,21 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              '07/08/2024 09:00',
-                              style: TextStyleCollection.captionMedium.copyWith(
-                                fontSize: 16,
-                                color: ColorPrimary.primary100,
+                            Center(
+                              child: Text(
+                                '07/08/2024 09:00',
+                                style:
+                                    TextStyleCollection.captionMedium.copyWith(
+                                  fontSize: 16,
+                                  color: ColorPrimary.primary100,
+                                ),
                               ),
                             ),
+                            const SizedBox(
+                              height: 8,
+                            ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
                                   'assets/images/koin.png',
@@ -143,9 +150,13 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            const SizedBox(
+                              height: 8,
+                            ),
                             Text(
-                              'Beras Mangga 10 Kg ',
+                              'Beras Mangga 10Kg Beras Mangga 10Kg BerasMangga10KgBerasMangga10KgBerasMangga 10 Kg',
                               maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyleCollection.captionMedium.copyWith(
                                 fontSize: 16,
                                 color: ColorPrimary.primary100,
@@ -157,13 +168,23 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                     ),
                     actions: <Widget>[
                       Center(
-                        child: IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.close,
-                            color: ColorPrimary.primary100,
+                        child: Container(
+                          padding: const EdgeInsetsDirectional.symmetric(horizontal: 16),
+                          decoration: BoxDecoration(
+                            color: ColorPrimary.primary100.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: Text(
+                              'Tutup',
+                              style: TextStyleCollection.captionMedium.copyWith(
+                                fontSize: 14,
+                                color: ColorPrimary.primary100,
+                              ),
+                            ),
                           ),
                         ),
                       ),
