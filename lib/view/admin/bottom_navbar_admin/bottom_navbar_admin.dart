@@ -70,7 +70,7 @@ class BottomNavbarAdmin extends StatelessWidget {
                           : ColorNeutral.neutral700,
                     ),
                     title: Text(
-                      "Riwayat",
+                      "Konversi",
                       style: TextStyleCollection.captionBold.copyWith(
                         fontSize: 16,
                       ),

@@ -19,7 +19,7 @@ class OnboardingButtonWidget extends StatelessWidget {
           onPressed: () {
             Get.to(() =>  LoginPage());
           },
-          text: 'Mari Menabung Sampah',
+          text: 'Mulai Menabung Sampah',
           textColor: ColorCollection.white,
           backgroundColor: ColorPrimary.primary100,
         ),
