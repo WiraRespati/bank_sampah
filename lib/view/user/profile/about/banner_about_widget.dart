@@ -1,5 +1,8 @@
 import 'package:bank_sampah/utils/color_constant.dart';
+import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class BannerAboutWidget extends StatelessWidget {
   const BannerAboutWidget({super.key});
@@ -36,23 +39,35 @@ class BannerAboutWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Row(
-                  children: [
-                    const SizedBox(
-                      width: 18,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: IconButton(
+                    onPressed: () {
+                      Get.to(() => BottomNavbar());
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: ColorPrimary.primary100,
                     ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     Image.asset(
-                      'assets/images/logobanksampah.jpg',
+                      'assets/images/logobs.png',
                       height: 40,
                       width: 40,
                     ),
                     const SizedBox(
                       width: 10,
                     ),
-                    Image.asset(
-                      'assets/images/banksampah_title.jpg',
+                    SizedBox(
                       height: 37,
                       width: 174,
+                      child: SvgPicture.asset(
+                        'assets/images/title_bank_sampah.svg',
+                      ),
                     ),
                   ],
                 ),

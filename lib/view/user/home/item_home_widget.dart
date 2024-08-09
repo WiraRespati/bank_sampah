@@ -29,7 +29,7 @@ class ItemHomeWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
-            'assets/images/logobanksampah.jpg',
+            'assets/images/logobs.png',
             height: 132,
             width: 132,
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class OnboardingHeaderWidget extends StatelessWidget {
   const OnboardingHeaderWidget({super.key});
@@ -13,15 +14,15 @@ class OnboardingHeaderWidget extends StatelessWidget {
         Container(
           padding: const EdgeInsets.only(top: 26, bottom: 7),
           child: Image.asset(
-            'assets/images/logobanksampah.jpg',
-            height: 64,
-            width: 64,
+            "assets/images/logobs.png",
+             height: 64,
+          width: 64,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 27),
-          child: Image.asset(
-            'assets/images/banksampah_title.jpg',
+          padding: const EdgeInsets.only(bottom: 27, left: 68, right: 68),
+          child: SvgPicture.asset(
+            'assets/images/title_bank_sampah.svg',
             height: 48,
             width: 225,
           ),

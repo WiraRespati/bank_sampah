@@ -1,6 +1,7 @@
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class BannerProfileWidget extends StatelessWidget {
   const BannerProfileWidget({super.key});
@@ -36,6 +37,7 @@ class BannerProfileWidget extends StatelessWidget {
               ),
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
@@ -43,19 +45,37 @@ class BannerProfileWidget extends StatelessWidget {
                       width: 18,
                     ),
                     Image.asset(
-                      'assets/images/logobanksampah.jpg',
+                      'assets/images/logobs.png',
                       height: 40,
                       width: 40,
                     ),
                     const SizedBox(
                       width: 10,
                     ),
-                    Image.asset(
-                      'assets/images/banksampah_title.jpg',
+                    SizedBox(
                       height: 37,
                       width: 174,
+                      child: SvgPicture.asset(
+                        'assets/images/title_bank_sampah.svg',
+                      ),
                     ),
                   ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 18),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: ColorPrimary.primary100.withOpacity(0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.location_on,
+                        color: ColorPrimary.primary100,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -94,7 +114,7 @@ class BannerProfileWidget extends StatelessWidget {
                           ),
                           child: ClipOval(
                             child: Image.asset(
-                              'assets/images/logobanksampah.jpg',
+                              'assets/images/logobs.png',
                               height: 42,
                               width: 42,
                               fit: BoxFit.cover,

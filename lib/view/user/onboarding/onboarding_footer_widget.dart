@@ -20,12 +20,16 @@ class OnboardingFooterWidget extends StatelessWidget {
             ),
           ),
           Text(
-            "KKN Kelompok 6 Gunung Samarinda Gelombang 3",
+            """
+KKN Kelompok 6 Gunung Samarinda Gelombang 3
+Universitas Mulia
+""",
             style: TextStyleCollection.caption.copyWith(
               color: ColorPrimary.primary100,
               fontSize: 10,
               fontStyle: FontStyle.italic,
             ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
