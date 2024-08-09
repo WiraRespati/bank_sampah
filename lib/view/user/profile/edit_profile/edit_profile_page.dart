@@ -23,12 +23,17 @@ class EditProfilePage extends StatelessWidget {
         surfaceTintColor: ColorNeutral.neutral50,
         title: Text(
           'Edit Profil',
-          style: TextStyleCollection.subtitleBold.copyWith(fontSize: 18),
+          style: TextStyleCollection.subtitleBold.copyWith(
+            fontSize: 18,
+          ),
         ),
         toolbarHeight: 56,
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: ColorPrimary.primary100),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: ColorPrimary.primary100,
+          ),
           onPressed: () {
             FocusScope.of(context).unfocus();
             // editController.cancelEditProfile();
@@ -51,7 +56,7 @@ class EditProfilePage extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: SizedBox(
               width: double.infinity,
               height: 48,

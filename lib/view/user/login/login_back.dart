@@ -22,7 +22,7 @@ class LoginBack extends StatelessWidget {
               overlayColor: WidgetStatePropertyAll(ColorNeutral.neutral100),
             ),
             icon: Icon(
-              Icons.arrow_back,
+              Icons.arrow_back_ios,
               color: ColorPrimary.primary100,
             ),
           ),

@@ -8,7 +8,11 @@ class ItemHomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 20, top: 15, bottom: 10,),
+      margin: const EdgeInsets.only(
+        left: 20,
+        top: 15,
+        bottom: 10,
+      ),
       padding: const EdgeInsets.only(right: 8),
       decoration: BoxDecoration(
         color: const Color(0xFFFAFAFA),
@@ -28,10 +32,13 @@ class ItemHomeWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            'assets/images/logobs.png',
-            height: 132,
-            width: 132,
+          Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: Image.asset(
+              'assets/images/logobs.png',
+              height: 132,
+              width: 132,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(
@@ -65,7 +72,7 @@ class ItemHomeWidget extends StatelessWidget {
                   fontSize: 12,
                   color: const Color(0xFFF39E09),
                 ),
-              )
+              ),
             ],
           )
         ],
