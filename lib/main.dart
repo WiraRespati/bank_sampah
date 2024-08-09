@@ -1,6 +1,6 @@
 import 'package:bank_sampah/firebase_options.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
-import 'package:bank_sampah/view/admin/bottom_navbar_admin/bottom_navbar_admin.dart';
+import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: BottomNavbarAdmin(),
+      home: BottomNavbar(),
     );
   }
 }

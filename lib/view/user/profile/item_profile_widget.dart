@@ -1,7 +1,9 @@
+import 'package:bank_sampah/controller/user/item_profile_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class ItemProfileWidget extends StatelessWidget {
   const ItemProfileWidget({
@@ -17,55 +19,68 @@ class ItemProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.only(left: 32, right: 26),
-        height: 70,
-        decoration: BoxDecoration(
-          color: ColorNeutral.neutral50,
-          border: const Border(
-            bottom: BorderSide(
-              color: Color(0x801C9351),
-              width: 1,
+    final controller = Get.put(ItemProfileController(), tag: title);
+
+    return GestureDetector(
+      onTapDown: (_) => controller.setTapped(true),
+      onTapUp: (_) {
+        controller.setTapped(false);
+        if (onTap != null) {
+          onTap!();
+        }
+      },
+      onTapCancel: () => controller.setTapped(false),
+      child: Obx(
+        () => Container(
+          padding: const EdgeInsets.only(left: 32, right: 26),
+          height: 70,
+          decoration: BoxDecoration(
+            color: controller.isTapped.value
+                ? ColorPrimary.primary100.withOpacity(0.1)
+                : ColorNeutral.neutral50,
+            border: const Border(
+              bottom: BorderSide(
+                color: Color(0x801C9351),
+                width: 1,
+              ),
             ),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x331C9351),
+                offset: Offset(0, 4),
+                blurRadius: 20,
+                spreadRadius: 0,
+              ),
+            ],
           ),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0x331C9351),
-              offset: Offset(0, 4),
-              blurRadius: 20,
-              spreadRadius: 0,
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                SvgPicture.asset(
-                  logo,
-                  height: 24,
-                  width: 24,
-                ),
-                const SizedBox(
-                  width: 12,
-                ),
-                Text(
-                  title,
-                  style: TextStyleCollection.bodyMedium.copyWith(
-                    fontSize: 16,
-                    color: ColorPrimary.primary100,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    logo,
+                    height: 24,
+                    width: 24,
                   ),
-                ),
-              ],
-            ),
-            Icon(
-              Icons.arrow_forward_ios,
-              color: ColorPrimary.primary100,
-            ),
-          ],
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  Text(
+                    title,
+                    style: TextStyleCollection.bodyMedium.copyWith(
+                      fontSize: 16,
+                      color: ColorPrimary.primary100,
+                    ),
+                  ),
+                ],
+              ),
+              Icon(
+                Icons.arrow_forward_ios,
+                color: ColorPrimary.primary100,
+              ),
+            ],
+          ),
         ),
       ),
     );

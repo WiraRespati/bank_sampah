@@ -22,7 +22,7 @@ class EditProfilePage extends StatelessWidget {
         backgroundColor: ColorNeutral.neutral50,
         surfaceTintColor: ColorNeutral.neutral50,
         title: Text(
-          'Edit Profil',
+          'Ubah Informasi Profil',
           style: TextStyleCollection.subtitleBold.copyWith(
             fontSize: 18,
           ),
