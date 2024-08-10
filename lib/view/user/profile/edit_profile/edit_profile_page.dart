@@ -46,30 +46,32 @@ class EditProfilePage extends StatelessWidget {
           },
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              const SizedBox(height: 40),
-              EditProfileFormWidget(),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: ButtonWidget(
-                onPressed: () async {
-                  Get.to(BottomNavbar());
-                },
-                text: 'Edit Profil',
-                textColor: ColorNeutral.neutral100,
-              ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                const SizedBox(height: 40),
+                EditProfileFormWidget(),
+              ],
             ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: ButtonWidget(
+                  onPressed: () async {
+                    Get.to(BottomNavbar());
+                  },
+                  text: 'Edit Profil',
+                  textColor: ColorNeutral.neutral100,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

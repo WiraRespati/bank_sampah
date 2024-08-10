@@ -16,39 +16,41 @@ class HomeAdminPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorCollection.white,
-      body: Column(
-        children: [
-          const BannerHomeAdminWidget(),
-          UploadMenabungSampahWidget(
-            onTap: () {
-              Get.to(() => const UploadMenabungSampahPage());
-            },
-          ),
-          ItemHomeAdminWidget(
-            title: 'Kelola Barang',
-            subtitle: 'Edit dan Tambahkan Barang',
-            image: "assets/images/logo_manage_barang.svg",
-            onTap: () {
-              Get.to(() => const KelolaBarangPage());
-            },
-          ),
-          ItemHomeAdminWidget(
-            title: 'Kelola Sampah',
-            subtitle: 'Edit dan Tambahkan Sampah',
-            image: "assets/images/logo_manage_sampah.svg",
-            onTap: () {
-              Get.to(() => const KelolaSampahPage());
-            },
-          ),
-          ItemHomeAdminWidget(
-            title: 'Kelola User',
-            subtitle: 'Edit dan Hapus User',
-            image: "assets/images/logo_profile.svg",
-            onTap: () {
-              Get.to(() => const KelolaUserPage());
-            },
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const BannerHomeAdminWidget(),
+            UploadMenabungSampahWidget(
+              onTap: () {
+                Get.to(() => UploadMenabungSampahPage());
+              },
+            ),
+            ItemHomeAdminWidget(
+              title: 'Kelola Barang',
+              subtitle: 'Edit dan Tambahkan Barang',
+              image: "assets/images/logo_manage_barang.svg",
+              onTap: () {
+                Get.to(() => const KelolaBarangPage());
+              },
+            ),
+            ItemHomeAdminWidget(
+              title: 'Kelola Sampah',
+              subtitle: 'Edit dan Tambahkan Sampah',
+              image: "assets/images/logo_manage_sampah.svg",
+              onTap: () {
+                Get.to(() => const KelolaSampahPage());
+              },
+            ),
+            ItemHomeAdminWidget(
+              title: 'Kelola User',
+              subtitle: 'Edit dan Hapus User',
+              image: "assets/images/logo_profile.svg",
+              onTap: () {
+                Get.to(() => const KelolaUserPage());
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

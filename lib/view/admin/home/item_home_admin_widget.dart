@@ -36,7 +36,7 @@ class ItemHomeAdminWidget extends StatelessWidget {
       onTapCancel: () => controller.setTapped(false),
       child: Obx(
         () => Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          margin: const EdgeInsets.only(right: 20,left: 20, top: 18,),
           height: 65,
           decoration: BoxDecoration(
             color: controller.isTapped.value
