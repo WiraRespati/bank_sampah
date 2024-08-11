@@ -1,4 +1,4 @@
-import 'package:bank_sampah/controller/user/edit_profile_controller.dart';
+import 'package:bank_sampah/controller/user/profile_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:flutter/material.dart';

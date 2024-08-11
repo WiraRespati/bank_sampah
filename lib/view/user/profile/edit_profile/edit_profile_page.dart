@@ -1,4 +1,4 @@
-import 'package:bank_sampah/controller/user/edit_profile_controller.dart';
+import 'package:bank_sampah/controller/user/profile_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
@@ -63,7 +63,13 @@ class EditProfilePage extends StatelessWidget {
                 height: 48,
                 child: ButtonWidget(
                   onPressed: () async {
-                    Get.to(BottomNavbar());
+                    editController.updateUserData();
+                    Get.snackbar(
+                      'Berhasil',
+                      'Profil berhasil diperbarui',
+                      snackPosition: SnackPosition.TOP,
+                    );
+                    Get.offAll(() => BottomNavbar());
                   },
                   text: 'Edit Profil',
                   textColor: ColorNeutral.neutral100,

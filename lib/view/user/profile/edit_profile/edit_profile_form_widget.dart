@@ -1,4 +1,4 @@
-import 'package:bank_sampah/controller/user/edit_profile_controller.dart';
+import 'package:bank_sampah/controller/user/profile_controller.dart';
 import 'package:bank_sampah/view/user/profile/edit_profile/edit_profil_radio_button.dart';
 import 'package:bank_sampah/view/widget/text_form_field_widget.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +49,7 @@ class EditProfileFormWidget extends StatelessWidget {
               keyboardType: TextInputType.name,
               titleForm: 'Ubah Password',
               hintText: 'Ubah Password anda',
-              isPassword: false,
+              isPassword: true,
               controller: editController.editPasswordController,
               errorText: editController.errorMessageEditPassword.value,
               onChanged: (value) {

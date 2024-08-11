@@ -1,11 +1,14 @@
+import 'package:bank_sampah/controller/user/profile_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 class BannerProfileWidget extends StatelessWidget {
-  const BannerProfileWidget({super.key});
-
+  BannerProfileWidget({super.key});
+  final ProfileController profileController = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -123,26 +126,49 @@ class BannerProfileWidget extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 15, left: 18),
-                          child: Column(
-                            children: [
-                              Text(
-                                'Nama Lengkap',
-                                style: TextStyleCollection.bodyMedium.copyWith(
-                                    fontSize: 16,
-                                    color: ColorPrimary.primary100),
-                              ),
-                              const Text(
-                                '3576447103910003',
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xFF4F4F4F),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
+                          child: Obx(() {
+                            final user = profileController.userData.value;
+                            return Column(children: [
+                              profileController.isLoadingEditUser.value
+                                  ? Shimmer.fromColors(
+                                      baseColor: ColorNeutral.neutral50,
+                                      highlightColor: ColorNeutral.neutral300,
+                                      child: ClipOval(
+                                        child: Container(
+                                          width: 100.0,
+                                          height: 16.0,
+                                          color: ColorNeutral.neutral300,
+                                        ),
+                                      ),
+                                    )
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                          Text(
+                                            user != null
+                                                ? "${user.name}"
+                                                : "Loading...",
+                                            style: TextStyleCollection
+                                                .bodyMedium
+                                                .copyWith(
+                                              fontSize: 16,
+                                              color: ColorPrimary.primary100,
+                                            ),
+                                          ),
+                                          Text(
+                                            user?.nik ?? "Loading...",
+                                            style: const TextStyle(
+                                              fontFamily: 'Roboto',
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                              color: Color(0xFF4F4F4F),
+                                            ),
+                                          ),
+                                        ])
+                            ]);
+                          }),
+                        ),
                       ],
                     ),
                   ),
