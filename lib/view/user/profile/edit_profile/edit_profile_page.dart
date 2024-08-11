@@ -62,7 +62,13 @@ class EditProfilePage extends StatelessWidget {
               height: 48,
               child: ButtonWidget(
                 onPressed: () async {
-                  Get.to(BottomNavbar());
+                  editController.updateUserData();
+                  Get.snackbar(
+                    'Berhasil',
+                    'Profil berhasil diperbarui',
+                    snackPosition: SnackPosition.TOP,
+                  );
+                  Get.offAll(() => BottomNavbar());
                 },
                 text: 'Edit Profil',
                 textColor: ColorNeutral.neutral100,

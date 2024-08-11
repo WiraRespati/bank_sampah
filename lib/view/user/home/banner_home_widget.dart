@@ -1,13 +1,18 @@
+import 'package:bank_sampah/controller/user/user_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class BannerHomeWidget extends StatelessWidget {
   const BannerHomeWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final UserController userController = Get.put(UserController());
+    userController.getUserData();
+
     return SizedBox(
       height: 380,
       width: double.infinity,
@@ -117,79 +122,88 @@ class BannerHomeWidget extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 18),
-                      child: Text(
-                        "Halo Wira Selamat Datang",
-                        style: TextStyleCollection.captionMedium.copyWith(
-                          fontSize: 16,
-                          color: ColorPrimary.primary100,
-                        ),
-                      ),
+                      child: Obx(() {
+                        final user = userController.userData.value;
+                        return Text(
+                          user != null
+                              ? "Halo ${user.name?.split(' ').first ?? ''} Selamat Datang"
+                              : "Loading...",
+                          style: TextStyleCollection.captionMedium.copyWith(
+                            fontSize: 16,
+                            color: ColorPrimary.primary100,
+                          ),
+                        );
+                      }),
                     ),
                   ),
                   Positioned(
                     top: 55,
                     child: Container(
-                        height: 55,
-                        width: 320,
-                        decoration: BoxDecoration(
-                          color: ColorNeutral.neutral50,
-                          border: Border.all(
-                            color: const Color(0xFFB6E0B1),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(0xFF000000).withOpacity(0.25),
-                              offset: const Offset(0, 4),
-                              blurRadius: 20,
-                              spreadRadius: 0,
-                            ),
-                          ],
+                      height: 55,
+                      width: 320,
+                      decoration: BoxDecoration(
+                        color: ColorNeutral.neutral50,
+                        border: Border.all(
+                          color: const Color(0xFFB6E0B1),
+                          width: 1,
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 18,
-                              ),
-                              child: Text(
-                                "Total Koin Anda",
-                                style:
-                                    TextStyleCollection.captionMedium.copyWith(
-                                  fontSize: 16,
-                                  color: ColorCollection.black,
-                                ),
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF000000).withOpacity(0.25),
+                            offset: const Offset(0, 4),
+                            blurRadius: 20,
+                            spreadRadius: 0,
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 18,
+                            ),
+                            child: Text(
+                              "Total Koin Anda",
+                              style: TextStyleCollection.captionMedium.copyWith(
+                                fontSize: 16,
+                                color: ColorCollection.black,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                right: 18,
-                              ),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/images/koin.png',
-                                    height: 25,
-                                    width: 25,
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    '45.000',
-                                    style: TextStyleCollection.captionMedium
-                                        .copyWith(
-                                      fontSize: 16,
-                                      color: ColorCollection.black,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              right: 18,
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/images/koin.png',
+                                  height: 25,
+                                  width: 25,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Obx(() => Text(
+                                      userController.userData.value != null
+                                          ? userController
+                                              .userData.value!.points
+                                              .toString()
+                                          : "0",
+                                      style: TextStyleCollection.captionMedium
+                                          .copyWith(
+                                        fontSize: 16,
+                                        color: ColorCollection.black,
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   )
                 ],
               ),

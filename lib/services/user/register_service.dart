@@ -1,3 +1,4 @@
+import 'package:bank_sampah/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -12,16 +13,25 @@ class RegisterService {
     String nik,
   ) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
+      final UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
-        'name': name,
-        'email': email,
-        'nik': nik,
-        'role': 'user',
-      });
+      final User user = userCredential.user!;
+
+      UserModel userModel = UserModel(
+        uid: user.uid,
+        name: name,
+        email: email,
+        nik: nik,
+        gender: 'Pria',
+        phone: '',
+      );
+      await _firestore
+          .collection('users')
+          .doc(user.uid)
+          .set(userModel.toJson());
       return 'success';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
