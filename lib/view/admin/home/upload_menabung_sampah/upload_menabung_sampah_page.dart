@@ -82,7 +82,7 @@ class UploadMenabungSampahPage extends StatelessWidget {
                   );
                 }),
                 const SizedBox(height: 24),
-                const UploadImageWidget(),
+                UploadImageWidget(),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 48),
