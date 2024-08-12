@@ -32,6 +32,22 @@ class FormTambahBarangWidget extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
+           Obx(
+            () => TextFormFieldWidget(
+              isPassword: false,
+              titleForm: 'Deskripsi Barang',
+              hintText: 'Masukkan Deskripsi Barang',
+              keyboardType: TextInputType.multiline,
+              controller: barangController.deskripsiBarangController,
+              errorText: barangController.errorMessageDeskripsiBarang.value,
+              onChanged: (String value) {
+                barangController.validatorDeskripsiBarang(value);
+              },
+            ),
+          ),
+          const SizedBox(
+            height: 24,
+          ),
           Obx(
             () => TextFormFieldWidget(
               isPassword: false,

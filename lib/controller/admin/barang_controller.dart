@@ -12,13 +12,14 @@ class BarangController extends GetxController {
   RxString? imagePath = ''.obs;
 
   final errorMessageNamaBarang = Rxn<String>();
+  final errorMessageDeskripsiBarang = Rxn<String>();
   final errorMessageNilaiPoint = Rxn<String>();
   final errorMessageJumlahStok = Rxn<String>();
 
   TextEditingController namaBarangController = TextEditingController();
+  TextEditingController deskripsiBarangController = TextEditingController();
   TextEditingController nilaiPointController = TextEditingController();
   TextEditingController jumlahStokController = TextEditingController();
-
 
   void setTapped(bool tapped) {
     isTapped.value = tapped;
@@ -80,6 +81,14 @@ class BarangController extends GetxController {
     }
   }
 
+  void validatorDeskripsiBarang(String value) {
+    if (value.isEmpty) {
+      errorMessageDeskripsiBarang.value = "Deskripsi Barang tidak boleh kosong";
+    } else {
+      errorMessageDeskripsiBarang.value = null;
+    }
+  }
+
   void validatorNilaiPoint(String value) {
     if (value.isEmpty) {
       errorMessageNilaiPoint.value = "Nilai Point tidak boleh kosong";
@@ -87,17 +96,19 @@ class BarangController extends GetxController {
       errorMessageNilaiPoint.value = null;
     }
   }
+
   void validatorJumlahStok(String value) {
     if (value.isEmpty) {
-      errorMessageNilaiPoint.value = "Jumlah Stok tidak boleh kosong";
+      errorMessageJumlahStok.value = "Jumlah Stok tidak boleh kosong";
     } else {
-      errorMessageNilaiPoint.value = null;
+      errorMessageJumlahStok.value = null;
     }
   }
 
   @override
   void dispose() {
     namaBarangController.dispose();
+    deskripsiBarangController.dispose();
     nilaiPointController.dispose();
     jumlahStokController.dispose();
     super.dispose();
