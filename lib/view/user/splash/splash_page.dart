@@ -5,6 +5,8 @@ import 'package:bank_sampah/view/user/onboarding/onboarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../admin/bottom_navbar_admin/bottom_navbar_admin.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -19,9 +21,15 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(const Duration(seconds: 3), () {
       // Ganti dengan navigasi ke halaman berikutnya
       // cek user apakah sudah login atau belum
-      AuthService().user != null
-          ? Get.offAll(() => BottomNavbar())
-          : Get.offAll(() => const OnboardingPage());
+      AuthService().user == null
+          ? Get.offAll(() => const OnboardingPage())
+          : AuthService().checkAdmin().then((value) {
+              if (value) {
+                Get.offAll(() => BottomNavbarAdmin());
+              } else {
+                Get.offAll(() => BottomNavbar());
+              }
+            });
     });
   }
 
