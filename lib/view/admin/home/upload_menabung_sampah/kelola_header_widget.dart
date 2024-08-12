@@ -4,8 +4,11 @@ import 'package:bank_sampah/view/admin/bottom_navbar_admin/bottom_navbar_admin.d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class UploadMenabungSampahHeaderWidget extends StatelessWidget {
-  const UploadMenabungSampahHeaderWidget({super.key});
+class KelolaHeaderWidget extends StatelessWidget {
+  const KelolaHeaderWidget({super.key, required this.title, this.onPressed});
+
+  final String title;
+  final Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -32,18 +35,18 @@ class UploadMenabungSampahHeaderWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 24),
             child: IconButton(
-              onPressed: () {
-                Get.to(() => BottomNavbarAdmin());
-              },
+              onPressed: onPressed ??
+                  () {
+                    Get.to(() => BottomNavbarAdmin());
+                  },
               icon: Icon(
                 Icons.arrow_back_ios,
                 color: ColorPrimary.primary100,
               ),
             ),
           ),
-          // const SizedBox(width: 13),
           Text(
-            'Menabung Sampah',
+            title,
             style: TextStyleCollection.bodyMedium.copyWith(
               color: ColorPrimary.primary100,
               fontSize: 20,

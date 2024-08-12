@@ -12,6 +12,7 @@ class ButtonWidget extends StatelessWidget {
     this.textColor,
     this.backgroundColor,
     this.child,
+    this.borderRadius,
   });
 
   final void Function()? onPressed;
@@ -20,6 +21,7 @@ class ButtonWidget extends StatelessWidget {
   final Color? textColor;
   final Color? backgroundColor;
   final Widget? child;
+  final BorderRadiusGeometry? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class ButtonWidget extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: borderRadius ?? BorderRadius.circular(16),
           side: side ?? BorderSide.none,
         ),
         backgroundColor: backgroundColor ?? ColorPrimary.primary100,

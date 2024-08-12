@@ -1,10 +1,12 @@
+import 'package:bank_sampah/view/admin/home/kelola_barang/tambah_barang/button_tambah_widget.dart';
+import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/button_upload_widget.dart';
 import 'package:bank_sampah/view/widget/button_widget.dart';
 import 'package:bank_sampah/view/widget/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bank_sampah/controller/admin/search_user_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
-import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/upload_menabung_sampah_header_widget.dart';
+import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/kelola_header_widget.dart';
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/input_form_menabung_widget.dart';
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/upload_image_widget.dart';
 
@@ -23,7 +25,9 @@ class UploadMenabungSampahPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const UploadMenabungSampahHeaderWidget(),
+                const KelolaHeaderWidget(
+                  title: 'Menabung Sampah',
+                ),
                 const SizedBox(height: 32),
                 SearchWidget(
                   controller: searchController.searchController,
@@ -83,22 +87,11 @@ class UploadMenabungSampahPage extends StatelessWidget {
                 }),
                 const SizedBox(height: 24),
                 UploadImageWidget(),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 48),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 48,
-                    child: ButtonWidget(
-                      onPressed: () async {},
-                      text: 'Upload Menabung Sampah',
-                      textColor: ColorNeutral.neutral100,
-                    ),
-                  ),
-                ),
+                const SizedBox(height: 128),
               ],
             ),
           ),
+          const ButtonUploadWidget(),
         ],
       ),
     );
