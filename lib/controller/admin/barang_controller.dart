@@ -13,9 +13,12 @@ class BarangController extends GetxController {
 
   final errorMessageNamaBarang = Rxn<String>();
   final errorMessageNilaiPoint = Rxn<String>();
+  final errorMessageJumlahStok = Rxn<String>();
 
   TextEditingController namaBarangController = TextEditingController();
   TextEditingController nilaiPointController = TextEditingController();
+  TextEditingController jumlahStokController = TextEditingController();
+
 
   void setTapped(bool tapped) {
     isTapped.value = tapped;
@@ -84,11 +87,19 @@ class BarangController extends GetxController {
       errorMessageNilaiPoint.value = null;
     }
   }
+  void validatorJumlahStok(String value) {
+    if (value.isEmpty) {
+      errorMessageNilaiPoint.value = "Jumlah Stok tidak boleh kosong";
+    } else {
+      errorMessageNilaiPoint.value = null;
+    }
+  }
 
   @override
   void dispose() {
     namaBarangController.dispose();
     nilaiPointController.dispose();
+    jumlahStokController.dispose();
     super.dispose();
   }
 }

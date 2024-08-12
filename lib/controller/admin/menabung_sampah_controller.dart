@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:flutter/widgets.dart';
 import 'package:image/image.dart' as img;
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -7,6 +8,13 @@ class MenabungSampahController extends GetxController {
   var isTapped = false.obs;
   Rx<XFile?> imageFile = Rx<XFile?>(null);
   RxString? imagePath = ''.obs;
+
+  final errorMessageDeskripsi = Rxn<String>();
+  final errorMessageNilaiPoint = Rxn<String>();
+
+  TextEditingController deskripsiController = TextEditingController();
+  TextEditingController nilaiPointController = TextEditingController();
+
   void setTapped(bool tapped) {
     isTapped.value = tapped;
   }
@@ -57,5 +65,28 @@ class MenabungSampahController extends GetxController {
       setImageFile(pickedFile);
       setImagePath(pickedFile.path);
     }
+  }
+
+  void validatorNilaiPoint(String value) {
+    if (value.isEmpty) {
+      errorMessageNilaiPoint.value = "Nilai Point tidak boleh kosong";
+    } else {
+      errorMessageNilaiPoint.value = null;
+    }
+  }
+
+  void validatorDeskripsi(String value) {
+    if (value.isEmpty) {
+      errorMessageDeskripsi.value = "Deskripsi tidak boleh kosong";
+    } else {
+      errorMessageDeskripsi.value = null;
+    }
+  }
+
+  @override
+  void dispose() {
+    deskripsiController.dispose();
+    nilaiPointController.dispose();
+    super.dispose();
   }
 }
