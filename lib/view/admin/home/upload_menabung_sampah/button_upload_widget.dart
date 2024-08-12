@@ -1,12 +1,16 @@
+import 'package:bank_sampah/controller/admin/menabung_sampah_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/view/widget/button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ButtonUploadWidget extends StatelessWidget {
   const ButtonUploadWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final MenabungSampahController menabungSampahController =
+        Get.put(MenabungSampahController());
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -30,7 +34,9 @@ class ButtonUploadWidget extends StatelessWidget {
                 width: double.infinity,
                 height: 48,
                 child: ButtonWidget(
-                  onPressed: () async {},
+                  onPressed: () {
+                    menabungSampahController.upload();
+                  },
                   text: 'Upload Menabung Sampah',
                   textColor: ColorNeutral.neutral100,
                 ),

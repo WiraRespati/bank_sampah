@@ -1,5 +1,6 @@
 import 'dart:typed_data';
-import 'package:flutter/widgets.dart';
+import 'package:bank_sampah/services/admin/upload_pengumpulan_sampah_service.dart';
+import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -81,6 +82,26 @@ class MenabungSampahController extends GetxController {
     } else {
       errorMessageDeskripsi.value = null;
     }
+  }
+
+  void upload() async {
+    await UploadPengumpulanSampahService()
+        .uploadImagePengumpulanSampah(imageFile.value!)
+        .then((value) {
+      UploadPengumpulanSampahService().addPengumpulanSampah(
+        value,
+        '2132131242231',
+        deskripsiController.text,
+        int.parse(nilaiPointController.text),
+      );
+    });
+    Get.snackbar(
+      'Success',
+      'Upload Menabung Sampah Berhasil',
+      snackPosition: SnackPosition.TOP,
+      backgroundColor: Colors.green,
+      colorText: Colors.white,
+    );
   }
 
   @override
