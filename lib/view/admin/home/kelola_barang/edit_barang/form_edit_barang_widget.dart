@@ -1,13 +1,14 @@
-import 'package:bank_sampah/controller/admin/barang_controller.dart';
 import 'package:bank_sampah/view/widget/text_form_field_widget.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class FormTambahBarangWidget extends StatelessWidget {
-  FormTambahBarangWidget({super.key});
+import '../../../../../controller/admin/edit_barang_controller.dart';
 
-  final BarangController barangController = Get.put(
-    BarangController(),
+class FormEditBarangWidget extends StatelessWidget {
+  FormEditBarangWidget({super.key});
+
+  final EditBarangController editBarangController = Get.put(
+    EditBarangController(),
   );
 
   @override
@@ -22,26 +23,26 @@ class FormTambahBarangWidget extends StatelessWidget {
               titleForm: 'Nama Barang',
               hintText: 'Masukkan Nama Barang',
               keyboardType: TextInputType.name,
-              controller: barangController.namaBarangController,
-              errorText: barangController.errorMessageNamaBarang.value,
+              controller: editBarangController.namaBarangController,
+              errorText: editBarangController.errorMessageNamaBarang.value,
               onChanged: (String value) {
-                barangController.validatorNamaBarang(value);
+                editBarangController.validatorNamaBarang(value);
               },
             ),
           ),
           const SizedBox(
             height: 24,
           ),
-           Obx(
+          Obx(
             () => TextFormFieldWidget(
               isPassword: false,
               titleForm: 'Deskripsi Barang',
               hintText: 'Masukkan Deskripsi Barang',
               keyboardType: TextInputType.multiline,
-              controller: barangController.deskripsiBarangController,
-              errorText: barangController.errorMessageDeskripsiBarang.value,
+              controller: editBarangController.deskripsiBarangController,
+              errorText: editBarangController.errorMessageDeskripsiBarang.value,
               onChanged: (String value) {
-                barangController.validatorDeskripsiBarang(value);
+                editBarangController.validatorDeskripsiBarang(value);
               },
             ),
           ),
@@ -54,10 +55,10 @@ class FormTambahBarangWidget extends StatelessWidget {
               titleForm: 'Nilai Point',
               hintText: 'Masukkan Nilai Point Barang',
               keyboardType: TextInputType.number,
-              controller: barangController.nilaiPointController,
-              errorText: barangController.errorMessageNilaiPoint.value,
+              controller: editBarangController.nilaiPointController,
+              errorText: editBarangController.errorMessageNilaiPoint.value,
               onChanged: (String value) {
-                barangController.validatorNilaiPoint(value);
+                editBarangController.validatorNilaiPoint(value);
               },
             ),
           ),
@@ -70,10 +71,10 @@ class FormTambahBarangWidget extends StatelessWidget {
               titleForm: 'Jumlah Stok',
               hintText: 'Masukkan Jumlah Stok Barang',
               keyboardType: TextInputType.number,
-              controller: barangController.jumlahStokController,
-              errorText: barangController.errorMessageJumlahStok.value,
+              controller: editBarangController.jumlahStokController,
+              errorText: editBarangController.errorMessageJumlahStok.value,
               onChanged: (String value) {
-                barangController.validatorJumlahStok(value);
+                editBarangController.validatorJumlahStok(value);
               },
             ),
           ),

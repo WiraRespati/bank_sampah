@@ -1,13 +1,12 @@
 import 'dart:typed_data';
-import 'package:flutter/widgets.dart';
 import 'package:image/image.dart' as img;
 
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:image_picker/image_picker.dart';
 
-class BarangController extends GetxController {
-  var isTapped = false.obs;
-
+class EditBarangController extends GetxController {
   Rx<XFile?> imageFile = Rx<XFile?>(null);
   RxString? imagePath = ''.obs;
 
@@ -20,10 +19,6 @@ class BarangController extends GetxController {
   TextEditingController deskripsiBarangController = TextEditingController();
   TextEditingController nilaiPointController = TextEditingController();
   TextEditingController jumlahStokController = TextEditingController();
-
-  void setTapped(bool tapped) {
-    isTapped.value = tapped;
-  }
 
   void onGalleryView() async {
     final ImagePicker picker = ImagePicker();
