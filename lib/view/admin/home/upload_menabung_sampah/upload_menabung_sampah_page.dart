@@ -1,16 +1,19 @@
+import 'package:bank_sampah/controller/admin/menabung_sampah_controller.dart';
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/button_upload_widget.dart';
 import 'package:bank_sampah/view/widget/search_widget.dart';
+import 'package:bank_sampah/view/widget/text_form_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bank_sampah/controller/admin/search_user_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/kelola_header_widget.dart';
-import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/input_form_menabung_widget.dart';
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/upload_image_widget.dart';
 
 class UploadMenabungSampahPage extends StatelessWidget {
   final SearchUserController searchController = Get.put(SearchUserController());
-
+  final MenabungSampahController barangController = Get.put(
+    MenabungSampahController(),
+  );
   UploadMenabungSampahPage({super.key});
 
   @override
@@ -36,7 +39,44 @@ class UploadMenabungSampahPage extends StatelessWidget {
                 Obx(() {
                   return Stack(
                     children: [
-                      const InputFormMenabungWidget(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          children: [
+                            const TextFormFieldWidget(
+                              titleForm: 'Nama Lengkap',
+                              hintText: 'Nama Lengkap',
+                              isPassword: false,
+                            ),
+                            const SizedBox(height: 24),
+                            TextFormFieldWidget(
+                              titleForm: 'Deskripsi',
+                              hintText: 'Deskripsikan Sampah yang dikumpul',
+                              isPassword: false,
+                              controller: barangController.deskripsiController,
+                              errorText:
+                                  barangController.errorMessageDeskripsi.value,
+                              onChanged: (String value) {
+                                barangController.validatorDeskripsi(value);
+                              },
+                              keyboardType: TextInputType.multiline,
+                            ),
+                            const SizedBox(height: 24),
+                            TextFormFieldWidget(
+                              titleForm: 'Nilai Point',
+                              hintText: 'Masukkan Nilai Point',
+                              isPassword: false,
+                              controller: barangController.nilaiPointController,
+                              errorText:
+                                  barangController.errorMessageNilaiPoint.value,
+                              onChanged: (String value) {
+                                barangController.validatorNilaiPoint(value);
+                              },
+                              keyboardType: TextInputType.number,
+                            ),
+                          ],
+                        ),
+                      ),
                       if (searchController.isSearching.value)
                         Align(
                           alignment: Alignment.topCenter,
