@@ -1,7 +1,10 @@
+import 'package:bank_sampah/services/user/auth_service.dart';
 import 'package:bank_sampah/services/user/login_service.dart';
 import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../view/admin/bottom_navbar_admin/bottom_navbar_admin.dart';
 
 class LoginController extends GetxController {
   final errorMessageEmail = Rxn<String>();
@@ -11,6 +14,7 @@ class LoginController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 
   RxBool isLoadingLogin = false.obs;
+  RxBool isAdmin = false.obs;
 
   final RegExp emailRegExp = RegExp(
     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
@@ -55,8 +59,8 @@ class LoginController extends GetxController {
       isLoadingLogin.value = true;
       String result = await LoginService().signInWithEmailAndPassword(
           emailController.text, passwordController.text);
+      isAdmin.value = await AuthService().checkAdmin();
       isLoadingLogin.value = false;
-
       if (result == 'success') {
         Get.snackbar(
           'Berhasil',
@@ -65,7 +69,11 @@ class LoginController extends GetxController {
           backgroundColor: Colors.green,
           colorText: Colors.white,
         );
-        Get.offAll(() => BottomNavbar());
+        if (isAdmin.value) {
+          Get.offAll(() => BottomNavbarAdmin());
+        } else {
+          Get.offAll(() => BottomNavbar());
+        }
         emailController.clear();
         passwordController.clear();
       } else if (result == 'user-not-found') {

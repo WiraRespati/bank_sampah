@@ -17,4 +17,11 @@ class AuthService {
         await _firestore.collection('users').doc(user!.uid).get();
     return UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
   }
+
+  Future<bool> checkAdmin() async {
+    DocumentSnapshot snapshot =
+        await _firestore.collection('users').doc(user!.uid).get();
+    var data = snapshot.data() as Map<String, dynamic>;
+    return data['role'] == 'admin';
+  }
 }
