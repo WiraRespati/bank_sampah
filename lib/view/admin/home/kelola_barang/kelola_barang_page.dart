@@ -1,3 +1,4 @@
+import 'package:bank_sampah/view/admin/home/kelola_barang/edit_barang/edit_barang_page.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/tambah_barang/tambah_barang_page.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/tambah_barang_widget.dart';
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/kelola_header_widget.dart';
@@ -35,10 +36,15 @@ class KelolaBarangPage extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return const SizedBox(
+                  return SizedBox(
                     width: 152,
                     height: 265,
-                    child: ItemAdminWidget(),
+                    child: ItemAdminWidget(
+                      buttonName: 'Edit',
+                      onPressed: () {
+                        Get.to(() => const EditBarangPage());
+                      },
+                    ),
                   );
                 },
               ),

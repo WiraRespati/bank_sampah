@@ -2,8 +2,8 @@ import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/view/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 
-class ButtonTambahWidget extends StatelessWidget {
-  const ButtonTambahWidget({super.key});
+class ButtonTambahSampahWidget extends StatelessWidget {
+  const ButtonTambahSampahWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,13 @@
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
-import 'package:bank_sampah/view/admin/home/kelola_barang/edit_barang/edit_barang_page.dart';
 import 'package:bank_sampah/view/widget/button_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ItemAdminWidget extends StatelessWidget {
-  const ItemAdminWidget({super.key});
+  const ItemAdminWidget({super.key, this.onPressed, required this.buttonName});
+
+  final Function()? onPressed;
+  final String buttonName;
 
   @override
   Widget build(BuildContext context) {
@@ -79,10 +80,8 @@ class ItemAdminWidget extends StatelessWidget {
               width: double.infinity,
               height: 29,
               child: ButtonWidget(
-                onPressed: () async {
-                  Get.to(() => const EditBarangPage());
-                },
-                text: 'Edit',
+                onPressed: onPressed,
+                text: buttonName,
                 textColor: ColorNeutral.neutral100,
                 borderRadius: BorderRadius.circular(6),
               ),

@@ -2,8 +2,8 @@ import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/view/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 
-class ButtonTambahWidget extends StatelessWidget {
-  const ButtonTambahWidget({super.key});
+class ButtonEditSampahWidget extends StatelessWidget {
+  const ButtonEditSampahWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class ButtonTambahWidget extends StatelessWidget {
                 height: 48,
                 child: ButtonWidget(
                   onPressed: () async {},
-                  text: 'Tambah',
+                  text: 'Edit',
                   textColor: ColorNeutral.neutral100,
                 ),
               ),
