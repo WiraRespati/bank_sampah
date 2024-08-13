@@ -3,7 +3,8 @@ import 'package:bank_sampah/view/admin/home/banner_home_admin_widget.dart';
 import 'package:bank_sampah/view/admin/home/item_home_admin_widget.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/kelola_barang_page.dart';
 import 'package:bank_sampah/view/admin/home/kelola_sampah/kelola_sampah_page.dart';
-import 'package:bank_sampah/view/admin/home/kelola_user/kelola_user_page.dart';
+import 'package:bank_sampah/view/admin/home/riwayat_konversi/riwayat_konversi_page.dart';
+import 'package:bank_sampah/view/admin/home/riwayat_menabung/riwayat_menabung_page.dart';
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah_widget.dart';
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/upload_menabung_sampah_page.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class HomeAdminPage extends StatelessWidget {
           children: [
             const BannerHomeAdminWidget(),
             UploadMenabungSampahWidget(
+              title: 'Upload Menabung Sampah',
               onTap: () {
                 Get.to(() => UploadMenabungSampahPage());
               },
@@ -42,13 +44,22 @@ class HomeAdminPage extends StatelessWidget {
               },
             ),
             ItemHomeAdminWidget(
-              title: 'Kelola User',
-              subtitle: 'Edit dan Hapus User',
-              image: "assets/images/logo_profile.svg",
+              title: 'Riwayat Menabung',
+              subtitle: 'Riwayat Menabung Sampah',
+              image: "assets/images/logo_manage_sampah.svg",
               onTap: () {
-                Get.to(() => const KelolaUserPage());
+                Get.to(() => const RiwayatMenabungPage());
               },
             ),
+            ItemHomeAdminWidget(
+              title: 'Riwayat Konversi',
+              subtitle: 'Riwayat Konversi Point',
+              image: "assets/images/logo_manage_sampah.svg",
+              onTap: () {
+                Get.to(() => const RiwayatKonversiPage());
+              },
+            ),
+            const SizedBox(height: 32),
           ],
         ),
       ),

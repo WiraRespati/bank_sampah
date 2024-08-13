@@ -3,17 +3,25 @@ import 'package:flutter/material.dart';
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget(
-      {super.key, this.controller, this.hintText, this.onChanged, this.onClear});
+      {super.key,
+      this.controller,
+      this.hintText,
+      this.onChanged,
+      this.onClear,
+      this.padding,
+      this.filterButton});
 
   final TextEditingController? controller;
   final String? hintText;
   final Function(String)? onChanged;
   final Function()? onClear;
+  final EdgeInsetsGeometry? padding;
+  final Widget? filterButton;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: padding ?? const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
         decoration: BoxDecoration(
           color: ColorCollection.white,
@@ -43,9 +51,15 @@ class SearchWidget extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(Icons.person_search_outlined),
               ),
-              suffixIcon: IconButton(
-                onPressed: onClear,
-                icon: const Icon(Icons.cancel_outlined),
+              suffixIcon: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                    onPressed: onClear,
+                    icon: const Icon(Icons.cancel_outlined),
+                  ),
+                  filterButton ?? Container(),
+                ],
               ),
             ),
           ),
