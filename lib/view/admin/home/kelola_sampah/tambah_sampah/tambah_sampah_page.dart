@@ -9,8 +9,8 @@ import 'package:get/get.dart';
 import '../../../../../utils/color_constant.dart';
 
 class TambahSampahPage extends StatelessWidget {
-   TambahSampahPage({super.key});
-final AddSampahController addSampahController = Get.put(
+  TambahSampahPage({super.key});
+  final AddSampahController addSampahController = Get.put(
     AddSampahController(),
   );
   @override
@@ -24,6 +24,7 @@ final AddSampahController addSampahController = Get.put(
                 KelolaHeaderWidget(
                   title: "Tambah Sampah",
                   onPressed: () {
+                    addSampahController.clearFormAll();
                     Get.back();
                   },
                 ),

@@ -26,6 +26,7 @@ class TambahBarangPage extends StatelessWidget {
                 KelolaHeaderWidget(
                   title: "Tambah Barang",
                   onPressed: () {
+                    barangController.clearData();
                     Get.back();
                   },
                 ),

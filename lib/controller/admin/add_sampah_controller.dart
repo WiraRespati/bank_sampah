@@ -145,6 +145,7 @@ class AddSampahController extends GetxController {
         colorText: Colors.white,
       );
       Get.to(() => const KelolaSampahPage());
+      clearFormAll();
     } on Exception catch (e) {
       // Tampilkan pesan error
       isLoadingAddSampah.value = false;
@@ -157,6 +158,13 @@ class AddSampahController extends GetxController {
         colorText: Colors.white,
       );
     }
+  }
+
+  void clearFormAll() {
+    namaSampahController.clear();
+    deskripsiSampahController.clear();
+    nilaiPointSampahController.clear();
+    imageFile.value = null;
   }
 
   @override
