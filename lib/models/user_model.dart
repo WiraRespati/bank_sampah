@@ -5,8 +5,8 @@ class UserModel {
   String? gender;
   String? phone;
   String? email;
-  int points;
-  String role;
+  int? points;
+  String? role;
 
   UserModel({
     this.uid,

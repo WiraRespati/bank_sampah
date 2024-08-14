@@ -9,12 +9,14 @@ class MenabungSampahController extends GetxController {
   var isTapped = false.obs;
   Rx<XFile?> imageFile = Rx<XFile?>(null);
   RxString? imagePath = ''.obs;
+  RxString nik = ''.obs;
 
   final errorMessageDeskripsi = Rxn<String>();
   final errorMessageNilaiPoint = Rxn<String>();
 
   TextEditingController deskripsiController = TextEditingController();
   TextEditingController nilaiPointController = TextEditingController();
+  TextEditingController namaLengkapController = TextEditingController();
 
   void setTapped(bool tapped) {
     isTapped.value = tapped;
@@ -105,7 +107,7 @@ class MenabungSampahController extends GetxController {
         .then((value) {
       UploadPengumpulanSampahService().addPengumpulanSampah(
         value,
-        '2132131242231',
+        nik.value,
         deskripsiController.text,
         int.parse(nilaiPointController.text),
       );

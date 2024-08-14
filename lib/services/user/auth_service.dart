@@ -24,4 +24,15 @@ class AuthService {
     var data = snapshot.data() as Map<String, dynamic>;
     return data['role'] == 'admin';
   }
+
+  Future<Map<String, dynamic>> getAllUserData() async {
+    final usersSnapshot = await _firestore.collection('users').get();
+
+    Map<String, dynamic> users = {};
+    for (var user in usersSnapshot.docs) {
+      users[user.id] = user.data();
+    }
+
+    return users;
+  }
 }
