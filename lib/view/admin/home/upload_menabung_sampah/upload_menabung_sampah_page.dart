@@ -11,13 +11,16 @@ import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/upload_image_
 
 class UploadMenabungSampahPage extends StatelessWidget {
   final SearchUserController searchController = Get.put(SearchUserController());
-  final MenabungSampahController barangController = Get.put(
+  final MenabungSampahController menabungSampahController = Get.put(
     MenabungSampahController(),
   );
   UploadMenabungSampahPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final SearchUserController searchUserController =
+        Get.put(SearchUserController());
+    searchUserController.getAllUser();
     return Scaffold(
       backgroundColor: ColorNeutral.neutral50,
       body: Stack(
@@ -43,21 +46,25 @@ class UploadMenabungSampahPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Column(
                           children: [
-                            const TextFormFieldWidget(
+                            TextFormFieldWidget(
                               titleForm: 'Nama Lengkap',
                               hintText: 'Nama Lengkap',
                               isPassword: false,
+                              controller: menabungSampahController
+                                  .namaLengkapController,
                             ),
                             const SizedBox(height: 24),
                             TextFormFieldWidget(
                               titleForm: 'Deskripsi',
                               hintText: 'Deskripsikan Sampah yang dikumpul',
                               isPassword: false,
-                              controller: barangController.deskripsiController,
-                              errorText:
-                                  barangController.errorMessageDeskripsi.value,
+                              controller:
+                                  menabungSampahController.deskripsiController,
+                              errorText: menabungSampahController
+                                  .errorMessageDeskripsi.value,
                               onChanged: (String value) {
-                                barangController.validatorDeskripsi(value);
+                                menabungSampahController
+                                    .validatorDeskripsi(value);
                               },
                               keyboardType: TextInputType.multiline,
                             ),
@@ -66,11 +73,13 @@ class UploadMenabungSampahPage extends StatelessWidget {
                               titleForm: 'Nilai Point',
                               hintText: 'Masukkan Nilai Point',
                               isPassword: false,
-                              controller: barangController.nilaiPointController,
-                              errorText:
-                                  barangController.errorMessageNilaiPoint.value,
+                              controller:
+                                  menabungSampahController.nilaiPointController,
+                              errorText: menabungSampahController
+                                  .errorMessageNilaiPoint.value,
                               onChanged: (String value) {
-                                barangController.validatorNilaiPoint(value);
+                                menabungSampahController
+                                    .validatorNilaiPoint(value);
                               },
                               keyboardType: TextInputType.number,
                             ),
@@ -111,6 +120,19 @@ class UploadMenabungSampahPage extends StatelessWidget {
                                       title: Text(searchController
                                           .searchResults[index]),
                                       onTap: () {
+                                        searchController.searchController.text =
+                                            searchController
+                                                .searchResults[index]
+                                                .toString();
+                                        menabungSampahController.nik.value =
+                                            searchController
+                                                .searchResults[index]
+                                                .toString();
+                                        menabungSampahController
+                                                .namaLengkapController.text =
+                                            searchController.getNamaUser(
+                                                searchController
+                                                    .searchResults[index]);
                                         searchController.clearSearch();
                                       },
                                     );
