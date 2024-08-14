@@ -32,7 +32,7 @@ class FormTambahBarangWidget extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-           Obx(
+          Obx(
             () => TextFormFieldWidget(
               isPassword: false,
               titleForm: 'Deskripsi Barang',

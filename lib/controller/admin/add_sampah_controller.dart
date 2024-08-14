@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:bank_sampah/services/admin/tambah_sampah_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -93,6 +94,39 @@ class AddSampahController extends GetxController {
     } else {
       errorMessageNilaiPointSampah.value = null;
     }
+  }
+
+  void addSampah() async {
+    //validate form
+    validatorNamaSampah(namaSampahController.text);
+    validatorDeskripsiSampah(deskripsiSampahController.text);
+    validatorNilaiPointSampah(nilaiPointSampahController.text);
+
+    //print value
+    if (errorMessageNamaSampah.value != null ||
+        errorMessageDeskripsiSampah.value != null ||
+        errorMessageNilaiPointSampah.value != null ||
+        imageFile.value == null) {
+      Get.snackbar(
+        'Error',
+        'Seluruh Form Harus tes',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
+    //add data to firebase
+    await TambahSampahService()
+        .uploadImageSampah(imageFile.value!)
+        .then((imageUrl) {
+      TambahSampahService().addSampah(
+        imageUrl,
+        namaSampahController.text,
+        int.parse(nilaiPointSampahController.text),
+        deskripsiSampahController.text,
+      );
+    });
   }
 
   @override

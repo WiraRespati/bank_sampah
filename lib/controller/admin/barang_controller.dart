@@ -1,5 +1,6 @@
 import 'dart:typed_data';
-import 'package:flutter/widgets.dart';
+import 'package:bank_sampah/services/admin/tambah_barang_service.dart';
+import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 
 import 'package:get/get.dart';
@@ -102,6 +103,61 @@ class BarangController extends GetxController {
       errorMessageJumlahStok.value = "Jumlah Stok tidak boleh kosong";
     } else {
       errorMessageJumlahStok.value = null;
+    }
+  }
+
+  void addBarang() async {
+    validatorNamaBarang(namaBarangController.text);
+    validatorDeskripsiBarang(deskripsiBarangController.text);
+    validatorNilaiPoint(nilaiPointController.text);
+    validatorJumlahStok(jumlahStokController.text);
+
+    if (errorMessageNamaBarang.value != null ||
+        errorMessageDeskripsiBarang.value != null ||
+        errorMessageNilaiPoint.value != null ||
+        errorMessageJumlahStok.value != null ||
+        imageFile.value == null) {
+      Get.snackbar(
+        'Error',
+        'Seluruh Form Harus Diisi',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+      return;
+    }
+
+    try {
+      // Upload image and add barang
+      await TambahBarangService()
+          .uploadImageBarang(imageFile.value!)
+          .then((value) {
+        TambahBarangService().addBarang(
+          value,
+          namaBarangController.text,
+          int.parse(nilaiPointController.text),
+          int.parse(jumlahStokController.text),
+          deskripsiBarangController.text,
+        );
+      });
+
+      // Show success message
+      Get.snackbar(
+        'Success',
+        'Upload Menabung Sampah Berhasil',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+    } on Exception catch (e) {
+      // Show error message
+      Get.snackbar(
+        'Error',
+        'Gagal menambahkan barang (error: ${e.toString()})',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     }
   }
 

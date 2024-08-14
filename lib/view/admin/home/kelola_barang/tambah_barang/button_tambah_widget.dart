@@ -1,3 +1,4 @@
+import 'package:bank_sampah/controller/admin/barang_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/view/widget/button_widget.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,9 @@ class ButtonTambahWidget extends StatelessWidget {
                 width: double.infinity,
                 height: 48,
                 child: ButtonWidget(
-                  onPressed: () async {},
+                  onPressed: () {
+                    BarangController().addBarang();
+                  },
                   text: 'Tambah',
                   textColor: ColorNeutral.neutral100,
                 ),

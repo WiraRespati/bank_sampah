@@ -85,6 +85,21 @@ class MenabungSampahController extends GetxController {
   }
 
   void upload() async {
+    validatorDeskripsi(deskripsiController.text);
+    validatorNilaiPoint(nilaiPointController.text);
+
+    if (errorMessageDeskripsi.value != null ||
+        errorMessageNilaiPoint.value != null ||
+        imageFile.value == null) {
+      Get.snackbar(
+        'Error',
+        'Seluruh Form Harus Diisi',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
     await UploadPengumpulanSampahService()
         .uploadImagePengumpulanSampah(imageFile.value!)
         .then((value) {
