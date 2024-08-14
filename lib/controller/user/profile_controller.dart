@@ -1,5 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../../models/user_model.dart';
@@ -78,8 +77,7 @@ class ProfileController extends GetxController {
 
 //update user data
   Future<void> updateUserData() async {
-    final FirebaseFirestore firestore = FirebaseFirestore.instance;
-    final FirebaseAuth auth = FirebaseAuth.instance;
+    getUserData();
     final UserModel user = UserModel(
       uid: userData.value!.uid,
       nik: userData.value!.nik,
@@ -92,18 +90,17 @@ class ProfileController extends GetxController {
     );
     try {
       isLoadingEditUser.value = true;
-
-      await firestore
-          .collection('users')
-          .doc(userData.value!.uid)
-          .update(user.toJson());
-      await auth.currentUser!.updateDisplayName(namaLengkapController.text);
-      if (editPasswordController.text.isNotEmpty &&
-          editPasswordController.text.length >= 6) {
-        await auth.currentUser!.updatePassword(editPasswordController.text);
-      }
+      await AuthService().updateUserData(user, editPasswordController.text);
       isLoadingEditUser.value = false;
+
+      Get.snackbar(
+        'Berhasil',
+        'Profil berhasil diperbarui',
+        snackPosition: SnackPosition.TOP,
+      );
+      Get.offAll(() => BottomNavbar());
     } catch (e) {
+      isLoadingEditUser.value = false;
       Get.snackbar(
         'Error',
         'Terjadi kesalahan saat mengupdate data',

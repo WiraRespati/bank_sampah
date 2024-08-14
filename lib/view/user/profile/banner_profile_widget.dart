@@ -112,17 +112,22 @@ class BannerProfileWidget extends StatelessWidget {
                     child: Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(
-                            left: 21,
-                          ),
-                          child: ClipOval(
-                            child: Image.asset(
-                              'assets/images/logobs.png',
-                              height: 42,
-                              width: 42,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                          padding: const EdgeInsets.only(left: 21),
+                          child: Obx(() {
+                            final user = profileController.userData.value;
+                            Icon genderIcon;
+                            if (user?.gender == 'Pria') {
+                              genderIcon = Icon(Icons.male,
+                                  size: 32, color: ColorPrimary.primary100);
+                            } else if (user?.gender == 'Wanita') {
+                              genderIcon = Icon(Icons.female,
+                                  size: 32, color: ColorPrimary.primary100);
+                            } else {
+                              genderIcon = Icon(Icons.person,
+                                  size: 32, color: ColorPrimary.primary100);
+                            }
+                            return ClipOval(child: genderIcon);
+                          }),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 15, left: 18),

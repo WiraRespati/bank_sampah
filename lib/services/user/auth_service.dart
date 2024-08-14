@@ -35,4 +35,12 @@ class AuthService {
 
     return users;
   }
+
+  Future<void> updateUserData(UserModel user, String newPassword) async {
+    await _firestore.collection('users').doc(user.uid).update(user.toJson());
+    await _auth.currentUser!.updateDisplayName(user.name);
+    if (newPassword.isNotEmpty && newPassword.length >= 6) {
+      await _auth.currentUser!.updatePassword(newPassword);
+    }
+  }
 }

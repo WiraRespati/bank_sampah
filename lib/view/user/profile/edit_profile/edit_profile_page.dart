@@ -1,7 +1,6 @@
 import 'package:bank_sampah/controller/user/profile_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
-import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
 import 'package:bank_sampah/view/user/profile/edit_profile/edit_profile_form_widget.dart';
 import 'package:bank_sampah/view/widget/button_widget.dart';
 import 'package:flutter/material.dart';
@@ -46,38 +45,57 @@ class EditProfilePage extends StatelessWidget {
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                const SizedBox(height: 40),
-                EditProfileFormWidget(),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: ButtonWidget(
-                  onPressed: () async {
-                    editController.updateUserData();
-                    Get.snackbar(
-                      'Berhasil',
-                      'Profil berhasil diperbarui',
-                      snackPosition: SnackPosition.TOP,
-                    );
-                    Get.offAll(() => BottomNavbar());
-                  },
-                  text: 'Edit Profil',
-                  textColor: ColorNeutral.neutral100,
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 40),
+                      EditProfileFormWidget(),
+                    ],
+                  ),
                 ),
               ),
-            )
-          ],
-        ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ButtonWidget(
+                    onPressed: () async {
+                      await editController.updateUserData();
+                    },
+                    text: 'Edit Profil',
+                    textColor: ColorNeutral.neutral100,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Obx(
+            () {
+              if (editController.isLoadingEditUser.value) {
+                return Container(
+                  color: ColorNeutral.neutral50.withOpacity(0.5),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        ColorPrimary.primary100,
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                return const SizedBox.shrink();
+              }
+            },
+          ),
+        ],
       ),
     );
   }
