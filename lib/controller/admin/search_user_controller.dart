@@ -19,7 +19,7 @@ class SearchUserController extends GetxController {
           .map((e) => e.nik)
           .toList();
       searchResults.assignAll(result);
-      print(result);
+      
     } else {
       isSearching.value = false;
       searchResults.clear();

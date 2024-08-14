@@ -4,7 +4,6 @@ import 'package:bank_sampah/controller/admin/item_home_admin_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class ItemHomeAdminWidget extends StatelessWidget {
@@ -18,7 +17,7 @@ class ItemHomeAdminWidget extends StatelessWidget {
 
   final String title;
   final String subtitle;
-  final String image;
+  final Widget? image;
   final Function()? onTap;
 
   @override
@@ -71,10 +70,7 @@ class ItemHomeAdminWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Center(
-                        child: SvgPicture.asset(
-                          image,
-                          color: ColorPrimary.primary100,
-                        ),
+                        child: image,
                       ),
                     ),
                   ),

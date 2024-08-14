@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/view/admin/home/banner_home_admin_widget.dart';
 import 'package:bank_sampah/view/admin/home/item_home_admin_widget.dart';
@@ -8,6 +10,7 @@ import 'package:bank_sampah/view/admin/home/riwayat_menabung/riwayat_menabung_pa
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah_widget.dart';
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/upload_menabung_sampah_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class HomeAdminPage extends StatelessWidget {
@@ -30,7 +33,10 @@ class HomeAdminPage extends StatelessWidget {
             ItemHomeAdminWidget(
               title: 'Kelola Barang',
               subtitle: 'Edit dan Tambahkan Barang',
-              image: "assets/images/logo_manage_barang.svg",
+              image: SvgPicture.asset(
+                "assets/images/logo_manage_barang.svg",
+                color: ColorPrimary.primary100,
+              ),
               onTap: () {
                 Get.to(() => const KelolaBarangPage());
               },
@@ -38,7 +44,10 @@ class HomeAdminPage extends StatelessWidget {
             ItemHomeAdminWidget(
               title: 'Kelola Sampah',
               subtitle: 'Edit dan Tambahkan Sampah',
-              image: "assets/images/logo_manage_sampah.svg",
+              image: SvgPicture.asset(
+                "assets/images/logo_manage_sampah.svg",
+                color: ColorPrimary.primary100,
+              ),
               onTap: () {
                 Get.to(() => const KelolaSampahPage());
               },
@@ -46,7 +55,12 @@ class HomeAdminPage extends StatelessWidget {
             ItemHomeAdminWidget(
               title: 'Riwayat Menabung',
               subtitle: 'Riwayat Menabung Sampah',
-              image: "assets/images/logo_manage_sampah.svg",
+              image: Image.asset(
+                "assets/images/menabungsampahicon.png",
+                height: 24,
+                width: 24,
+                color: ColorPrimary.primary100,
+              ),
               onTap: () {
                 Get.to(() => const RiwayatMenabungPage());
               },
@@ -54,7 +68,12 @@ class HomeAdminPage extends StatelessWidget {
             ItemHomeAdminWidget(
               title: 'Riwayat Konversi',
               subtitle: 'Riwayat Konversi Point',
-              image: "assets/images/logo_manage_sampah.svg",
+              image: Image.asset(
+                "assets/images/konversipointicon.png",
+                height: 24,
+                width: 24,
+                color: ColorPrimary.primary100,
+              ),
               onTap: () {
                 Get.to(() => const RiwayatKonversiPage());
               },
