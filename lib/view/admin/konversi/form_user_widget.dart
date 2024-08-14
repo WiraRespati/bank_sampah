@@ -15,11 +15,13 @@ class FormUserWidget extends StatelessWidget {
             titleForm: 'Nama Lengkap',
             hintText: 'Nama Lengkap',
             isPassword: false,
+            isEnabled: false,
           ),
           SizedBox(height: 24),
           TextFormFieldWidget(
             titleForm: 'Jumlah Point',
             hintText: 'Jumlah Point yang dimiliki',
+            isEnabled: false,
             isPassword: false,
           ),
           SizedBox(height: 24),

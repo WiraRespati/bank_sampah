@@ -4,6 +4,7 @@ class TextFormFieldWidgetController extends GetxController {
   RxBool isFocused = false.obs;
   RxBool isFormError = false.obs;
   RxBool obscureText = true.obs;
+  RxBool isEnabled = true.obs;
 
   void handleFocusChange(bool focus) {
     isFocused.value = focus;
@@ -15,5 +16,9 @@ class TextFormFieldWidgetController extends GetxController {
     } else {
       return false;
     }
+  }
+
+  void setEnabled(bool enabled) {
+    isEnabled.value = enabled;
   }
 }

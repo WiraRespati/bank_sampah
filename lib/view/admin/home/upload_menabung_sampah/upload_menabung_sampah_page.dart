@@ -49,6 +49,7 @@ class UploadMenabungSampahPage extends StatelessWidget {
                             TextFormFieldWidget(
                               titleForm: 'Nama Lengkap',
                               hintText: 'Nama Lengkap',
+                              isEnabled: false,
                               isPassword: false,
                               controller: menabungSampahController
                                   .namaLengkapController,

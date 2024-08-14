@@ -16,6 +16,7 @@ class TextFormFieldWidget extends StatelessWidget {
     required this.isPassword,
     this.colorTitleText,
     this.keyboardType,
+    this.isEnabled = true,
   });
 
   final String titleForm;
@@ -26,6 +27,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final bool isPassword;
   final Color? colorTitleText;
   final TextInputType? keyboardType;
+  final bool isEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +68,12 @@ class TextFormFieldWidget extends StatelessWidget {
                     : false,
                 style: TextStyleCollection.caption.copyWith(
                   fontSize: 14,
-                  color: ColorNeutral.neutral700,
+                  color: isEnabled
+                      ? ColorNeutral.neutral700
+                      : ColorPrimary.primary100,
                 ),
                 keyboardType: keyboardType,
+                enabled: isEnabled,
                 decoration: InputDecoration(
                   suffixIcon: isPassword
                       ? IconButton(
@@ -85,7 +90,7 @@ class TextFormFieldWidget extends StatelessWidget {
                       : null,
                   errorText: errorText,
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: isEnabled ? Colors.white : ColorNeutral.neutral300,
                   hintText: hintText,
                   hintStyle: TextStyleCollection.caption.copyWith(
                     fontSize: 12,

@@ -14,16 +14,19 @@ class FormBarangWidget extends StatelessWidget {
           TextFormFieldWidget(
               titleForm: 'Nama Barang',
               hintText: 'Nama Barang',
+              isEnabled: false,
               isPassword: false),
           SizedBox(height: 24),
           TextFormFieldWidget(
               titleForm: 'Harga Barang',
               hintText: 'Harga Barang',
+              isEnabled: false,
               isPassword: false),
           SizedBox(height: 24),
           TextFormFieldWidget(
               titleForm: 'Stok Barang',
               hintText: 'Jumlah Stok Barang yang tersedia',
+              isEnabled: false,
               isPassword: false),
           SizedBox(height: 24),
         ],

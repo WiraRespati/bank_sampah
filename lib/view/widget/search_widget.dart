@@ -9,7 +9,6 @@ class SearchWidget extends StatelessWidget {
       this.onChanged,
       this.onClear,
       this.padding,
-      this.filterButton,
       this.keyboardType,
       this.icon});
 
@@ -18,7 +17,6 @@ class SearchWidget extends StatelessWidget {
   final Function(String)? onChanged;
   final Function()? onClear;
   final EdgeInsetsGeometry? padding;
-  final Widget? filterButton;
   final TextInputType? keyboardType;
   final Widget? icon;
 
@@ -44,11 +42,13 @@ class SearchWidget extends StatelessWidget {
         height: 64,
         child: Center(
           child: TextFormField(
+            style: TextStyle(color: ColorPrimary.primary100),
             onChanged: onChanged,
             keyboardType: keyboardType ?? TextInputType.number,
             controller: controller,
             decoration: InputDecoration(
               hintText: hintText,
+              hintStyle: TextStyle(color: ColorCollection.gray),
               contentPadding: const EdgeInsets.symmetric(vertical: 20.0),
               border: InputBorder.none,
               prefixIcon: IconButton(
@@ -62,7 +62,6 @@ class SearchWidget extends StatelessWidget {
                     onPressed: onClear,
                     icon: const Icon(Icons.cancel_outlined),
                   ),
-                  filterButton ?? Container(),
                 ],
               ),
             ),
