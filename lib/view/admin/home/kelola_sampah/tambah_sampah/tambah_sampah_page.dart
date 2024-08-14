@@ -1,13 +1,18 @@
-import 'package:bank_sampah/view/admin/home/kelola_barang/tambah_barang/button_tambah_widget.dart';
+import 'package:bank_sampah/controller/admin/add_sampah_controller.dart';
+import 'package:bank_sampah/view/admin/home/kelola_sampah/tambah_sampah/button_tambah_sampah_widget.dart';
 import 'package:bank_sampah/view/admin/home/kelola_sampah/tambah_sampah/form_tambah_sampah_widget.dart';
 import 'package:bank_sampah/view/admin/home/kelola_sampah/tambah_sampah/upload_tambah_sampah_widget.dart';
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/kelola_header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TambahSampahPage extends StatelessWidget {
-  const TambahSampahPage({super.key});
+import '../../../../../utils/color_constant.dart';
 
+class TambahSampahPage extends StatelessWidget {
+   TambahSampahPage({super.key});
+final AddSampahController addSampahController = Get.put(
+    AddSampahController(),
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +38,25 @@ class TambahSampahPage extends StatelessWidget {
               ],
             ),
           ),
-          // perhatikan ini
-          const ButtonTambahWidget(),
+          ButtonTambahSampahWidget(),
+          Obx(
+            () {
+              if (addSampahController.isLoadingAddSampah.value) {
+                return Container(
+                  color: ColorNeutral.neutral50.withOpacity(0.5),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        ColorPrimary.primary100,
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                return const SizedBox.shrink();
+              }
+            },
+          ),
         ],
       ),
     );

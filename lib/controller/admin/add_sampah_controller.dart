@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:bank_sampah/services/admin/tambah_sampah_service.dart';
+import 'package:bank_sampah/view/admin/home/kelola_sampah/kelola_sampah_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,6 +12,8 @@ class AddSampahController extends GetxController {
 
   Rx<XFile?> imageFile = Rx<XFile?>(null);
   RxString? imagePath = ''.obs;
+
+  RxBool isLoadingAddSampah = false.obs;
 
   final errorMessageNamaSampah = Rxn<String>();
   final errorMessageDeskripsiSampah = Rxn<String>();
@@ -109,7 +112,7 @@ class AddSampahController extends GetxController {
         imageFile.value == null) {
       Get.snackbar(
         'Error',
-        'Seluruh Form Harus tes',
+        'Seluruh Form Harus diisi',
         snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.red,
         colorText: Colors.white,
@@ -117,16 +120,43 @@ class AddSampahController extends GetxController {
       return;
     }
     //add data to firebase
-    await TambahSampahService()
-        .uploadImageSampah(imageFile.value!)
-        .then((imageUrl) {
-      TambahSampahService().addSampah(
-        imageUrl,
-        namaSampahController.text,
-        int.parse(nilaiPointSampahController.text),
-        deskripsiSampahController.text,
+
+    try {
+      isLoadingAddSampah.value = true;
+      // Upload image dan tambahkan barang
+      await TambahSampahService()
+          .uploadImageSampah(imageFile.value!)
+          .then((imageUrl) {
+        TambahSampahService().addSampah(
+          imageUrl,
+          namaSampahController.text,
+          int.parse(nilaiPointSampahController.text),
+          deskripsiSampahController.text,
+        );
+      });
+      isLoadingAddSampah.value = false;
+
+      // Tampilkan pesan sukses
+      Get.snackbar(
+        'Success',
+        'Upload Menabung Sampah Berhasil',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
       );
-    });
+      Get.to(() => const KelolaSampahPage());
+    } on Exception catch (e) {
+      // Tampilkan pesan error
+      isLoadingAddSampah.value = false;
+
+      Get.snackbar(
+        'Error',
+        'Gagal menambahkan barang (error: ${e.toString()})',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
   }
 
   @override

@@ -20,7 +20,7 @@ class KelolaSampahPage extends StatelessWidget {
             ),
             TambahSampahWidget(
               onTap: () {
-                Get.to(() => const TambahSampahPage());
+                Get.to(() =>  TambahSampahPage());
               },
             ),
             Container(

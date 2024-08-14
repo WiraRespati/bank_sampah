@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:bank_sampah/services/admin/tambah_barang_service.dart';
+import 'package:bank_sampah/view/admin/home/kelola_barang/kelola_barang_page.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 
@@ -11,6 +12,8 @@ class BarangController extends GetxController {
 
   Rx<XFile?> imageFile = Rx<XFile?>(null);
   RxString? imagePath = ''.obs;
+
+  RxBool isLoadingAddBarang = false.obs;
 
   final errorMessageNamaBarang = Rxn<String>();
   final errorMessageDeskripsiBarang = Rxn<String>();
@@ -107,11 +110,13 @@ class BarangController extends GetxController {
   }
 
   void addBarang() async {
+    // Validasi setiap field
     validatorNamaBarang(namaBarangController.text);
     validatorDeskripsiBarang(deskripsiBarangController.text);
     validatorNilaiPoint(nilaiPointController.text);
     validatorJumlahStok(jumlahStokController.text);
 
+    // Cek apakah ada error message atau image file yang kosong
     if (errorMessageNamaBarang.value != null ||
         errorMessageDeskripsiBarang.value != null ||
         errorMessageNilaiPoint.value != null ||
@@ -121,14 +126,15 @@ class BarangController extends GetxController {
         'Error',
         'Seluruh Form Harus Diisi',
         snackPosition: SnackPosition.TOP,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.red,
         colorText: Colors.white,
       );
       return;
     }
 
     try {
-      // Upload image and add barang
+      isLoadingAddBarang.value = true;
+      // Upload image dan tambahkan barang
       await TambahBarangService()
           .uploadImageBarang(imageFile.value!)
           .then((value) {
@@ -140,8 +146,9 @@ class BarangController extends GetxController {
           deskripsiBarangController.text,
         );
       });
+      isLoadingAddBarang.value = false;
 
-      // Show success message
+      // Tampilkan pesan sukses
       Get.snackbar(
         'Success',
         'Upload Menabung Sampah Berhasil',
@@ -149,8 +156,12 @@ class BarangController extends GetxController {
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
+      clearData();
+      Get.to(() => const KelolaBarangPage());
     } on Exception catch (e) {
-      // Show error message
+      // Tampilkan pesan error
+      isLoadingAddBarang.value = false;
+
       Get.snackbar(
         'Error',
         'Gagal menambahkan barang (error: ${e.toString()})',
@@ -159,6 +170,18 @@ class BarangController extends GetxController {
         colorText: Colors.white,
       );
     }
+  }
+
+  void clearData() {
+    namaBarangController.clear();
+    deskripsiBarangController.clear();
+    nilaiPointController.clear();
+    jumlahStokController.clear();
+    imageFile.value = null;
+    errorMessageNamaBarang.value = null;
+    errorMessageDeskripsiBarang.value = null;
+    errorMessageNilaiPoint.value = null;
+    errorMessageJumlahStok.value = null;
   }
 
   @override

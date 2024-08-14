@@ -19,8 +19,8 @@ class FormEditSampahWidget extends StatelessWidget {
           Obx(
             () => TextFormFieldWidget(
               isPassword: false,
-              titleForm: 'Nama Barang',
-              hintText: 'Masukkan Nama Barang',
+              titleForm: 'Nama Sampah',
+              hintText: 'Masukkan Nama Sampah',
               keyboardType: TextInputType.name,
               controller: sampahController.namaSampahController,
               errorText: sampahController.errorMessageNamaSampah.value,
@@ -35,8 +35,8 @@ class FormEditSampahWidget extends StatelessWidget {
           Obx(
             () => TextFormFieldWidget(
               isPassword: false,
-              titleForm: 'Deskripsi Barang',
-              hintText: 'Masukkan Deskripsi Barang',
+              titleForm: 'Deskripsi Sampah',
+              hintText: 'Masukkan Deskripsi Sampah',
               keyboardType: TextInputType.multiline,
               controller: sampahController.deskripsiSampahController,
               errorText: sampahController.errorMessageDeskripsiSampah.value,

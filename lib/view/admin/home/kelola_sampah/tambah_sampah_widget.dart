@@ -24,7 +24,7 @@ class TambahSampahWidget extends StatelessWidget {
       },
       onTapCancel: () => controller.setTapped(false),
       onTap: () {
-        Get.to(() => const TambahSampahPage());
+        Get.to(() => TambahSampahPage());
       },
       child: Obx(
         () => Container(
