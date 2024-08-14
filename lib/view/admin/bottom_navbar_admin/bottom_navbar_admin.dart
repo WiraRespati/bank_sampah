@@ -3,7 +3,7 @@ import 'package:bank_sampah/controller/admin/bottom_navbar_admin_controller.dart
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:bank_sampah/view/admin/home/home_admin_page.dart';
-import 'package:bank_sampah/view/user/history/history_page.dart';
+import 'package:bank_sampah/view/admin/konversi/konversi_page.dart';
 import 'package:bank_sampah/view/user/home/home_page.dart';
 import 'package:bank_sampah/view/user/profile/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,8 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 class BottomNavbarAdmin extends StatelessWidget {
   BottomNavbarAdmin({super.key});
 
-  final BottomNavbarAdminController controller = Get.put(BottomNavbarAdminController());
+  final BottomNavbarAdminController controller =
+      Get.put(BottomNavbarAdminController());
 
   @override
   Widget build(BuildContext context) {
@@ -61,14 +62,17 @@ class BottomNavbarAdmin extends StatelessWidget {
                     selectedColor: ColorPrimary.primary100,
                     unselectedColor: ColorNeutral.neutral700),
                 SalomonBottomBarItem(
-                    icon: SvgPicture.asset(
-                      "assets/images/logo_history.svg",
-                      height: 24,
-                      width: 24,
-                      color: controller.currentIndex.value == 1
-                          ? ColorPrimary.primary100
-                          : ColorNeutral.neutral700,
-                    ),
+                    icon: controller.currentIndex.value == 1
+                        ? Image.asset(
+                            "assets/images/logobs.png",
+                            height: 24,
+                            width: 24,
+                          )
+                        : Image.asset(
+                            "assets/images/disablelogobs.png",
+                            height: 24,
+                            width: 24,
+                          ),
                     title: Text(
                       "Konversi",
                       style: TextStyleCollection.captionBold.copyWith(
@@ -105,7 +109,7 @@ class BottomNavbarAdmin extends StatelessWidget {
       case 0:
         return const Center(child: HomeAdminPage());
       case 1:
-        return const Center(child: HistoryPage());
+        return Center(child: KonversiPage());
       case 2:
         return const Center(child: ProfilePage());
       default:

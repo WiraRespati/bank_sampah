@@ -9,7 +9,9 @@ class SearchWidget extends StatelessWidget {
       this.onChanged,
       this.onClear,
       this.padding,
-      this.filterButton});
+      this.filterButton,
+      this.keyboardType,
+      this.icon});
 
   final TextEditingController? controller;
   final String? hintText;
@@ -17,6 +19,8 @@ class SearchWidget extends StatelessWidget {
   final Function()? onClear;
   final EdgeInsetsGeometry? padding;
   final Widget? filterButton;
+  final TextInputType? keyboardType;
+  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,7 @@ class SearchWidget extends StatelessWidget {
         child: Center(
           child: TextFormField(
             onChanged: onChanged,
-            keyboardType: TextInputType.number,
+            keyboardType: keyboardType ?? TextInputType.number,
             controller: controller,
             decoration: InputDecoration(
               hintText: hintText,
@@ -49,7 +53,7 @@ class SearchWidget extends StatelessWidget {
               border: InputBorder.none,
               prefixIcon: IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.person_search_outlined),
+                icon: icon ?? const Icon(Icons.person_search_outlined),
               ),
               suffixIcon: Row(
                 mainAxisAlignment: MainAxisAlignment.end,

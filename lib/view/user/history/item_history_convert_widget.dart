@@ -13,6 +13,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.symmetric( vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
         color: ColorNeutral.neutral50,
         border: const Border(
@@ -21,6 +22,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
             width: 1,
           ),
         ),
+        borderRadius:   BorderRadius.circular(16),
         boxShadow: const [
           BoxShadow(
             color: Color(0x331C9351),
