@@ -13,6 +13,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.symmetric( vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
         color: ColorNeutral.neutral50,
         border: const Border(
@@ -21,6 +22,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
             width: 1,
           ),
         ),
+        borderRadius:   BorderRadius.circular(16),
         boxShadow: const [
           BoxShadow(
             color: Color(0x331C9351),
@@ -104,7 +106,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
-                            'https://images.tokopedia.net/img/cache/900/VqbcmM/2022/8/3/41c4839f-1fd5-4bad-9566-5ecb4916b565.jpg',
+                            'https://cdn.ralali.id/assets/img/Libraries/Beras-Premium-Cap-Tiga-Mangga-5kg_mtJX9ekyQrY1jWrn_1562573061.jpg',
                             fit: BoxFit.contain,
                             height: 250,
                           ),
@@ -169,7 +171,8 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                     actions: <Widget>[
                       Center(
                         child: Container(
-                          padding: const EdgeInsetsDirectional.symmetric(horizontal: 16),
+                          padding: const EdgeInsetsDirectional.symmetric(
+                              horizontal: 16),
                           decoration: BoxDecoration(
                             color: ColorPrimary.primary100.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(16),

@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class KelolaHeaderWidget extends StatelessWidget {
-  const KelolaHeaderWidget({super.key, required this.title, this.onPressed});
+  const KelolaHeaderWidget(
+      {super.key, required this.title, this.onPressed, this.leading});
 
   final String title;
   final Function()? onPressed;
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
@@ -31,27 +33,33 @@ class KelolaHeaderWidget extends StatelessWidget {
         ],
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 24),
-            child: IconButton(
-              onPressed: onPressed ??
-                  () {
-                    Get.to(() => BottomNavbarAdmin());
-                  },
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: ColorPrimary.primary100,
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 24),
+                child: IconButton(
+                  onPressed: onPressed ??
+                      () {
+                        Get.to(() => BottomNavbarAdmin());
+                      },
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: ColorPrimary.primary100,
+                  ),
+                ),
               ),
-            ),
+              Text(
+                title,
+                style: TextStyleCollection.bodyMedium.copyWith(
+                  color: ColorPrimary.primary100,
+                  fontSize: 20,
+                ),
+              ),
+            ],
           ),
-          Text(
-            title,
-            style: TextStyleCollection.bodyMedium.copyWith(
-              color: ColorPrimary.primary100,
-              fontSize: 20,
-            ),
-          ),
+          leading ?? const SizedBox(),
         ],
       ),
     );

@@ -6,9 +6,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class UploadMenabungSampahWidget extends StatelessWidget {
-  UploadMenabungSampahWidget({super.key, this.onTap});
+  UploadMenabungSampahWidget({super.key, this.onTap, required this.title});
 
   final Function()? onTap;
+  final String title;
   final controller = Get.put(MenabungSampahController());
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class UploadMenabungSampahWidget extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.only(left: 17),
                 child: Text(
-                  'Upload Menabung Sampah',
+                 title,
                   style: TextStyleCollection.captionMedium
                       .copyWith(fontSize: 16, color: ColorCollection.white),
                 ),

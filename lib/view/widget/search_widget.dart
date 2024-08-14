@@ -3,17 +3,29 @@ import 'package:flutter/material.dart';
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget(
-      {super.key, this.controller, this.hintText, this.onChanged, this.onClear});
+      {super.key,
+      this.controller,
+      this.hintText,
+      this.onChanged,
+      this.onClear,
+      this.padding,
+      this.filterButton,
+      this.keyboardType,
+      this.icon});
 
   final TextEditingController? controller;
   final String? hintText;
   final Function(String)? onChanged;
   final Function()? onClear;
+  final EdgeInsetsGeometry? padding;
+  final Widget? filterButton;
+  final TextInputType? keyboardType;
+  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: padding ?? const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
         decoration: BoxDecoration(
           color: ColorCollection.white,
@@ -33,7 +45,7 @@ class SearchWidget extends StatelessWidget {
         child: Center(
           child: TextFormField(
             onChanged: onChanged,
-            keyboardType: TextInputType.number,
+            keyboardType: keyboardType ?? TextInputType.number,
             controller: controller,
             decoration: InputDecoration(
               hintText: hintText,
@@ -41,11 +53,17 @@ class SearchWidget extends StatelessWidget {
               border: InputBorder.none,
               prefixIcon: IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.person_search_outlined),
+                icon: icon ?? const Icon(Icons.person_search_outlined),
               ),
-              suffixIcon: IconButton(
-                onPressed: onClear,
-                icon: const Icon(Icons.cancel_outlined),
+              suffixIcon: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                    onPressed: onClear,
+                    icon: const Icon(Icons.cancel_outlined),
+                  ),
+                  filterButton ?? Container(),
+                ],
               ),
             ),
           ),
