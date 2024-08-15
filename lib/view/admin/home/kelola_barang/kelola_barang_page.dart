@@ -1,3 +1,4 @@
+import 'package:bank_sampah/controller/admin/barang_controller.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/edit_barang/edit_barang_page.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/tambah_barang/tambah_barang_page.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/tambah_barang_widget.dart';
@@ -11,6 +12,10 @@ class KelolaBarangPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final BarangController barangController = Get.put(
+      BarangController(),
+    );
+    barangController.getAllBarang();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -20,33 +25,39 @@ class KelolaBarangPage extends StatelessWidget {
             ),
             TambahBarangWidget(
               onTap: () {
-                Get.to(() =>  TambahBarangPage());
+                Get.to(() => TambahBarangPage());
               },
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 23,
-                  childAspectRatio: 0.65,
+              child: Obx(
+                () => GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 23,
+                    childAspectRatio: 0.65,
+                  ),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: barangController.listBarang.value?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      width: 152,
+                      height: 265,
+                      child: ItemAdminWidget(
+                        buttonName: 'Edit',
+                        image: barangController.listBarang.value?[index].image,
+                        title: barangController.listBarang.value?[index].name,
+                        point: barangController.listBarang.value?[index].price
+                            .toString(),
+                        onPressed: () {
+                          Get.to(() => const EditBarangPage());
+                        },
+                      ),
+                    );
+                  },
                 ),
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return SizedBox(
-                    width: 152,
-                    height: 265,
-                    child: ItemAdminWidget(
-                      buttonName: 'Edit',
-                      onPressed: () {
-                        Get.to(() => const EditBarangPage());
-                      },
-                    ),
-                  );
-                },
               ),
             ),
             const SizedBox(

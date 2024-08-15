@@ -4,10 +4,20 @@ import 'package:bank_sampah/view/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 
 class ItemAdminWidget extends StatelessWidget {
-  const ItemAdminWidget({super.key, this.onPressed, required this.buttonName});
+  const ItemAdminWidget({
+    super.key,
+    this.onPressed,
+    required this.buttonName,
+    this.image,
+    this.title,
+    this.point,
+  });
 
   final Function()? onPressed;
   final String buttonName;
+  final String? image;
+  final String? title;
+  final String? point;
 
   @override
   Widget build(BuildContext context) {
@@ -29,20 +39,26 @@ class ItemAdminWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Image.asset(
-              'assets/images/logobs.png',
-              height: 132,
-              width: 132,
-            ),
-          ),
+              padding: const EdgeInsets.only(left: 8),
+              child: image != null
+                  ? Image.network(
+                      image!,
+                      width: 152,
+                      height: 152,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      'assets/images/logobs.png',
+                      height: 132,
+                      width: 132,
+                    )),
           Padding(
             padding: const EdgeInsets.only(
               top: 9,
               left: 14,
             ),
             child: Text(
-              'Beras 5Kg',
+              title ?? 'Nama Barang',
               style: TextStyleCollection.caption.copyWith(
                 fontSize: 14,
                 color: ColorCollection.black,
@@ -63,7 +79,7 @@ class ItemAdminWidget extends StatelessWidget {
                 width: 4,
               ),
               Text(
-                "45.000",
+                point ?? "Points",
                 style: TextStyleCollection.captionMedium.copyWith(
                   fontSize: 12,
                   color: const Color(0xFFF39E09),

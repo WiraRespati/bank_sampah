@@ -1,4 +1,6 @@
 import 'dart:typed_data';
+import 'package:bank_sampah/models/barang_model.dart';
+import 'package:bank_sampah/services/admin/show_barang_services.dart';
 import 'package:bank_sampah/services/admin/tambah_barang_service.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/kelola_barang_page.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,8 @@ import 'package:image_picker/image_picker.dart';
 
 class BarangController extends GetxController {
   var isTapped = false.obs;
+
+  Rxn<List<BarangModel>> listBarang = Rxn<List<BarangModel>>([]);
 
   Rx<XFile?> imageFile = Rx<XFile?>(null);
   RxString? imagePath = ''.obs;
@@ -162,6 +166,21 @@ class BarangController extends GetxController {
       // Tampilkan pesan error
       isLoadingAddBarang.value = false;
 
+      Get.snackbar(
+        'Error',
+        'Gagal menambahkan barang (error: ${e.toString()})',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
+  void getAllBarang() async {
+    try {
+      final response = await ShowBarangServices().getAllBarangData();
+      listBarang.value = response['barang'];
+    } on Exception catch (e) {
       Get.snackbar(
         'Error',
         'Gagal menambahkan barang (error: ${e.toString()})',
