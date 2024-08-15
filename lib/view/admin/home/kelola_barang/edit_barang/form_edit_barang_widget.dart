@@ -13,6 +13,7 @@ class FormEditBarangWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    editBarangController.setBarang();
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(

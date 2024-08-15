@@ -1,3 +1,4 @@
+import 'package:bank_sampah/controller/admin/edit_sampah_controller.dart';
 import 'package:bank_sampah/view/admin/home/kelola_sampah/edit_sampah/edit_sampah_page.dart';
 import 'package:bank_sampah/view/admin/home/kelola_sampah/tambah_sampah/tambah_sampah_page.dart';
 import 'package:bank_sampah/view/admin/home/kelola_sampah/tambah_sampah_widget.dart';
@@ -11,6 +12,9 @@ class KelolaSampahPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final EditSampahController editSampahController =
+        Get.put(EditSampahController());
+    editSampahController.getAllSampah();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -20,34 +24,45 @@ class KelolaSampahPage extends StatelessWidget {
             ),
             TambahSampahWidget(
               onTap: () {
-                Get.to(() =>  TambahSampahPage());
+                Get.to(() => TambahSampahPage());
               },
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 23,
-                  childAspectRatio: 0.65,
-                ),
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return SizedBox(
-                    width: 152,
-                    height: 265,
-                    child: ItemAdminWidget(
-                      buttonName: 'Edit',
-                      onPressed: () {
-                        Get.to(() => const EditSampahPage());
-                      },
+              child: Obx(() => GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 23,
+                      childAspectRatio: 0.65,
                     ),
-                  );
-                },
-              ),
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount:
+                        editSampahController.listSampah.value?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return SizedBox(
+                        width: 152,
+                        height: 265,
+                        child: ItemAdminWidget(
+                          buttonName: 'Edit',
+                          image: editSampahController
+                              .listSampah.value![index].gambar,
+                          title: editSampahController
+                              .listSampah.value![index].name,
+                          point: editSampahController
+                              .listSampah.value![index].points
+                              .toString(),
+                          onPressed: () {
+                            Get.to(() => const EditSampahPage());
+                            editSampahController.sampah.value =
+                                editSampahController.listSampah.value![index];
+                          },
+                        ),
+                      );
+                    },
+                  )),
             ),
             const SizedBox(
               height: 32,

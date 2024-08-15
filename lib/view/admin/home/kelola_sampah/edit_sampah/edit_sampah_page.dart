@@ -5,11 +5,15 @@ import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/kelola_header
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../controller/admin/edit_sampah_controller.dart';
+
 class EditSampahPage extends StatelessWidget {
   const EditSampahPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final EditSampahController editSampahController =
+        Get.put(EditSampahController());
     return Scaffold(
       body: Stack(
         children: [
@@ -20,6 +24,7 @@ class EditSampahPage extends StatelessWidget {
                   title: "Edit Data Sampah",
                   onPressed: () {
                     Get.back();
+                    editSampahController.clearForm();
                   },
                 ),
                 const SizedBox(

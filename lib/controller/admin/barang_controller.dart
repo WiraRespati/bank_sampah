@@ -180,7 +180,7 @@ class BarangController extends GetxController {
     try {
       final response = await ShowBarangServices().getAllBarangData();
       listBarang.value = response['barang'];
-    } on Exception catch (e) {
+    } catch (e) {
       Get.snackbar(
         'Error',
         'Gagal menambahkan barang (error: ${e.toString()})',

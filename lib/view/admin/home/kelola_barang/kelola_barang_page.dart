@@ -1,4 +1,5 @@
 import 'package:bank_sampah/controller/admin/barang_controller.dart';
+import 'package:bank_sampah/controller/admin/edit_barang_controller.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/edit_barang/edit_barang_page.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/tambah_barang/tambah_barang_page.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/tambah_barang_widget.dart';
@@ -14,6 +15,9 @@ class KelolaBarangPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final BarangController barangController = Get.put(
       BarangController(),
+    );
+    final EditBarangController editBarangController = Get.put(
+      EditBarangController(),
     );
     barangController.getAllBarang();
     return Scaffold(
@@ -53,6 +57,8 @@ class KelolaBarangPage extends StatelessWidget {
                             .toString(),
                         onPressed: () {
                           Get.to(() => const EditBarangPage());
+                          editBarangController.barang.value =
+                              barangController.listBarang.value?[index];
                         },
                       ),
                     );

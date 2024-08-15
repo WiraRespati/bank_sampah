@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 class UploadEditBarangWidget extends StatelessWidget {
   UploadEditBarangWidget({super.key});
 
-  final EditBarangController barangController = Get.put(
+  final EditBarangController editBarangController = Get.put(
     EditBarangController(),
   );
 
@@ -58,7 +58,7 @@ class UploadEditBarangWidget extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 16),
                               child: Text(
-                                "Foto Sampah",
+                                "Foto Barang",
                                 style: TextStyleCollection.bodyBold.copyWith(
                                     color: ColorPrimary.primary100,
                                     fontSize: 16),
@@ -95,7 +95,7 @@ class UploadEditBarangWidget extends StatelessWidget {
                               InkWell(
                                 onTap: () async {
                                   Get.back();
-                                  barangController.onCameraView();
+                                  editBarangController.onCameraView();
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.only(
@@ -135,7 +135,7 @@ class UploadEditBarangWidget extends StatelessWidget {
                               InkWell(
                                 onTap: () {
                                   Get.back();
-                                  barangController.onGalleryView();
+                                  editBarangController.onGalleryView();
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.only(
@@ -187,17 +187,18 @@ class UploadEditBarangWidget extends StatelessWidget {
                 ),
                 height: 324,
                 width: 324,
-                child: barangController.imageFile.value != null
+                child: editBarangController.imageFile.value != null
                     ? Image.file(
-                        File(barangController.imageFile.value!.path),
+                        File(editBarangController.imageFile.value!.path),
                         fit: BoxFit.cover,
                       )
-                    : Center(
-                        child: Icon(
-                          Icons.add_a_photo,
-                          color: ColorPrimary.primary100,
-                        ),
-                      ),
+                    : editBarangController.barang.value!.image != null
+                        ? Image.network(
+                            editBarangController.barang.value!.image!)
+                        : Image.file(
+                            File(editBarangController.imageFile.value!.path),
+                            fit: BoxFit.cover,
+                          ),
               ),
             ),
           ),

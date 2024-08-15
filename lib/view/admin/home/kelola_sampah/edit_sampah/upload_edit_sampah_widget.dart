@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UploadEditSampahWidget extends StatelessWidget {
-   UploadEditSampahWidget({super.key});
+  UploadEditSampahWidget({super.key});
 
   final EditSampahController sampahController = Get.put(
     EditSampahController(),
@@ -192,12 +192,15 @@ class UploadEditSampahWidget extends StatelessWidget {
                         File(sampahController.imageFile.value!.path),
                         fit: BoxFit.cover,
                       )
-                    : Center(
-                        child: Icon(
-                          Icons.add_a_photo,
-                          color: ColorPrimary.primary100,
-                        ),
-                      ),
+                    : sampahController.sampah.value!.gambar != null
+                        ? Image.network(
+                            sampahController.sampah.value!.gambar!,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.file(
+                            File(sampahController.imageFile.value!.path),
+                            fit: BoxFit.cover,
+                          ),
               ),
             ),
           ),
