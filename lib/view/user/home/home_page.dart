@@ -1,9 +1,11 @@
 import 'package:bank_sampah/controller/admin/barang_controller.dart';
+import 'package:bank_sampah/controller/admin/edit_sampah_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/utils.dart';
 import 'package:bank_sampah/view/user/home/banner_home_widget.dart';
 import 'package:bank_sampah/view/user/home/barang/barang_page.dart';
 import 'package:bank_sampah/view/user/home/item_home_widget.dart';
+import 'package:bank_sampah/view/user/home/sampah/sampah_page.dart';
 import 'package:bank_sampah/view/user/home/title_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +18,11 @@ class HomePage extends StatelessWidget {
     final BarangController barangController = Get.put(
       BarangController(),
     );
+     final EditSampahController sampahController = Get.put(
+      EditSampahController(),
+    );
     barangController.getAllBarang();
+     sampahController.getAllSampah();
     return Scaffold(
       backgroundColor: ColorCollection.white,
       body: SingleChildScrollView(
@@ -25,24 +31,37 @@ class HomePage extends StatelessWidget {
             const BannerHomeWidget(),
             TitleItemWidget(
               title: 'Sampah yang dapat ditabung',
-              onPressed: () {},
+              onPressed: () {
+                 Get.to(() => const SampahPage());
+              },
             ),
             SizedBox(
               height: 210,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.only(
-                      left: 20,
-                      top: 15,
-                      bottom: 10,
-                    ),
-                    child: const ItemHomeWidget(),
-                  );
-                },
-              ),
+              child: Obx(() {
+                final listSampah = sampahController.listSampah.value;
+                if (listSampah == null || listSampah.isEmpty) {
+                  return const Center(child: Text('Tidak ada samapah tersedia'));
+                }
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    final sampah = listSampah[index];
+                    return Container(
+                      margin: const EdgeInsets.only(
+                        left: 20,
+                        top: 15,
+                        bottom: 10,
+                      ),
+                      child: ItemHomeWidget(
+                        image: sampah.gambar,
+                        title: sampah.name,
+                        point: Helper.formatNumber(sampah.points!.toString()),
+                      ),
+                    );
+                  },
+                );
+              }),
             ),
             TitleItemWidget(
               title: 'Barang yang dapat ditukar',
