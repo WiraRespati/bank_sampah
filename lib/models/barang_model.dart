@@ -7,7 +7,7 @@ class BarangModel {
   String? description;
   int? price;
   int? stock;
-  FieldValue? createdAt;
+  Timestamp? createdAt;
 
   BarangModel({
     this.id,

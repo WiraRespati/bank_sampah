@@ -38,7 +38,7 @@ class TambahBarangService {
         description: description,
         price: price,
         stock: stock,
-        createdAt: FieldValue.serverTimestamp(),
+        createdAt: Timestamp.now(),
       );
       await documentReference.set(barang.toJson());
     } on FirebaseException catch (e) {
