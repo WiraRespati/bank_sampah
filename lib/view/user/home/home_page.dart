@@ -1,14 +1,22 @@
+import 'package:bank_sampah/controller/admin/barang_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
+import 'package:bank_sampah/utils/utils.dart';
 import 'package:bank_sampah/view/user/home/banner_home_widget.dart';
+import 'package:bank_sampah/view/user/home/barang/barang_page.dart';
 import 'package:bank_sampah/view/user/home/item_home_widget.dart';
 import 'package:bank_sampah/view/user/home/title_item_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final BarangController barangController = Get.put(
+      BarangController(),
+    );
+    barangController.getAllBarang();
     return Scaffold(
       backgroundColor: ColorCollection.white,
       body: SingleChildScrollView(
@@ -25,23 +33,50 @@ class HomePage extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: 5,
                 itemBuilder: (context, index) {
-                  return const ItemHomeWidget();
+                  return Container(
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      top: 15,
+                      bottom: 10,
+                    ),
+                    child: const ItemHomeWidget(),
+                  );
                 },
               ),
             ),
             TitleItemWidget(
               title: 'Barang yang dapat ditukar',
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => const BarangPage());
+              },
             ),
             SizedBox(
               height: 210,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return const ItemHomeWidget();
-                },
-              ),
+              child: Obx(() {
+                final listBarang = barangController.listBarang.value;
+                if (listBarang == null || listBarang.isEmpty) {
+                  return const Center(child: Text('Tidak ada barang tersedia'));
+                }
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    final barang = listBarang[index];
+                    return Container(
+                      margin: const EdgeInsets.only(
+                        left: 20,
+                        top: 15,
+                        bottom: 10,
+                      ),
+                      child: ItemHomeWidget(
+                        image: barang.image,
+                        title: barang.name,
+                        point: Helper.formatNumber(barang.price!.toString()),
+                      ),
+                    );
+                  },
+                );
+              }),
             ),
             const SizedBox(
               height: 35,
