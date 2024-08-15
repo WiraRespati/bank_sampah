@@ -10,7 +10,6 @@ class ProfilLogoutAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final LogoutController logoutController = Get.put(LogoutController());
     return AlertDialog(
       backgroundColor: ColorNeutral.neutral50,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -48,7 +47,7 @@ class ProfilLogoutAlertDialog extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 AuthService().signOut();
-                Get.offAll(() => const SplashPage());
+                Get.offAll(() => SplashPage());
               },
               child: Container(
                 width: 112,
