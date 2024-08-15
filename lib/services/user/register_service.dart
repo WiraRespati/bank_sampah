@@ -27,6 +27,8 @@ class RegisterService {
         nik: nik,
         gender: 'Pria',
         phone: '',
+        points: 0,
+        role: 'user',
       );
       await _firestore
           .collection('users')
