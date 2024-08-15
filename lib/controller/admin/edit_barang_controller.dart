@@ -1,14 +1,19 @@
 import 'dart:typed_data';
+import 'package:bank_sampah/services/admin/edit_barang_service.dart';
+import 'package:bank_sampah/view/admin/home/kelola_barang/kelola_barang_page.dart';
+import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
 
 import 'package:flutter/material.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../models/barang_model.dart';
 
 class EditBarangController extends GetxController {
   Rx<XFile?> imageFile = Rx<XFile?>(null);
   RxString? imagePath = ''.obs;
+
+  Rxn<BarangModel> barang = Rxn<BarangModel>();
 
   final errorMessageNamaBarang = Rxn<String>();
   final errorMessageDeskripsiBarang = Rxn<String>();
@@ -98,6 +103,55 @@ class EditBarangController extends GetxController {
     } else {
       errorMessageJumlahStok.value = null;
     }
+  }
+
+  void setBarang() {
+    namaBarangController.text = barang.value!.name ?? '';
+    deskripsiBarangController.text = barang.value!.description ?? '';
+    nilaiPointController.text = barang.value!.price.toString();
+    jumlahStokController.text = barang.value!.stock.toString();
+    imagePath!.value = barang.value!.image ?? '';
+  }
+
+  void editBarang() async {
+    final response = await EditBarangService().editBarang(
+      BarangModel(
+        id: barang.value!.id,
+        name: namaBarangController.text,
+        description: deskripsiBarangController.text,
+        price: int.parse(nilaiPointController.text),
+        stock: int.parse(jumlahStokController.text),
+        image: barang.value!.image,
+      ),
+      imageFile.value,
+    );
+    if (response['status'] == 'success') {
+      Get.offAll(() => const KelolaBarangPage());
+      Get.snackbar(
+        'Success',
+        'Berhasil mengedit barang',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+    } else {
+      Get.snackbar(
+        'Error',
+        'Gagal mengedit barang',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
+  void clearData() {
+    namaBarangController.clear();
+    deskripsiBarangController.clear();
+    nilaiPointController.clear();
+    jumlahStokController.clear();
+    imagePath!.value = '';
+    imageFile.value = null;
   }
 
   @override
