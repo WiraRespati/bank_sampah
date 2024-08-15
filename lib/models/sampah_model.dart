@@ -6,7 +6,7 @@ class SampahModel {
   String? description;
   int? points;
   String? gambar;
-  FieldValue? createdAt;
+  Timestamp? createdAt;
 
   SampahModel({
     this.id,

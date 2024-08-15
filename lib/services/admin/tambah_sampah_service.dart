@@ -38,7 +38,7 @@ class TambahSampahService {
         gambar: imageUrl,
         description: description,
         points: points,
-        createdAt: FieldValue.serverTimestamp(),
+        createdAt: Timestamp.now(),
       );
       await documentReference.set(sampah.toJson());
     } on FirebaseException catch (e) {

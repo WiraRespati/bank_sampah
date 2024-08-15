@@ -12,6 +12,7 @@ class FormEditSampahWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    sampahController.setSampah();
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(

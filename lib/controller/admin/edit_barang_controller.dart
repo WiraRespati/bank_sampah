@@ -122,6 +122,7 @@ class EditBarangController extends GetxController {
         price: int.parse(nilaiPointController.text),
         stock: int.parse(jumlahStokController.text),
         image: barang.value!.image,
+        createdAt: barang.value!.createdAt,
       ),
       imageFile.value,
     );
