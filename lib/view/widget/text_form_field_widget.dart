@@ -90,7 +90,7 @@ class TextFormFieldWidget extends StatelessWidget {
                       : null,
                   errorText: errorText,
                   filled: true,
-                  fillColor: isEnabled ? Colors.white : ColorNeutral.neutral300,
+                  fillColor: isEnabled ? ColorCollection.white : ColorPrimary.primary100.withOpacity(0.1),
                   hintText: hintText,
                   hintStyle: TextStyleCollection.caption.copyWith(
                     fontSize: 12,
