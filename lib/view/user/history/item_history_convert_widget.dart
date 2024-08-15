@@ -13,7 +13,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric( vertical: 8, horizontal: 16),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
         color: ColorNeutral.neutral50,
         border: const Border(
@@ -22,7 +22,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
             width: 1,
           ),
         ),
-        borderRadius:   BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16),
         boxShadow: const [
           BoxShadow(
             color: Color(0x331C9351),
@@ -86,112 +86,122 @@ class ItemHistoryConvertWidget extends StatelessWidget {
             icon: const Icon(Icons.remove_red_eye_outlined),
             color: ColorPrimary.primary100,
             onPressed: () {
-              showDialog(
+              showModalBottomSheet(
                 context: context,
-                barrierDismissible: false,
-                barrierColor: Colors.black.withOpacity(0.7),
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
                 builder: (context) {
-                  return AlertDialog(
-                    title: Text(
-                      'Detail Tukar Koin',
-                      textAlign: TextAlign.center,
-                      style: TextStyleCollection.bodyBold.copyWith(
-                        fontSize: 16,
-                        color: ColorPrimary.primary100,
+                  return Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16),
                       ),
                     ),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            'https://cdn.ralali.id/assets/img/Libraries/Beras-Premium-Cap-Tiga-Mangga-5kg_mtJX9ekyQrY1jWrn_1562573061.jpg',
-                            fit: BoxFit.contain,
-                            height: 250,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    height: 350,
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Center(
-                              child: Text(
-                                '07/08/2024 09:00',
-                                style:
-                                    TextStyleCollection.captionMedium.copyWith(
-                                  fontSize: 16,
-                                  color: ColorPrimary.primary100,
-                                ),
+                            Text(
+                              'Detail Barang',
+                              style: TextStyleCollection.bodyBold.copyWith(
+                                fontSize: 16,
+                                color: ColorPrimary.primary100,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              icon: Icon(
+                                Icons.close,
+                                color: ColorPrimary.primary100,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.network(
+                                'https://cdn.ralali.id/assets/img/Libraries/Beras-Premium-Cap-Tiga-Mangga-5kg_mtJX9ekyQrY1jWrn_1562573061.jpg',
+                                fit: BoxFit.contain,
+                                height: 250,
+                                width: 150,
                               ),
                             ),
                             const SizedBox(
-                              height: 8,
+                              width: 10,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/images/koin.png',
-                                  height: 15,
-                                  width: 15,
-                                ),
-                                const SizedBox(
-                                  width: 2,
-                                ),
-                                Text(
-                                  '50.000',
-                                  style: TextStyleCollection.captionMedium
-                                      .copyWith(
-                                    fontSize: 14,
-                                    color: const Color(0xFFF39E09),
+                            Expanded(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '07/08/2024 09:00',
+                                        style: TextStyleCollection.captionMedium
+                                            .copyWith(
+                                          fontSize: 16,
+                                          color: ColorPrimary.primary100,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              'Beras Mangga 10Kg Beras Mangga 10Kg BerasMangga10KgBerasMangga10KgBerasMangga 10 Kg',
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyleCollection.captionMedium.copyWith(
-                                fontSize: 16,
-                                color: ColorPrimary.primary100,
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/koin.png',
+                                        height: 15,
+                                        width: 15,
+                                      ),
+                                      const SizedBox(
+                                        width: 2,
+                                      ),
+                                      Text(
+                                        '50.000',
+                                        style: TextStyleCollection.captionMedium
+                                            .copyWith(
+                                          fontSize: 14,
+                                          color: const Color(0xFFF39E09),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    'Beras Mangga 10Kg Beras Mangga 10Kg BerasMangga10KgBerasMangga10KgBerasMangga 10 Kg',
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyleCollection.captionMedium
+                                        .copyWith(
+                                      fontSize: 16,
+                                      color: ColorPrimary.primary100,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
                       ],
                     ),
-                    actions: <Widget>[
-                      Center(
-                        child: Container(
-                          padding: const EdgeInsetsDirectional.symmetric(
-                              horizontal: 16),
-                          decoration: BoxDecoration(
-                            color: ColorPrimary.primary100.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: TextButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            child: Text(
-                              'Tutup',
-                              style: TextStyleCollection.captionMedium.copyWith(
-                                fontSize: 14,
-                                color: ColorPrimary.primary100,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
                   );
                 },
               );

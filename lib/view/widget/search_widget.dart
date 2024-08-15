@@ -56,6 +56,7 @@ class SearchWidget extends StatelessWidget {
                 icon: icon ?? const Icon(Icons.person_search_outlined),
               ),
               suffixIcon: Row(
+                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
