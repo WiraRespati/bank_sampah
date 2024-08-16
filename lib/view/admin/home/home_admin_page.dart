@@ -75,7 +75,7 @@ class HomeAdminPage extends StatelessWidget {
                 color: ColorPrimary.primary100,
               ),
               onTap: () {
-                Get.to(() => const RiwayatKonversiPage());
+                Get.to(() =>  RiwayatKonversiPage());
               },
             ),
             const SizedBox(height: 32),

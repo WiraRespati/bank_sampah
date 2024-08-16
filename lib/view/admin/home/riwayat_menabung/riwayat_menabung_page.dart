@@ -1,13 +1,19 @@
-import 'package:bank_sampah/utils/color_constant.dart';
+import 'package:bank_sampah/controller/admin/riwayat_menabung_controller.dart';
+import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/kelola_header_widget.dart';
 import 'package:bank_sampah/view/user/history/item_history_convert_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:bank_sampah/utils/color_constant.dart';
 
 class RiwayatMenabungPage extends StatelessWidget {
   const RiwayatMenabungPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final RiwayatMenabungController riwayatMenabungController =
+        Get.put(RiwayatMenabungController());
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -22,7 +28,53 @@ class RiwayatMenabungPage extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
+                              'Pilih Periode',
+                              style: TextStyleCollection.bodyMedium.copyWith(
+                                color: ColorPrimary.primary100,
+                                fontSize: 20,
+                              ),
+                            ),
+                            content: Obx(() {
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <String>[
+                                  '1 hari',
+                                  '1 minggu',
+                                  '1 bulan',
+                                  '1 tahun'
+                                ].map((String value) {
+                                  return RadioListTile<String>(
+                                    title: Text(
+                                      value,
+                                      style: TextStyleCollection.captionMedium
+                                          .copyWith(
+                                        color: ColorPrimary.primary100,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    value: value,
+                                    groupValue:
+                                        riwayatMenabungController.selectedPeriod.value,
+                                    onChanged: (String? newValue) {
+                                      if (newValue != null) {
+                                        riwayatMenabungController.updatePeriod(newValue);
+                                        Navigator.of(context).pop();
+                                      }
+                                    },
+                                  );
+                                }).toList(),
+                              );
+                            }),
+                          );
+                        },
+                      );
+                    },
                     icon: Icon(
                       Icons.filter_list_rounded,
                       color: ColorPrimary.primary100,
