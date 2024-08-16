@@ -1,8 +1,10 @@
 import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../../models/user_model.dart';
 import '../../services/user/auth_service.dart';
+import '../../view/admin/bottom_navbar_admin/bottom_navbar_admin.dart';
 
 class ProfileController extends GetxController {
   TextEditingController namaLengkapController = TextEditingController();
@@ -97,14 +99,22 @@ class ProfileController extends GetxController {
         'Berhasil',
         'Profil berhasil diperbarui',
         snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
       );
-      Get.offAll(() => BottomNavbar());
+      if (await AuthService().checkAdmin()) {
+        Get.offAll(() => BottomNavbarAdmin());
+      } else {
+        Get.offAll(() => BottomNavbar());
+      }
     } catch (e) {
       isLoadingEditUser.value = false;
       Get.snackbar(
         'Error',
         'Terjadi kesalahan saat mengupdate data',
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
       );
     }
   }

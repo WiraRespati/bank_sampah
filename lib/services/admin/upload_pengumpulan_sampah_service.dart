@@ -31,6 +31,8 @@ class UploadPengumpulanSampahService {
     try {
       final DocumentReference documentReference =
           _firestore.collection('pengumpulan_sampah').doc();
+      final Future<QuerySnapshot> userReference =
+          _firestore.collection('users').where('nik', isEqualTo: nik).get();
       PengumpulanSampah pengumpulanSampah = PengumpulanSampah(
         id: documentReference.id,
         image: imageUrl,
@@ -40,6 +42,13 @@ class UploadPengumpulanSampahService {
         points: points,
       );
       await documentReference.set(pengumpulanSampah.toJson());
+      await userReference.then((value) {
+        final DocumentReference userDocumentReference =
+            _firestore.collection('users').doc(value.docs.first.id);
+        userDocumentReference.update({
+          'points': FieldValue.increment(points),
+        });
+      });
     } on FirebaseException catch (e) {
       Get.snackbar('Error', 'Failed to upload data (error: ${e.code})');
     }

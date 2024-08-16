@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:bank_sampah/services/admin/upload_pengumpulan_sampah_service.dart';
+import 'package:bank_sampah/view/admin/bottom_navbar_admin/bottom_navbar_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import 'package:get/get.dart';
@@ -119,6 +120,16 @@ class MenabungSampahController extends GetxController {
       backgroundColor: Colors.green,
       colorText: Colors.white,
     );
+    clearForm();
+    Get.offAll(BottomNavbarAdmin());
+  }
+
+  void clearForm() {
+    deskripsiController.clear();
+    nilaiPointController.clear();
+    namaLengkapController.clear();
+    imagePath!.value = '';
+    imageFile.value = null;
   }
 
   @override
