@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
             TitleItemWidget(
               title: 'Barang yang dapat ditukar',
               onPressed: () {
-                Get.to(() => const BarangPage());
+                Get.to(() =>  const BarangPage());
               },
             ),
             SizedBox(

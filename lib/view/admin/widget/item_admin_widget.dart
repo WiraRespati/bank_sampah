@@ -1,6 +1,7 @@
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:bank_sampah/view/widget/button_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ItemAdminWidget extends StatelessWidget {
@@ -38,20 +39,40 @@ class ItemAdminWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: image != null
-                  ? Image.network(
-                      image!,
-                      width: 152,
+          image != null && image!.isNotEmpty
+              ? ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(8),
+                    topRight: Radius.circular(8),
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: image!,
+                    placeholder: (context, url) => Image.asset(
+                      'assets/images/logobs.png',
                       height: 152,
                       fit: BoxFit.cover,
-                    )
-                  : Image.asset(
+                      width: 152,
+                    ),
+                    errorWidget: (context, url, error) => Image.asset(
                       'assets/images/logobs.png',
-                      height: 132,
-                      width: 132,
-                    )),
+                      height: 152,
+                      width: 152,
+                      fit: BoxFit.cover,
+                    ),
+                    height: 152,
+                    width: 152,
+                    fit: BoxFit.cover,
+                  ),
+                )
+              : ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    'assets/images/logobs.png',
+                    height: 152,
+                    width: 152,
+                    fit: BoxFit.cover,
+                  ),
+                ),
           Padding(
             padding: const EdgeInsets.only(
               top: 9,
@@ -59,6 +80,7 @@ class ItemAdminWidget extends StatelessWidget {
             ),
             child: Text(
               title ?? 'Nama Barang',
+              maxLines: 1,
               style: TextStyleCollection.caption.copyWith(
                 fontSize: 14,
                 color: ColorCollection.black,

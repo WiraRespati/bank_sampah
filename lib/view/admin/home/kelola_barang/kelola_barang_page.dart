@@ -32,39 +32,48 @@ class KelolaBarangPage extends StatelessWidget {
                 Get.to(() => TambahBarangPage());
               },
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: Obx(
-                () => GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 23,
-                    childAspectRatio: 0.65,
-                  ),
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: barangController.listBarang.value?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    return SizedBox(
-                      width: 152,
-                      height: 265,
-                      child: ItemAdminWidget(
-                        buttonName: 'Edit',
-                        image: barangController.listBarang.value?[index].image,
-                        title: barangController.listBarang.value?[index].name,
-                        point: barangController.listBarang.value?[index].price
-                            .toString(),
-                        onPressed: () {
-                          Get.to(() => const EditBarangPage());
-                          editBarangController.barang.value =
-                              barangController.listBarang.value?[index];
-                        },
+            LayoutBuilder(
+              builder: (context, constraints) {
+                int crossAxisCount = constraints.maxWidth > 600 ? 4 : 2;
+                double childAspectRatio =
+                    constraints.maxWidth > 600 ? 0.60 : 0.60;
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Obx(
+                    () => GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        mainAxisSpacing: 24,
+                        crossAxisSpacing: crossAxisCount == 4 ? 33 : 24,
+                        childAspectRatio: childAspectRatio,
                       ),
-                    );
-                  },
-                ),
-              ),
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: barangController.listBarang.value?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        return Center(
+                          child: ItemAdminWidget(
+                            buttonName: 'Edit',
+                            image:
+                                barangController.listBarang.value?[index].image,
+                            title:
+                                barangController.listBarang.value?[index].name,
+                            point: barangController
+                                .listBarang.value?[index].price
+                                .toString(),
+                            onPressed: () {
+                              Get.to(() => const EditBarangPage());
+                              editBarangController.barang.value =
+                                  barangController.listBarang.value?[index];
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
             ),
             const SizedBox(
               height: 32,

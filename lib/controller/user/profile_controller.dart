@@ -1,6 +1,5 @@
 import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../../models/user_model.dart';
 import '../../services/user/auth_service.dart';

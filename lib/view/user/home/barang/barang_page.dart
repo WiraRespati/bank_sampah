@@ -1,6 +1,5 @@
 import 'package:bank_sampah/controller/admin/barang_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
-import 'package:bank_sampah/utils/utils.dart';
 import 'package:bank_sampah/view/user/home/barang/barang_appbar.dart';
 import 'package:bank_sampah/view/user/home/item_home_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,36 +16,47 @@ class BarangPage extends StatelessWidget {
     barangController.getAllBarang();
     return Scaffold(
       backgroundColor: ColorNeutral.neutral50,
-      body: Column(
-        children: [
-          const BarangAppbar(),
-          Expanded(
-            child: Obx(() {
-              final listBarang = barangController.listBarang.value;
-              if (listBarang == null || listBarang.isEmpty) {
-                return const Center(child: Text('Tidak ada barang tersedia'));
-              }
-              return GridView.builder(
-                padding: EdgeInsets.zero,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.77,
-                ),
-                itemCount: listBarang.length,
-                itemBuilder: (context, index) {
-                  final barang = listBarang[index];
-                  return Center(
-                    child: ItemHomeWidget(
-                      image: barang.image,
-                      title: barang.name,
-                      point: Helper.formatNumber(barang.price!.toString()),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const BarangAppbar(),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                int crossAxisCount = constraints.maxWidth > 600 ? 4 : 2;
+                double childAspectRatio =
+                    constraints.maxWidth > 600 ? 0.60 : 0.60;
+        
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Obx(
+                    () => GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        mainAxisSpacing: 24,
+                        crossAxisSpacing: crossAxisCount == 4 ? 33 : 24,
+                        childAspectRatio: childAspectRatio,
+                      ),
+                      itemCount: barangController.listBarang.value?.length ?? 0,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Center(
+                          child: ItemHomeWidget(
+                            image:
+                                barangController.listBarang.value?[index].image,
+                            title: barangController.listBarang.value?[index].name,
+                            point: barangController.listBarang.value?[index].price
+                                .toString(),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              );
-            }),
-          ),
-        ],
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
