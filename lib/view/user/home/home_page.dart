@@ -18,11 +18,11 @@ class HomePage extends StatelessWidget {
     final BarangController barangController = Get.put(
       BarangController(),
     );
-     final EditSampahController sampahController = Get.put(
+    final EditSampahController sampahController = Get.put(
       EditSampahController(),
     );
     barangController.getAllBarang();
-     sampahController.getAllSampah();
+    sampahController.getAllSampah();
     return Scaffold(
       backgroundColor: ColorCollection.white,
       body: SingleChildScrollView(
@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
             TitleItemWidget(
               title: 'Sampah yang dapat ditabung',
               onPressed: () {
-                 Get.to(() => const SampahPage());
+                Get.to(() => const SampahPage());
               },
             ),
             SizedBox(
@@ -40,7 +40,8 @@ class HomePage extends StatelessWidget {
               child: Obx(() {
                 final listSampah = sampahController.listSampah.value;
                 if (listSampah == null || listSampah.isEmpty) {
-                  return const Center(child: Text('Tidak ada samapah tersedia'));
+                  return const Center(
+                      child: Text('Tidak ada samapah tersedia'));
                 }
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -57,6 +58,8 @@ class HomePage extends StatelessWidget {
                         image: sampah.gambar,
                         title: sampah.name,
                         point: Helper.formatNumber(sampah.points!.toString()),
+                        description: sampah.description,
+                        date: Helper.formatTimestamp(sampah.createdAt),
                       ),
                     );
                   },
@@ -66,7 +69,7 @@ class HomePage extends StatelessWidget {
             TitleItemWidget(
               title: 'Barang yang dapat ditukar',
               onPressed: () {
-                Get.to(() =>  const BarangPage());
+                Get.to(() => const BarangPage());
               },
             ),
             SizedBox(
@@ -81,6 +84,7 @@ class HomePage extends StatelessWidget {
                   itemCount: 5,
                   itemBuilder: (context, index) {
                     final barang = listBarang[index];
+
                     return Container(
                       margin: const EdgeInsets.only(
                         left: 20,
@@ -91,6 +95,9 @@ class HomePage extends StatelessWidget {
                         image: barang.image,
                         title: barang.name,
                         point: Helper.formatNumber(barang.price!.toString()),
+                        description: barang.description,
+                        date: barang.createdAt.toString(),
+                        stok: barang.stock.toString(),
                       ),
                     );
                   },
