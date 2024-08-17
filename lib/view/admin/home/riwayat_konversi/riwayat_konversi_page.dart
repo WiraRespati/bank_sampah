@@ -41,7 +41,7 @@ class RiwayatKonversiPage extends StatelessWidget {
                             title: Text(
                               'Pilih Periode',
                               style: TextStyleCollection.bodyMedium.copyWith(
-                                color: ColorPrimary.primary100,
+                                color: ColorCollection.black,
                                 fontSize: 20,
                               ),
                             ),
@@ -59,13 +59,14 @@ class RiwayatKonversiPage extends StatelessWidget {
                                       value,
                                       style: TextStyleCollection.captionMedium
                                           .copyWith(
-                                        color: ColorPrimary.primary100,
+                                        color: ColorCollection.black,
                                         fontSize: 16,
                                       ),
                                     ),
                                     value: value,
                                     groupValue: riwayatKonversiController
                                         .selectedPeriod.value,
+                                    activeColor: ColorPrimary.primary100,
                                     onChanged: (String? newValue) {
                                       if (newValue != null) {
                                         riwayatKonversiController

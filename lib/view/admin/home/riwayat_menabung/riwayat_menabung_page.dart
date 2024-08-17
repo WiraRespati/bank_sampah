@@ -36,7 +36,7 @@ class RiwayatMenabungPage extends StatelessWidget {
                             title: Text(
                               'Pilih Periode',
                               style: TextStyleCollection.bodyMedium.copyWith(
-                                color: ColorPrimary.primary100,
+                                color: ColorCollection.black,
                                 fontSize: 20,
                               ),
                             ),
@@ -54,16 +54,18 @@ class RiwayatMenabungPage extends StatelessWidget {
                                       value,
                                       style: TextStyleCollection.captionMedium
                                           .copyWith(
-                                        color: ColorPrimary.primary100,
+                                        color: ColorCollection.black,
                                         fontSize: 16,
                                       ),
                                     ),
                                     value: value,
-                                    groupValue:
-                                        riwayatMenabungController.selectedPeriod.value,
+                                    groupValue: riwayatMenabungController
+                                        .selectedPeriod.value,
+                                        activeColor: ColorPrimary.primary100,
                                     onChanged: (String? newValue) {
                                       if (newValue != null) {
-                                        riwayatMenabungController.updatePeriod(newValue);
+                                        riwayatMenabungController
+                                            .updatePeriod(newValue);
                                         Navigator.of(context).pop();
                                       }
                                     },

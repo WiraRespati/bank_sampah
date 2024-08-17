@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:bank_sampah/utils/color_constant.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,19 @@ import 'package:get/get.dart';
 import '../../../utils/text_style_constant.dart';
 
 class ItemHistoryConvertWidget extends StatelessWidget {
-  const ItemHistoryConvertWidget({super.key});
+  const ItemHistoryConvertWidget(
+      {super.key,
+      this.title,
+      this.description,
+      this.image,
+      this.date,
+      this.point});
+
+  final String? title;
+  final String? description;
+  final String? image;
+  final String? date;
+  final String? point;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +41,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                   topRight: Radius.circular(16),
                 ),
               ),
-              height: 350,
+              height: 250,
               child: Column(
                 children: [
                   Row(
@@ -36,7 +49,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Detail Barang',
+                        title ?? 'Detail Barang',
                         style: TextStyleCollection.bodyBold.copyWith(
                           fontSize: 16,
                           color: ColorPrimary.primary100,
@@ -57,11 +70,23 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
-                        child: Image.network(
-                          'https://cdn.ralali.id/assets/img/Libraries/Beras-Premium-Cap-Tiga-Mangga-5kg_mtJX9ekyQrY1jWrn_1562573061.jpg',
-                          fit: BoxFit.contain,
-                          height: 250,
+                        child: CachedNetworkImage(
+                          imageUrl: image ?? '',
+                          placeholder: (context, url) => Image.asset(
+                            'assets/images/logobs.png',
+                            height: 150,
+                            fit: BoxFit.cover,
+                            width: 150,
+                          ),
+                          errorWidget: (context, url, error) => Image.asset(
+                            'assets/images/logobs.png',
+                            height: 150,
+                            width: 150,
+                            fit: BoxFit.cover,
+                          ),
+                          height: 150,
                           width: 150,
+                          fit: BoxFit.cover,
                         ),
                       ),
                       const SizedBox(
@@ -76,7 +101,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '07/08/2024 09:00',
+                                  date ?? '07/08/2024 09:00',
                                   style: TextStyleCollection.captionMedium
                                       .copyWith(
                                     fontSize: 16,
@@ -89,7 +114,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                               height: 8,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Image.asset(
                                   'assets/images/koin.png',
@@ -100,7 +125,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                                   width: 2,
                                 ),
                                 Text(
-                                  '50.000',
+                                  point ?? '1.000',
                                   style: TextStyleCollection.captionMedium
                                       .copyWith(
                                     fontSize: 14,
@@ -113,7 +138,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                               height: 8,
                             ),
                             Text(
-                              'Beras Mangga 10Kg Beras Mangga 10Kg BerasMangga10KgBerasMangga10KgBerasMangga 10 Kg',
+                              description ?? 'Description',
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyleCollection.captionMedium.copyWith(
