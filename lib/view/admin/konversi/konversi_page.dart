@@ -145,6 +145,13 @@ class KonversiPage extends StatelessWidget {
                                   title: Text(konversiController
                                       .searchBarangResults[index]),
                                   onTap: () {
+                                    konversiController
+                                            .searchBarangController.text =
+                                        konversiController
+                                            .searchBarangResults[index];
+                                    konversiController.getDataBarang(
+                                        konversiController
+                                            .searchBarangResults[index]);
                                     konversiController.clearSearchBarang();
                                   },
                                 );
@@ -163,7 +170,9 @@ class KonversiPage extends StatelessWidget {
                 width: double.infinity,
                 height: 48,
                 child: ButtonWidget(
-                  onPressed: () async {},
+                  onPressed: () {
+                    konversiController.konversiBarang();
+                  },
                   text: 'Konversi',
                   textColor: ColorNeutral.neutral100,
                 ),
