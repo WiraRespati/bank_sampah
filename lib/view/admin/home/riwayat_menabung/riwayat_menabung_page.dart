@@ -13,7 +13,7 @@ class RiwayatMenabungPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final RiwayatMenabungController riwayatMenabungController =
         Get.put(RiwayatMenabungController());
-
+    riwayatMenabungController.getAllRiwayat();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -61,7 +61,7 @@ class RiwayatMenabungPage extends StatelessWidget {
                                     value: value,
                                     groupValue: riwayatMenabungController
                                         .selectedPeriod.value,
-                                        activeColor: ColorPrimary.primary100,
+                                    activeColor: ColorPrimary.primary100,
                                     onChanged: (String? newValue) {
                                       if (newValue != null) {
                                         riwayatMenabungController
@@ -90,7 +90,8 @@ class RiwayatMenabungPage extends StatelessWidget {
               padding: EdgeInsets.zero,
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 7,
+              itemCount:
+                  riwayatMenabungController.listRiwayat.value?.length ?? 0,
               itemBuilder: (context, index) {
                 return const ItemHistoryConvertWidget();
               },

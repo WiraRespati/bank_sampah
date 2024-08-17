@@ -1,14 +1,33 @@
+import 'package:bank_sampah/models/barang_model.dart';
+import 'package:bank_sampah/services/admin/show_barang_services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+
+import '../../models/user_model.dart';
+import '../../services/admin/konversi_service.dart';
+import '../../services/user/auth_service.dart';
 
 class KonversiController extends GetxController {
   // TextEditingController untuk mengontrol input teks pencarian user dan barang
   final TextEditingController searchUserController = TextEditingController();
   final TextEditingController searchBarangController = TextEditingController();
 
+  // TextEditingController untuk user
+  final TextEditingController namaLengkapController = TextEditingController();
+  final TextEditingController pointsController = TextEditingController();
+
+  //TextEditingController untuk barang
+  final TextEditingController namaBarangController = TextEditingController();
+  final TextEditingController hargaBarangController = TextEditingController();
+  final TextEditingController stockBarangController = TextEditingController();
+
+  Rxn<List<UserModel>> listUsers = Rxn<List<UserModel>>([]);
+  Rxn<List<BarangModel>> listBarang = Rxn<List<BarangModel>>([]);
+  Rxn<UserModel> selectedUser = Rxn<UserModel>();
+  Rxn<BarangModel> selectedBarang = Rxn<BarangModel>();
   // Observable untuk menyimpan hasil pencarian user dan barang
-  var searchUserResults = <String>[].obs;
-  var searchBarangResults = <String>[].obs;
+  var searchUserResults = [].obs;
+  var searchBarangResults = [].obs;
 
   // Observable untuk mengontrol status pencarian user dan barang
   var isSearchingUser = false.obs;
@@ -33,20 +52,24 @@ class KonversiController extends GetxController {
 
   // Fungsi untuk memulai pencarian user
   void startSearchUser(String query) {
-    if (query.isEmpty) {
-      clearSearchUser();
-      return;
+    if (query.isNotEmpty) {
+      isSearchingUser.value = true;
+      final result = listUsers.value!
+          .where((element) => element.nik!.contains(query))
+          .map((e) => e.nik)
+          .toList();
+      searchUserResults.assignAll(result);
+    } else {
+      isSearchingUser.value = false;
+      searchUserResults.clear();
     }
-
-    isSearchingUser.value = true;
-    searchUserResults.value = dummyUserData
-        .where((user) => user.toLowerCase().contains(query.toLowerCase()))
-        .toList();
   }
 
   // Fungsi untuk menghapus teks pencarian user
   void clearSearchUserText() {
     searchUserController.clear();
+    namaLengkapController.clear();
+    pointsController.clear();
     clearSearchUser();
   }
 
@@ -58,19 +81,25 @@ class KonversiController extends GetxController {
 
   // Fungsi untuk memulai pencarian barang
   void startSearchBarang(String query) {
-    if (query.isEmpty) {
-      clearSearchBarang();
-      return;
+    if (query.isNotEmpty) {
+      isSearchingBarang.value = true;
+      final result = listBarang.value!
+          .where((element) =>
+              element.name!.toLowerCase().contains(query.toLowerCase()))
+          .map((e) => e.name)
+          .toList();
+      searchBarangResults.assignAll(result);
+    } else {
+      isSearchingBarang.value = false;
+      searchBarangResults.clear();
     }
-
-    isSearchingBarang.value = true;
-    searchBarangResults.value = dummyBarangData
-        .where((barang) => barang.toLowerCase().contains(query.toLowerCase()))
-        .toList();
   }
 
   // Fungsi untuk menghapus teks pencarian barang
   void clearSearchBarangText() {
+    namaBarangController.clear();
+    stockBarangController.clear();
+    hargaBarangController.clear();
     searchBarangController.clear();
     clearSearchBarang();
   }
@@ -79,5 +108,118 @@ class KonversiController extends GetxController {
   void clearSearchBarang() {
     isSearchingBarang.value = false;
     searchBarangResults.clear();
+  }
+
+  void getAllUser() async {
+    try {
+      final response = await AuthService().getAllUserData();
+      listUsers.value = response.values
+          .map((doc) => UserModel.fromJson(doc as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Gagal mengambil data user (error: $e)',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+
+  void getAllBarang() async {
+    try {
+      final response = await ShowBarangServices().getAllBarangData();
+      listBarang.value = response['barang'];
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Gagal mengambil data barang (error: $e)',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
+  void getDataUser(String nik) {
+    final user = listUsers.value!.firstWhere((element) => element.nik == nik);
+    selectedUser.value = user;
+    namaLengkapController.text = user.name!;
+    pointsController.text = user.points.toString();
+  }
+
+  void getDataBarang(String namaBarang) {
+    final barang =
+        listBarang.value!.firstWhere((element) => element.name == namaBarang);
+    selectedBarang.value = barang;
+    namaBarangController.text = barang.name!;
+    hargaBarangController.text = barang.price.toString();
+    stockBarangController.text = barang.stock.toString();
+  }
+
+  void konversiBarang() async {
+    final userModel = selectedUser.value!;
+    final barangModel = selectedBarang.value!;
+    if (userModel.points! < barangModel.price!) {
+      Get.snackbar(
+        'Error',
+        'Point tidak cukup',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
+    await KonversiService()
+        .konversiBarang(userModel, barangModel)
+        .then((value) {
+      if (value['status'] == 'success') {
+        Get.snackbar(
+          'Success',
+          'Berhasil melakukan konversi barang',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+        clearForm();
+        getAllBarang();
+        getAllUser();
+      } else {
+        Get.snackbar(
+          'Error',
+          'Gagal melakukan konversi barang (error: ${value['message']})',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      }
+    });
+  }
+
+  void clearForm() {
+    searchUserController.clear();
+    searchBarangController.clear();
+    namaLengkapController.clear();
+    pointsController.clear();
+    namaBarangController.clear();
+    hargaBarangController.clear();
+    stockBarangController.clear();
+  }
+
+  void clearBarang() {
+    namaBarangController.clear();
+    hargaBarangController.clear();
+    stockBarangController.clear();
+  }
+
+  @override
+  void dispose() {
+    searchUserController.dispose();
+    searchBarangController.dispose();
+    namaLengkapController.dispose();
+    pointsController.dispose();
+    namaBarangController.dispose();
+    hargaBarangController.dispose();
+    stockBarangController.dispose();
+    super.dispose();
   }
 }
