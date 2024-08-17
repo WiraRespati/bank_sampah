@@ -6,7 +6,7 @@ class PengumpulanSampah {
   String? description;
   String? image;
   int? points;
-  FieldValue? createdAt;
+  Timestamp? createdAt;
 
   PengumpulanSampah({
     this.id,

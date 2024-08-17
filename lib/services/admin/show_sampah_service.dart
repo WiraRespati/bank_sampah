@@ -6,7 +6,10 @@ class ShowSampahService {
 
   Future<Map<String, dynamic>> getAllSampahData() async {
     try {
-      final sampahSnapshot = await _firestore.collection('sampah').get();
+      final sampahSnapshot = await _firestore
+          .collection('sampah')
+          .orderBy("createdAt", descending: true)
+          .get();
 
       List<SampahModel> sampah = [];
 

@@ -6,7 +6,10 @@ class ShowBarangServices {
 
   Future<Map<String, dynamic>> getAllBarangData() async {
     try {
-      final barangSnapshot = await _firestore.collection('barang').get();
+      final barangSnapshot = await _firestore
+          .collection('barang')
+          .orderBy("createdAt", descending: true)
+          .get();
 
       BarangModel barangModel = BarangModel();
       List<BarangModel> barang = [];

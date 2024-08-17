@@ -37,7 +37,7 @@ class UploadPengumpulanSampahService {
         id: documentReference.id,
         image: imageUrl,
         nik: nik,
-        createdAt: FieldValue.serverTimestamp(),
+        createdAt: Timestamp.now(),
         description: description,
         points: points,
       );
