@@ -17,36 +17,50 @@ class SampahPage extends StatelessWidget {
     sampahController.getAllSampah();
     return Scaffold(
       backgroundColor: ColorNeutral.neutral50,
-      body: Column(
-        children: [
-          const SampahAppbar(),
-          Expanded(
-            child: Obx(() {
-              final listBarang = sampahController.listSampah.value;
-              if (listBarang == null || listBarang.isEmpty) {
-                return const Center(child: Text('Tidak ada barang tersedia'));
-              }
-              return GridView.builder(
-                padding: EdgeInsets.zero,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.77,
-                ),
-                itemCount: listBarang.length,
-                itemBuilder: (context, index) {
-                  final sampah = listBarang[index];
-                  return Center(
-                    child: ItemHomeWidget(
-                      image: sampah.gambar,
-                      title: sampah.name,
-                      point: Helper.formatNumber(sampah.points!.toString()),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SampahAppbar(),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                int crossAxisCount = constraints.maxWidth > 600 ? 4 : 2;
+                double childAspectRatio =
+                    constraints.maxWidth > 600 ? 0.60 : 0.60;
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Obx(
+                    () => GridView.builder(
+                      padding: EdgeInsets.zero,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        crossAxisSpacing: crossAxisCount == 4 ? 33 : 24,
+                        childAspectRatio: childAspectRatio,
+                      ),
+                      itemCount: sampahController.listSampah.value?.length ?? 0,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final sampah =
+                            sampahController.listSampah.value?[index];
+                        return Center(
+                          child: ItemHomeWidget(
+                            image: sampah?.gambar,
+                            title: sampah?.name,
+                            point:
+                                Helper.formatNumber(sampah!.points.toString()),
+                            description: sampah.description,
+                            date: Helper.formatTimestamp(sampah.createdAt),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              );
-            }),
-          ),
-        ],
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

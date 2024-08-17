@@ -1,5 +1,6 @@
 import 'package:bank_sampah/controller/admin/barang_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
+import 'package:bank_sampah/utils/utils.dart';
 import 'package:bank_sampah/view/user/home/barang/barang_appbar.dart';
 import 'package:bank_sampah/view/user/home/item_home_widget.dart';
 import 'package:flutter/material.dart';
@@ -25,14 +26,14 @@ class BarangPage extends StatelessWidget {
                 int crossAxisCount = constraints.maxWidth > 600 ? 4 : 2;
                 double childAspectRatio =
                     constraints.maxWidth > 600 ? 0.60 : 0.60;
-        
+
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: Obx(
                     () => GridView.builder(
+                      padding: EdgeInsets.zero,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: crossAxisCount,
-                        mainAxisSpacing: 24,
                         crossAxisSpacing: crossAxisCount == 4 ? 33 : 24,
                         childAspectRatio: childAspectRatio,
                       ),
@@ -40,13 +41,17 @@ class BarangPage extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
+                        final barang =
+                            barangController.listBarang.value?[index];
                         return Center(
                           child: ItemHomeWidget(
-                            image:
-                                barangController.listBarang.value?[index].image,
-                            title: barangController.listBarang.value?[index].name,
-                            point: barangController.listBarang.value?[index].price
-                                .toString(),
+                            image: barang?.image,
+                            title: barang?.name,
+                            point:
+                                Helper.formatNumber(barang!.price.toString()),
+                            description: barang.description,
+                            date: Helper.formatTimestamp(barang.createdAt),
+                            stok: barang.stock.toString(),
                           ),
                         );
                       },
