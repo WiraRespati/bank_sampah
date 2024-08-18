@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:bank_sampah/utils/color_constant.dart';
+import 'package:bank_sampah/utils/utils.dart';
 import 'package:bank_sampah/view/widget/show_modal_buttom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -82,7 +83,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '07/08/2024 09:00',
+                      date ?? '17/08/2024 09:00',
                       style: TextStyleCollection.captionMedium.copyWith(
                         fontSize: 16,
                         color: ColorPrimary.primary100,
@@ -99,7 +100,7 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                           width: 2,
                         ),
                         Text(
-                          '50.000',
+                          Helper.formatNumber(point!),
                           style: TextStyleCollection.captionMedium.copyWith(
                             fontSize: 14,
                             color: const Color(0xFFF39E09),

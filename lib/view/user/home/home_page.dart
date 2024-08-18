@@ -96,7 +96,7 @@ class HomePage extends StatelessWidget {
                         title: barang.name,
                         point: Helper.formatNumber(barang.price!.toString()),
                         description: barang.description,
-                        date: barang.createdAt.toString(),
+                        date: Helper.formatTimestamp(barang.createdAt),
                         stok: barang.stock.toString(),
                       ),
                     );

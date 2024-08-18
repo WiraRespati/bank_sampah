@@ -1,5 +1,6 @@
 import 'package:bank_sampah/controller/admin/riwayat_menabung_controller.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
+import 'package:bank_sampah/utils/utils.dart';
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/kelola_header_widget.dart';
 import 'package:bank_sampah/view/user/history/item_history_convert_widget.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +94,15 @@ class RiwayatMenabungPage extends StatelessWidget {
               itemCount:
                   riwayatMenabungController.listRiwayat.value?.length ?? 0,
               itemBuilder: (context, index) {
-                return const ItemHistoryConvertWidget();
+                final menabung =
+                    riwayatMenabungController.listRiwayat.value![index];
+                return ItemHistoryConvertWidget(
+                  date: Helper.formatTimestamp(menabung.createdAt),
+                  point: menabung.points.toString(),
+                  description: menabung.description,
+                  image: menabung.image,
+                  title: menabung.description!.split(' ').first,
+                );
               },
             ),
           ],
