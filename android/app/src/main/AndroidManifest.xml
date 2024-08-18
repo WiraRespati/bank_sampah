@@ -3,6 +3,10 @@
         android:label="bank_sampah"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+         <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBLezviNC1GBtKHKZ4TXtNJnL8Jk3c-0tQ" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
