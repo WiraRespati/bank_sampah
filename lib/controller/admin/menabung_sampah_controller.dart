@@ -1,8 +1,6 @@
-import 'dart:typed_data';
 import 'package:bank_sampah/services/admin/upload_pengumpulan_sampah_service.dart';
 import 'package:bank_sampah/view/admin/bottom_navbar_admin/bottom_navbar_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:image/image.dart' as img;
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -11,6 +9,7 @@ class MenabungSampahController extends GetxController {
   Rx<XFile?> imageFile = Rx<XFile?>(null);
   RxString? imagePath = ''.obs;
   RxString nik = ''.obs;
+  var isLoading = false.obs;
 
   final errorMessageDeskripsi = Rxn<String>();
   final errorMessageNilaiPoint = Rxn<String>();
@@ -38,23 +37,6 @@ class MenabungSampahController extends GetxController {
     imageFile.value = value;
   }
 
-  Future<List<int>> compressImage(Uint8List bytes) async {
-    int imageLength = bytes.length;
-    if (imageLength < 2000000) return bytes;
-    final img.Image image = img.decodeImage(Uint8List.fromList(bytes))!;
-    int compressQuality = 100;
-    int length = imageLength;
-    List<int> newByte = [];
-    do {
-      compressQuality -= 10;
-      newByte = img.encodeJpg(
-        image,
-        quality: compressQuality,
-      );
-      length = newByte.length;
-    } while (length > 1000000);
-    return newByte;
-  }
 
   void setImagePath(String? value) {
     imagePath!.value = value!;
@@ -103,25 +85,37 @@ class MenabungSampahController extends GetxController {
       );
       return;
     }
-    await UploadPengumpulanSampahService()
-        .uploadImagePengumpulanSampah(imageFile.value!)
-        .then((value) {
-      UploadPengumpulanSampahService().addPengumpulanSampah(
-        value,
+
+    isLoading.value = true;
+    try {
+      final imageUrl = await UploadPengumpulanSampahService()
+          .uploadImagePengumpulanSampah(imageFile.value!);
+      await UploadPengumpulanSampahService().addPengumpulanSampah(
+        imageUrl,
         nik.value,
         deskripsiController.text,
         int.parse(nilaiPointController.text),
       );
-    });
-    Get.snackbar(
-      'Success',
-      'Upload Menabung Sampah Berhasil',
-      snackPosition: SnackPosition.TOP,
-      backgroundColor: Colors.green,
-      colorText: Colors.white,
-    );
-    clearForm();
-    Get.offAll(BottomNavbarAdmin());
+      Get.snackbar(
+        'Success',
+        'Upload Menabung Sampah Berhasil',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+      clearForm();
+      Get.offAll(BottomNavbarAdmin());
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Gagal mengupload sampah',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   void clearForm() {

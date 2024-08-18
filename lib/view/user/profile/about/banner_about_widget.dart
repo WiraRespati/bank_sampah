@@ -1,5 +1,4 @@
 import 'package:bank_sampah/utils/color_constant.dart';
-import 'package:bank_sampah/view/user/bottom_navbar/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -43,7 +42,7 @@ class BannerAboutWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: IconButton(
                     onPressed: () {
-                      Get.to(() => BottomNavbar());
+                      Get.back();
                     },
                     icon: Icon(
                       Icons.arrow_back_ios,

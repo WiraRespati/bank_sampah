@@ -1,3 +1,4 @@
+import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/edit_barang/button_edit_widget.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/edit_barang/form_edit_barang_widget.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/edit_barang/upload_edit_barang_widget.dart';
@@ -17,30 +18,52 @@ class EditBarangPage extends StatelessWidget {
     );
     return Scaffold(
         body: Stack(
-      children: [
-        SingleChildScrollView(
-          child: Column(
-            children: [
-              KelolaHeaderWidget(
-                title: "Edit Data Barang",
-                onPressed: () {
-                  Get.back();
-                  editBarangController.clearData();
-                },
+          children: [
+            Stack(
+                  children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  KelolaHeaderWidget(
+                    title: "Edit Data Barang",
+                    onPressed: () {
+                      Get.back();
+                      editBarangController.clearData();
+                    },
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  FormEditBarangWidget(),
+                  UploadEditBarangWidget(),
+                  const SizedBox(
+                    height: 120,
+                  ),
+                ],
               ),
-              const SizedBox(
-                height: 30,
-              ),
-              FormEditBarangWidget(),
-              UploadEditBarangWidget(),
-              const SizedBox(
-                height: 120,
-              ),
-            ],
+            ),
+            const ButtonEditWidget(),
+                  ],
+                ),
+                Obx(
+            () {
+              if (editBarangController.isLoading.value) {
+                return Container(
+                  color: ColorNeutral.neutral50.withOpacity(0.5),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        ColorPrimary.primary100,
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                return const SizedBox.shrink();
+              }
+            },
           ),
-        ),
-        const ButtonEditWidget(),
-      ],
-    ));
+          ],
+        ));
   }
 }

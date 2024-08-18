@@ -21,65 +21,71 @@ class KelolaBarangPage extends StatelessWidget {
     );
     barangController.getAllBarang();
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const KelolaHeaderWidget(
-              title: "Kelola Barang",
-            ),
-            TambahBarangWidget(
-              onTap: () {
-                Get.to(() => TambahBarangPage());
-              },
-            ),
-            LayoutBuilder(
-              builder: (context, constraints) {
-                int crossAxisCount = constraints.maxWidth > 600 ? 4 : 2;
-                double childAspectRatio =
-                    constraints.maxWidth > 600 ? 0.60 : 0.60;
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                const KelolaHeaderWidget(
+                  title: "Kelola Barang",
+                ),
+                TambahBarangWidget(
+                  onTap: () {
+                    Get.to(() => TambahBarangPage());
+                  },
+                ),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    int crossAxisCount = constraints.maxWidth > 600 ? 4 : 2;
+                    double childAspectRatio =
+                        constraints.maxWidth > 600 ? 0.60 : 0.60;
 
-                return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Obx(
-                    () => GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        mainAxisSpacing: 24,
-                        crossAxisSpacing: crossAxisCount == 4 ? 33 : 24,
-                        childAspectRatio: childAspectRatio,
-                      ),
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: barangController.listBarang.value?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        return Center(
-                          child: ItemAdminWidget(
-                            buttonName: 'Edit',
-                            image:
-                                barangController.listBarang.value?[index].image,
-                            title:
-                                barangController.listBarang.value?[index].name,
-                            point: barangController
-                                .listBarang.value?[index].price
-                                .toString(),
-                            onPressed: () {
-                              Get.to(() => const EditBarangPage());
-                              editBarangController.barang.value =
-                                  barangController.listBarang.value?[index];
-                            },
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Obx(
+                        () => GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            mainAxisSpacing: 24,
+                            crossAxisSpacing: crossAxisCount == 4 ? 33 : 24,
+                            childAspectRatio: childAspectRatio,
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                );
-              },
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount:
+                              barangController.listBarang.value?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            return Center(
+                              child: ItemAdminWidget(
+                                buttonName: 'Edit',
+                                image: barangController
+                                    .listBarang.value?[index].image,
+                                title: barangController
+                                    .listBarang.value?[index].name,
+                                point: barangController
+                                    .listBarang.value?[index].price
+                                    .toString(),
+                                onPressed: () {
+                                  Get.to(() => const EditBarangPage());
+                                  editBarangController.barang.value =
+                                      barangController.listBarang.value?[index];
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+              ],
             ),
-            const SizedBox(
-              height: 32,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

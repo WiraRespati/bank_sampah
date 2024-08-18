@@ -1,5 +1,6 @@
 import 'package:bank_sampah/models/barang_model.dart';
 import 'package:bank_sampah/services/admin/show_barang_services.dart';
+import 'package:bank_sampah/view/admin/bottom_navbar_admin/bottom_navbar_admin.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class KonversiController extends GetxController {
   // TextEditingController untuk mengontrol input teks pencarian user dan barang
   final TextEditingController searchUserController = TextEditingController();
   final TextEditingController searchBarangController = TextEditingController();
+  var isLoading = false.obs;
 
   // TextEditingController untuk user
   final TextEditingController namaLengkapController = TextEditingController();
@@ -169,9 +171,12 @@ class KonversiController extends GetxController {
       );
       return;
     }
+
+    isLoading.value = true;
     await KonversiService()
         .konversiBarang(userModel, barangModel)
         .then((value) {
+      isLoading.value = false;
       if (value['status'] == 'success') {
         Get.snackbar(
           'Success',
@@ -183,6 +188,7 @@ class KonversiController extends GetxController {
         clearForm();
         getAllBarang();
         getAllUser();
+        Get.to(() => BottomNavbarAdmin());
       } else {
         Get.snackbar(
           'Error',
@@ -192,6 +198,15 @@ class KonversiController extends GetxController {
           colorText: Colors.white,
         );
       }
+    }).catchError((error) {
+      isLoading.value = false;
+      Get.snackbar(
+        'Error',
+        'Gagal melakukan konversi barang (error: $error)',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     });
   }
 

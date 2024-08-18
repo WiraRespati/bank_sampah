@@ -1,8 +1,6 @@
-import 'dart:typed_data';
 import 'package:bank_sampah/services/admin/edit_barang_service.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/kelola_barang_page.dart';
 import 'package:get/get.dart';
-import 'package:image/image.dart' as img;
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,7 +10,7 @@ import '../../models/barang_model.dart';
 class EditBarangController extends GetxController {
   Rx<XFile?> imageFile = Rx<XFile?>(null);
   RxString? imagePath = ''.obs;
-
+  var isLoading = false.obs;
   Rxn<BarangModel> barang = Rxn<BarangModel>();
 
   final errorMessageNamaBarang = Rxn<String>();
@@ -38,24 +36,6 @@ class EditBarangController extends GetxController {
 
   void setImageFile(XFile? value) {
     imageFile.value = value;
-  }
-
-  Future<List<int>> compressImage(Uint8List bytes) async {
-    int imageLength = bytes.length;
-    if (imageLength < 2000000) return bytes;
-    final img.Image image = img.decodeImage(Uint8List.fromList(bytes))!;
-    int compressQuality = 100;
-    int length = imageLength;
-    List<int> newByte = [];
-    do {
-      compressQuality -= 10;
-      newByte = img.encodeJpg(
-        image,
-        quality: compressQuality,
-      );
-      length = newByte.length;
-    } while (length > 1000000);
-    return newByte;
   }
 
   void setImagePath(String? value) {
@@ -114,6 +94,7 @@ class EditBarangController extends GetxController {
   }
 
   void editBarang() async {
+    isLoading.value = true;
     final response = await EditBarangService().editBarang(
       BarangModel(
         id: barang.value!.id,
@@ -126,6 +107,7 @@ class EditBarangController extends GetxController {
       ),
       imageFile.value,
     );
+    isLoading.value = false;
     if (response['status'] == 'success') {
       Get.offAll(() => const KelolaBarangPage());
       Get.snackbar(

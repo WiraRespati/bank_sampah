@@ -1,10 +1,8 @@
-import 'dart:typed_data';
 
 import 'package:bank_sampah/services/admin/edit_sampah_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image/image.dart' as img;
 
 import '../../models/sampah_model.dart';
 import '../../services/admin/show_sampah_service.dart';
@@ -13,6 +11,8 @@ import '../../view/admin/home/kelola_sampah/kelola_sampah_page.dart';
 class EditSampahController extends GetxController {
   Rx<XFile?> imageFile = Rx<XFile?>(null);
   RxString? imagePath = ''.obs;
+
+  var isLoading = false.obs;
 
   Rxn<List<SampahModel>> listSampah = Rxn<List<SampahModel>>([]);
   Rxn<SampahModel> sampah = Rxn<SampahModel>();
@@ -38,24 +38,6 @@ class EditSampahController extends GetxController {
 
   void setImageFile(XFile? value) {
     imageFile.value = value;
-  }
-
-  Future<List<int>> compressImage(Uint8List bytes) async {
-    int imageLength = bytes.length;
-    if (imageLength < 2000000) return bytes;
-    final img.Image image = img.decodeImage(Uint8List.fromList(bytes))!;
-    int compressQuality = 100;
-    int length = imageLength;
-    List<int> newByte = [];
-    do {
-      compressQuality -= 10;
-      newByte = img.encodeJpg(
-        image,
-        quality: compressQuality,
-      );
-      length = newByte.length;
-    } while (length > 1000000);
-    return newByte;
   }
 
   void setImagePath(String? value) {
@@ -122,6 +104,7 @@ class EditSampahController extends GetxController {
   }
 
   void editSampah() async {
+    isLoading.value = true;
     final response = await EditSampahService().editSampah(
       SampahModel(
         id: sampah.value!.id,
@@ -133,6 +116,7 @@ class EditSampahController extends GetxController {
       ),
       imageFile.value,
     );
+    isLoading.value = false;
     if (response['status'] == 'success') {
       Get.offAll(() => const KelolaSampahPage());
       clearForm();
