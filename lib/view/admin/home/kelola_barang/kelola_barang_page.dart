@@ -28,6 +28,7 @@ class KelolaBarangPage extends StatelessWidget {
               children: [
                 const KelolaHeaderWidget(
                   title: "Kelola Barang",
+                  
                 ),
                 TambahBarangWidget(
                   onTap: () {

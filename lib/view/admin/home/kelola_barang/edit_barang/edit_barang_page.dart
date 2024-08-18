@@ -18,14 +18,30 @@ class EditBarangPage extends StatelessWidget {
     );
     return Scaffold(
         body: Stack(
+      children: [
+        Stack(
           children: [
-            Stack(
-                  children: [
             SingleChildScrollView(
               child: Column(
                 children: [
                   KelolaHeaderWidget(
                     title: "Edit Data Barang",
+                    leading: Padding(
+                      padding: const EdgeInsets.only(right: 18),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: ColorPrimary.primary100.withOpacity(0.1),
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.delete,
+                            color: ColorPrimary.primary100,
+                          ),
+                        ),
+                      ),
+                    ),
                     onPressed: () {
                       Get.back();
                       editBarangController.clearData();
@@ -43,27 +59,27 @@ class EditBarangPage extends StatelessWidget {
               ),
             ),
             const ButtonEditWidget(),
-                  ],
-                ),
-                Obx(
-            () {
-              if (editBarangController.isLoading.value) {
-                return Container(
-                  color: ColorNeutral.neutral50.withOpacity(0.5),
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        ColorPrimary.primary100,
-                      ),
+          ],
+        ),
+        Obx(
+          () {
+            if (editBarangController.isLoading.value) {
+              return Container(
+                color: ColorNeutral.neutral50.withOpacity(0.5),
+                child: Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      ColorPrimary.primary100,
                     ),
                   ),
-                );
-              } else {
-                return const SizedBox.shrink();
-              }
-            },
-          ),
-          ],
-        ));
+                ),
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
+        ),
+      ],
+    ));
   }
 }

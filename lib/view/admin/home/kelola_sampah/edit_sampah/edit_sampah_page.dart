@@ -29,6 +29,25 @@ class EditSampahPage extends StatelessWidget {
                         Get.back();
                         editSampahController.clearForm();
                       },
+                      leading: Padding(
+                        padding: const EdgeInsets.only(right: 18),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: ColorPrimary.primary100.withOpacity(0.1),
+                            shape: BoxShape.circle,
+                          ),
+                          child: IconButton(
+                            onPressed: () {
+                              
+
+                            },
+                            icon: Icon(
+                              Icons.delete,
+                              color: ColorPrimary.primary100,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 30,
