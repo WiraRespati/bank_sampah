@@ -11,6 +11,7 @@ class KonversiService {
       await _firestore.collection('konversi').add({
         'userId': userModel.uid,
         'barangId': barangModel.id,
+        'createdAt': Timestamp.now(),
       });
 
       await _firestore.collection('users').doc(userModel.uid).update({

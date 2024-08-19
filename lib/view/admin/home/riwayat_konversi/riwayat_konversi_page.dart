@@ -1,6 +1,7 @@
 import 'package:bank_sampah/controller/admin/riwayat_konversi_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
+import 'package:bank_sampah/utils/utils.dart';
 import 'package:bank_sampah/view/admin/home/upload_menabung_sampah/kelola_header_widget.dart';
 import 'package:bank_sampah/view/user/history/item_history_convert_widget.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class RiwayatKonversiPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    riwayatKonversiController.getAllRiwayatKonversi();
     return Scaffold(
         body: Scaffold(
       body: SingleChildScrollView(
@@ -91,9 +93,23 @@ class RiwayatKonversiPage extends StatelessWidget {
               padding: EdgeInsets.zero,
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 7,
+              itemCount: riwayatKonversiController.listRiwayat.value!.length,
               itemBuilder: (context, index) {
-                return const ItemHistoryConvertWidget();
+                return ItemHistoryConvertWidget(
+                  date: Helper.formatTimestamp(riwayatKonversiController
+                      .listRiwayat.value![index].createdAt!),
+                  description: riwayatKonversiController
+                      .listBarang.value![index].description,
+                  image:
+                      riwayatKonversiController.listBarang.value![index].image,
+                  point: riwayatKonversiController
+                      .listBarang.value![index].price
+                      .toString(),
+                  title: riwayatKonversiController
+                      .listBarang.value![index].description!
+                      .split(' ')
+                      .first,
+                );
               },
             ),
           ],

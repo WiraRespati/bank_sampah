@@ -36,4 +36,16 @@ class RiwayatMenabungController extends GetxController {
       );
     }
   }
+
+  void filterRiwayatKonversi() {
+    if (selectedPeriod.value == '1 hari') {
+      // getAllRiwayat();
+    } else if (selectedPeriod.value == '1 minggu') {
+      // filter 1 minggu
+    } else if (selectedPeriod.value == '1 bulan') {
+      // filter 1 bulan
+    } else if (selectedPeriod.value == '1 tahun') {
+      // filter 1 tahun
+    }
+  }
 }
