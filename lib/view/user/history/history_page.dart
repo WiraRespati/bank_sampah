@@ -1,16 +1,22 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:bank_sampah/controller/user/riwayat_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
+import 'package:bank_sampah/utils/utils.dart';
 import 'package:bank_sampah/view/user/history/item_history_convert_widget.dart';
 import 'package:bank_sampah/view/user/home/banner_home_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final RiwayatController riwayatController = Get.put(RiwayatController());
+    riwayatController.getAllRiwayatKonversi();
+    riwayatController.getAllRiwayatMenabung();
     return Scaffold(
       backgroundColor: ColorCollection.white,
       body: SingleChildScrollView(
@@ -53,17 +59,61 @@ class HistoryPage extends StatelessWidget {
                           ListView.builder(
                             padding: EdgeInsets.zero,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemCount: 7,
+                            itemCount: riwayatController
+                                    .listRiwayatKonversi.value?.length ??
+                                0,
                             itemBuilder: (context, index) {
-                              return const ItemHistoryConvertWidget();
+                              return ItemHistoryConvertWidget(
+                                date: Helper.formatTimestamp(
+                                  riwayatController.listRiwayatKonversi
+                                      .value![index].createdAt,
+                                ),
+                                description: riwayatController
+                                    .listRiwayatKonversiBarang
+                                    .value![index]
+                                    .description,
+                                image: riwayatController
+                                    .listRiwayatKonversiBarang
+                                    .value![index]
+                                    .image,
+                                point: riwayatController
+                                    .listRiwayatKonversiBarang
+                                    .value![index]
+                                    .price
+                                    .toString(),
+                                title: riwayatController
+                                    .listRiwayatKonversiBarang
+                                    .value![index]
+                                    .name,
+                              );
                             },
                           ),
                           ListView.builder(
                             padding: EdgeInsets.zero,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemCount: 7,
+                            itemCount: riwayatController
+                                    .listRiwayatMenabung.value?.length ??
+                                0,
                             itemBuilder: (context, index) {
-                              return const ItemHistoryConvertWidget();
+                              return ItemHistoryConvertWidget(
+                                date: Helper.formatTimestamp(
+                                  riwayatController.listRiwayatMenabung
+                                      .value![index].createdAt,
+                                ),
+                                description: riwayatController
+                                    .listRiwayatMenabung
+                                    .value![index]
+                                    .description,
+                                image: riwayatController
+                                    .listRiwayatMenabung.value![index].image,
+                                point: riwayatController
+                                    .listRiwayatMenabung.value![index].points
+                                    .toString(),
+                                title: riwayatController.listRiwayatMenabung
+                                    .value![index].description!
+                                    .split(' ')
+                                    .first,
+                              );
                             },
                           ),
                         ],
