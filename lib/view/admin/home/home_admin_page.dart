@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:bank_sampah/controller/admin/riwayat_konversi_controller.dart';
+import 'package:bank_sampah/controller/admin/riwayat_menabung_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/view/admin/home/banner_home_admin_widget.dart';
 import 'package:bank_sampah/view/admin/home/item_home_admin_widget.dart';
@@ -18,6 +20,13 @@ class HomeAdminPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final RiwayatMenabungController riwayatMenabungController =
+        Get.put(RiwayatMenabungController());
+
+    final RiwayatKonversiController riwayatKonversiController =
+        Get.put(RiwayatKonversiController());
+    riwayatMenabungController.getAllRiwayat();
+    riwayatKonversiController.getAllRiwayatKonversi();
     return Scaffold(
       backgroundColor: ColorCollection.white,
       body: SingleChildScrollView(
@@ -75,7 +84,7 @@ class HomeAdminPage extends StatelessWidget {
                 color: ColorPrimary.primary100,
               ),
               onTap: () {
-                Get.to(() =>  RiwayatKonversiPage());
+                Get.to(() => RiwayatKonversiPage());
               },
             ),
             const SizedBox(height: 32),
