@@ -14,7 +14,7 @@ class RiwayatMenabungPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final RiwayatMenabungController riwayatMenabungController =
         Get.put(RiwayatMenabungController());
-    riwayatMenabungController.getAllRiwayat();
+    riwayatMenabungController.filterRiwayatMenabung();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -67,6 +67,8 @@ class RiwayatMenabungPage extends StatelessWidget {
                                       if (newValue != null) {
                                         riwayatMenabungController
                                             .updatePeriod(newValue);
+                                        riwayatMenabungController
+                                            .filterRiwayatMenabung();
                                         Navigator.of(context).pop();
                                       }
                                     },
@@ -87,24 +89,32 @@ class RiwayatMenabungPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            ListView.builder(
-              padding: EdgeInsets.zero,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount:
-                  riwayatMenabungController.listRiwayat.value?.length ?? 0,
-              itemBuilder: (context, index) {
-                final menabung =
-                    riwayatMenabungController.listRiwayat.value![index];
-                return ItemHistoryConvertWidget(
-                  date: Helper.formatTimestamp(menabung.createdAt),
-                  point: menabung.points.toString(),
-                  description: menabung.description,
-                  image: menabung.image,
-                  title: menabung.description!.split(' ').first,
+            Obx(() {
+              if (riwayatMenabungController.listRiwayat.value == null ||
+                  riwayatMenabungController.listRiwayat.value!.isEmpty) {
+                return const Center(
+                  child: Text('Belum ada riwayat menabung'),
                 );
-              },
-            ),
+              }
+              return ListView.builder(
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount:
+                    riwayatMenabungController.listRiwayat.value?.length ?? 0,
+                itemBuilder: (context, index) {
+                  final menabung =
+                      riwayatMenabungController.listRiwayat.value![index];
+                  return ItemHistoryConvertWidget(
+                    date: Helper.formatTimestamp(menabung.createdAt),
+                    point: menabung.points.toString(),
+                    description: menabung.description,
+                    image: menabung.image,
+                    title: menabung.description!.split(' ').first,
+                  );
+                },
+              );
+            }),
           ],
         ),
       ),

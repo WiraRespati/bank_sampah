@@ -37,15 +37,75 @@ class RiwayatMenabungController extends GetxController {
     }
   }
 
-  void filterRiwayatKonversi() {
+  void filterRiwayatMenabung() async {
     if (selectedPeriod.value == '1 hari') {
-      // getAllRiwayat();
+      // filter 1 hari
+      DateTime now = DateTime.now();
+      DateTime oneWeekAgo = now.subtract(const Duration(days: 1));
+      final response =
+          await RiwayatMenabungService().getFilteredRiwayatMenabung(oneWeekAgo);
+      if (response['status'] == 'success') {
+        listRiwayat.value = response['riwayat'];
+      } else {
+        Get.snackbar(
+          'Error',
+          'Gagal mengambil data riwayat menabung',
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.red,
+        );
+      }
     } else if (selectedPeriod.value == '1 minggu') {
       // filter 1 minggu
+      DateTime now = DateTime.now();
+      DateTime oneWeekAgo = now.subtract(const Duration(days: 7));
+      final response =
+          await RiwayatMenabungService().getFilteredRiwayatMenabung(oneWeekAgo);
+      if (response['status'] == 'success') {
+        listRiwayat.value = response['riwayat'];
+      } else {
+        Get.snackbar(
+          'Error',
+          'Gagal mengambil data riwayat menabung',
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.red,
+        );
+      }
     } else if (selectedPeriod.value == '1 bulan') {
       // filter 1 bulan
+      DateTime now = DateTime.now();
+      DateTime oneWeekAgo = now.subtract(const Duration(days: 30));
+      final response =
+          await RiwayatMenabungService().getFilteredRiwayatMenabung(oneWeekAgo);
+      if (response['status'] == 'success') {
+        listRiwayat.value = response['riwayat'];
+      } else {
+        Get.snackbar(
+          'Error',
+          'Gagal mengambil data riwayat menabung',
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.red,
+        );
+      }
     } else if (selectedPeriod.value == '1 tahun') {
       // filter 1 tahun
+      DateTime now = DateTime.now();
+      DateTime oneWeekAgo = now.subtract(const Duration(days: 365));
+      final response =
+          await RiwayatMenabungService().getFilteredRiwayatMenabung(oneWeekAgo);
+      if (response['status'] == 'success') {
+        listRiwayat.value = response['riwayat'];
+      } else {
+        Get.snackbar(
+          'Error',
+          'Gagal mengambil data riwayat menabung',
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.red,
+        );
+      }
     }
   }
 }

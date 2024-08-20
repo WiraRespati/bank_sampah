@@ -15,7 +15,6 @@ class RiwayatKonversiPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    riwayatKonversiController.getAllRiwayatKonversi();
     return Scaffold(
         body: Scaffold(
       body: SingleChildScrollView(
@@ -73,6 +72,8 @@ class RiwayatKonversiPage extends StatelessWidget {
                                       if (newValue != null) {
                                         riwayatKonversiController
                                             .updatePeriod(newValue);
+                                        riwayatKonversiController
+                                            .filterRiwayatKonversi();
                                         Navigator.of(context).pop();
                                       }
                                     },
@@ -89,29 +90,37 @@ class RiwayatKonversiPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            ListView.builder(
-              padding: EdgeInsets.zero,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: riwayatKonversiController.listRiwayat.value!.length,
-              itemBuilder: (context, index) {
-                return ItemHistoryConvertWidget(
-                  date: Helper.formatTimestamp(riwayatKonversiController
-                      .listRiwayat.value![index].createdAt!),
-                  description: riwayatKonversiController
-                      .listRiwayat.value![index].deskripsiBarang,
-                  image: riwayatKonversiController
-                      .listRiwayat.value![index].imageBarang,
-                  point: riwayatKonversiController
-                      .listRiwayat.value![index].hargaBarang
-                      .toString(),
-                  title: riwayatKonversiController
-                      .listRiwayat.value![index].deskripsiBarang!
-                      .split(' ')
-                      .first,
+            Obx(() {
+              if (riwayatKonversiController.listRiwayat.value == null ||
+                  riwayatKonversiController.listRiwayat.value!.isEmpty) {
+                return const Center(
+                  child: Text('Belum ada riwayat menabung'),
                 );
-              },
-            ),
+              }
+              return ListView.builder(
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: riwayatKonversiController.listRiwayat.value!.length,
+                itemBuilder: (context, index) {
+                  return ItemHistoryConvertWidget(
+                    date: Helper.formatTimestamp(riwayatKonversiController
+                        .listRiwayat.value![index].createdAt!),
+                    description: riwayatKonversiController
+                        .listRiwayat.value![index].deskripsiBarang,
+                    image: riwayatKonversiController
+                        .listRiwayat.value![index].imageBarang,
+                    point: riwayatKonversiController
+                        .listRiwayat.value![index].hargaBarang
+                        .toString(),
+                    title: riwayatKonversiController
+                        .listRiwayat.value![index].deskripsiBarang!
+                        .split(' ')
+                        .first,
+                  );
+                },
+              );
+            }),
           ],
         ),
       ),
