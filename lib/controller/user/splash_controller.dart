@@ -14,7 +14,7 @@ class SplashController extends GetxController {
   void _navigateToNextPage() async {
     await Future.delayed(const Duration(seconds: 3));
     if (AuthService().user == null) {
-      Get.offAll(() => const OnboardingPage());
+      Get.offAll(() =>  const OnboardingPage());
     } else {
       bool isAdmin = await AuthService().checkAdmin();
       if (isAdmin) {
