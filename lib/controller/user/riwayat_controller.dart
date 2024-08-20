@@ -1,4 +1,3 @@
-import 'package:bank_sampah/models/barang_model.dart';
 import 'package:bank_sampah/models/pengumpulan_sampah_model.dart';
 import 'package:bank_sampah/services/user/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import '../../services/user/riwayat_service.dart';
 
 class RiwayatController extends GetxController {
   Rxn<List<KonversiModel>> listRiwayatKonversi = Rxn<List<KonversiModel>>([]);
-  Rxn<List<BarangModel>> listRiwayatKonversiBarang = Rxn<List<BarangModel>>([]);
   Rxn<List<PengumpulanSampah>> listRiwayatMenabung =
       Rxn<List<PengumpulanSampah>>([]);
 
@@ -19,7 +17,6 @@ class RiwayatController extends GetxController {
           await RiwayatService().getAllRiwayatKonversi(AuthService().user!.uid);
       if (response['status'] == 'success') {
         listRiwayatKonversi.value = response['riwayat'];
-        listRiwayatKonversiBarang.value = response['barang'];
       } else {
         Get.snackbar(
           'Error',

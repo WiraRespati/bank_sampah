@@ -69,22 +69,18 @@ class HistoryPage extends StatelessWidget {
                                       .value![index].createdAt,
                                 ),
                                 description: riwayatController
-                                    .listRiwayatKonversiBarang
+                                    .listRiwayatKonversi
                                     .value![index]
-                                    .description,
-                                image: riwayatController
-                                    .listRiwayatKonversiBarang
-                                    .value![index]
-                                    .image,
-                                point: riwayatController
-                                    .listRiwayatKonversiBarang
-                                    .value![index]
-                                    .price
+                                    .deskripsiBarang,
+                                image: riwayatController.listRiwayatKonversi
+                                    .value![index].imageBarang,
+                                point: riwayatController.listRiwayatKonversi
+                                    .value![index].hargaBarang
                                     .toString(),
-                                title: riwayatController
-                                    .listRiwayatKonversiBarang
-                                    .value![index]
-                                    .name,
+                                title: riwayatController.listRiwayatKonversi
+                                    .value![index].deskripsiBarang!
+                                    .split(' ')
+                                    .first,
                               );
                             },
                           ),
