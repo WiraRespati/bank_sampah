@@ -51,7 +51,6 @@ class RiwayatKonversiController extends GetxController {
       if (response['status'] == 'success') {
         listRiwayat.value = response['riwayat'];
         listUser.value = response['users'];
-        print(listRiwayat.value);
       } else {
         Get.snackbar(
           'Error',
@@ -69,7 +68,6 @@ class RiwayatKonversiController extends GetxController {
       if (response['status'] == 'success') {
         listRiwayat.value = response['riwayat'];
         listUser.value = response['users'];
-        print(listRiwayat.value);
       } else {
         Get.snackbar(
           'Error',

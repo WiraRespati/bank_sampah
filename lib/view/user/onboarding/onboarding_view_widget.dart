@@ -24,7 +24,7 @@ class OnboardingViewWidget extends StatelessWidget {
       children: [
         Image.asset(
           assets,
-          // height: height ?? 214,
+          height: height ?? 214,
           width: double.infinity,
         ),
         const SizedBox(
