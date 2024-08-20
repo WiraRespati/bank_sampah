@@ -1,4 +1,3 @@
-import 'package:bank_sampah/models/barang_model.dart';
 import 'package:bank_sampah/models/konversi_model.dart';
 import 'package:bank_sampah/models/pengumpulan_sampah_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,21 +15,13 @@ class RiwayatService {
           .orderBy("createdAt", descending: true)
           .get();
       List<KonversiModel> listRiwayat = [];
-      List<BarangModel> listBarang = [];
       for (final dataRiwayat in konversi.docs) {
         listRiwayat.add(KonversiModel.fromJson(dataRiwayat.data()));
-      }
-
-      for (final konversi in listRiwayat) {
-        final barang =
-            await _firestore.collection('barang').doc(konversi.barangId).get();
-        listBarang.add(BarangModel.fromJson(barang.data()!));
       }
 
       return {
         'status': 'success',
         'riwayat': listRiwayat,
-        'barang': listBarang,
       };
     } catch (e) {
       return {

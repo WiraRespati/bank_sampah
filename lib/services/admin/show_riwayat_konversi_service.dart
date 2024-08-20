@@ -20,12 +20,6 @@ class ShowRiwayatKonversiService {
       }
 
       for (final konversi in listRiwayat) {
-        final barang =
-            await _firestore.collection('barang').doc(konversi.barangId).get();
-        listBarang.add(BarangModel.fromJson(barang.data()!));
-      }
-
-      for (final konversi in listRiwayat) {
         final user =
             await _firestore.collection('users').doc(konversi.userId).get();
         listUser.add(UserModel.fromJson(user.data()!));

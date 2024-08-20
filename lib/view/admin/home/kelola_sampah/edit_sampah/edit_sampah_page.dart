@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../controller/admin/edit_sampah_controller.dart';
+import '../../kelola_barang/edit_barang/alert_delete_widget.dart';
 
 class EditSampahPage extends StatelessWidget {
   const EditSampahPage({super.key});
@@ -38,8 +39,17 @@ class EditSampahPage extends StatelessWidget {
                           ),
                           child: IconButton(
                             onPressed: () {
-                              
-
+                              showDialog(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (context) => AlertDeleteWidget(
+                                        title: 'Hapus Sampah',
+                                        description:
+                                            "Apakah Anda yakin ingin menghapus sampah?",
+                                        onDelete: () {
+                                          editSampahController.deleteSampah();
+                                        },
+                                      ));
                             },
                             icon: Icon(
                               Icons.delete,

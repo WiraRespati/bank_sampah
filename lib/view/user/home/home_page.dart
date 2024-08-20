@@ -10,6 +10,8 @@ import 'package:bank_sampah/view/user/home/title_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controller/user/riwayat_controller.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -21,6 +23,11 @@ class HomePage extends StatelessWidget {
     final EditSampahController sampahController = Get.put(
       EditSampahController(),
     );
+    final RiwayatController riwayatController = Get.put(
+      RiwayatController(),
+    );
+    riwayatController.getAllRiwayatKonversi();
+    riwayatController.getAllRiwayatMenabung();
     barangController.getAllBarang();
     sampahController.getAllSampah();
     return Scaffold(

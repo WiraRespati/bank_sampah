@@ -1,4 +1,5 @@
 import 'package:bank_sampah/models/barang_model.dart';
+import 'package:bank_sampah/models/konversi_model.dart';
 import 'package:bank_sampah/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -8,12 +9,17 @@ class KonversiService {
   Future<Map<String, dynamic>> konversiBarang(
       UserModel userModel, BarangModel barangModel) async {
     try {
-      await _firestore.collection('konversi').add({
-        'userId': userModel.uid,
-        'barangId': barangModel.id,
-        'createdAt': Timestamp.now(),
-      });
-
+      final DocumentReference doc = _firestore.collection('konversi').doc();
+      KonversiModel konversiModel = KonversiModel(
+        id: doc.id,
+        userId: userModel.uid,
+        namaBarang: barangModel.name,
+        imageBarang: barangModel.image,
+        deskripsiBarang: barangModel.description,
+        hargaBarang: barangModel.price,
+        createdAt: Timestamp.now(),
+      );
+      await doc.set(konversiModel.toJson());
       await _firestore.collection('users').doc(userModel.uid).update({
         'points': userModel.points! - barangModel.price!,
       });
