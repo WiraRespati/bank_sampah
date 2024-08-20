@@ -28,4 +28,30 @@ class RiwayatMenabungService {
       };
     }
   }
+
+  Future<Map<String, dynamic>> getFilteredRiwayatMenabung(DateTime time) async {
+    try {
+      final menabung = await _firestore
+          .collection('pengumpulan_sampah')
+          .where('createdAt', isGreaterThanOrEqualTo: time)
+          .orderBy("createdAt", descending: true)
+          .get();
+      PengumpulanSampah pengumpulanSampah = PengumpulanSampah();
+      List<PengumpulanSampah> listRiwayat = [];
+      for (final dataRiwayat in menabung.docs) {
+        pengumpulanSampah = PengumpulanSampah.fromJson(dataRiwayat.data());
+        listRiwayat.add(pengumpulanSampah);
+      }
+
+      return {
+        'status': 'success',
+        'riwayat': listRiwayat,
+      };
+    } catch (e) {
+      return {
+        'status': 'error',
+        'message': e.toString(),
+      };
+    }
+  }
 }

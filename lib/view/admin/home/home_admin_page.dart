@@ -25,8 +25,8 @@ class HomeAdminPage extends StatelessWidget {
 
     final RiwayatKonversiController riwayatKonversiController =
         Get.put(RiwayatKonversiController());
-    riwayatMenabungController.getAllRiwayat();
-    riwayatKonversiController.getAllRiwayatKonversi();
+    riwayatMenabungController.filterRiwayatMenabung();
+    riwayatKonversiController.filterRiwayatKonversi();
     return Scaffold(
       backgroundColor: ColorCollection.white,
       body: SingleChildScrollView(
