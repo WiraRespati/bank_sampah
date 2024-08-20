@@ -19,51 +19,49 @@ class OnboardingViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            assets,
-            height: height ?? 214,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          assets,
+          // height: height ?? 214,
+          width: double.infinity,
+        ),
+        const SizedBox(
+          height: 31,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            children: [
+              AutoSizeText(
+                title,
+                style: TextStyleCollection.bodyBold.copyWith(
+                  color: ColorPrimary.primary200,
+                ),
+                minFontSize: 16,
+                maxFontSize: 18,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              AutoSizeText(
+                subtitle,
+                style: TextStyleCollection.caption.copyWith(
+                  color: ColorPrimary.primary200,
+                ),
+                minFontSize: 14,
+                maxFontSize: 16,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+            ],
           ),
-          const SizedBox(
-            height: 31,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              children: [
-                AutoSizeText(
-                  title,
-                  style: TextStyleCollection.bodyBold.copyWith(
-                    color: ColorPrimary.primary200,
-                  ),
-                  minFontSize: 16,
-                  maxFontSize: 18,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                AutoSizeText(
-                  subtitle,
-                  style: TextStyleCollection.caption.copyWith(
-                    color: ColorPrimary.primary200,
-                  ),
-                  minFontSize: 14,
-                  maxFontSize: 16,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
