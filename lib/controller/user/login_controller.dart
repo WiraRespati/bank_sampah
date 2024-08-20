@@ -55,57 +55,50 @@ class LoginController extends GetxController {
       return;
     }
 
-    try {
-      isLoadingLogin.value = true;
-      String result = await LoginService().signInWithEmailAndPassword(
-          emailController.text, passwordController.text);
+    isLoadingLogin.value = true;
+    String result = await LoginService().signInWithEmailAndPassword(
+        emailController.text, passwordController.text);
+    isLoadingLogin.value = false;
+    if (result == 'success') {
       isAdmin.value = await AuthService().checkAdmin();
       isLoadingLogin.value = false;
-      if (result == 'success') {
-        Get.snackbar(
-          'Berhasil',
-          'Login berhasil',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-        );
-        if (isAdmin.value) {
-          Get.offAll(() => BottomNavbarAdmin());
-        } else {
-          Get.offAll(() => BottomNavbar());
-        }
-        emailController.clear();
-        passwordController.clear();
-      } else if (result == 'user-not-found') {
-        Get.snackbar(
-          'Gagal',
-          'Pengguna tidak ditemukan',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
-      } else if (result == 'wrong-password') {
-        Get.snackbar(
-          'Gagal',
-          'Kata sandi salah',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
+      Get.snackbar(
+        'Berhasil',
+        'Login berhasil',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+      if (isAdmin.value) {
+        Get.offAll(() => BottomNavbarAdmin());
       } else {
-        Get.snackbar(
-          'Gagal',
-          'Email atau kata sandi salah',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
+        Get.offAll(() => BottomNavbar());
       }
-    } catch (e) {
+      emailController.clear();
+      passwordController.clear();
+    } else if (result == 'user-not-found') {
       isLoadingLogin.value = false;
       Get.snackbar(
         'Gagal',
-        'Something error occured',
+        'Pengguna tidak ditemukan',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    } else if (result == 'wrong-password') {
+      isLoadingLogin.value = false;
+      Get.snackbar(
+        'Gagal',
+        'Kata sandi salah',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    } else {
+      isLoadingLogin.value = false;
+      Get.snackbar(
+        'Gagal',
+        'anda sudah memasukkan password yang salah terlalu banyak. Coba lagi nanti',
         snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.red,
         colorText: Colors.white,

@@ -1,4 +1,5 @@
 import 'package:bank_sampah/utils/color_constant.dart';
+import 'package:bank_sampah/view/admin/home/kelola_barang/edit_barang/alert_delete_widget.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/edit_barang/button_edit_widget.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/edit_barang/form_edit_barang_widget.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/edit_barang/upload_edit_barang_widget.dart';
@@ -34,7 +35,19 @@ class EditBarangPage extends StatelessWidget {
                           shape: BoxShape.circle,
                         ),
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (context) => AlertDeleteWidget(
+                                      title: 'Hapus Barang',
+                                      description:
+                                          "Apakah Anda yakin ingin menghapus barang?",
+                                      onDelete: () {
+                                        editBarangController.deleteBarang();
+                                      },
+                                    ));
+                          },
                           icon: Icon(
                             Icons.delete,
                             color: ColorPrimary.primary100,

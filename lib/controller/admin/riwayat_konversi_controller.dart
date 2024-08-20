@@ -25,14 +25,20 @@ class RiwayatKonversiController extends GetxController {
         listRiwayat.value = response['riwayat'];
         listBarang.value = response['barang'];
         listUser.value = response['users'];
+        print(listRiwayat);
+        print(listBarang);
+        print(listUser);
       } else {
         Get.snackbar(
           'Error',
-          'Gagal mengambil data riwayat',
+          'Gagal mengambil data riwayat konversi (error: ${response['message']})',
           snackPosition: SnackPosition.TOP,
           colorText: Colors.white,
           backgroundColor: Colors.red,
         );
+        print("listRiwayat: $listRiwayat");
+        print("listBarang: $listBarang");
+        print("listUser: $listUser");
       }
     } catch (e) {
       Get.snackbar(

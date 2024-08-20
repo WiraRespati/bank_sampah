@@ -1,4 +1,4 @@
-
+import 'package:bank_sampah/services/admin/delete_sampah_service.dart';
 import 'package:bank_sampah/services/admin/edit_sampah_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -131,6 +131,32 @@ class EditSampahController extends GetxController {
       Get.snackbar(
         'Error',
         'Gagal mengedit sampah',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
+  void deleteSampah() async {
+    isLoading.value = true;
+    final response = await DeleteSampahService().deleteSampah(sampah.value!);
+    isLoading.value = false;
+    if (response['status'] == 'success') {
+      isLoading.value = false;
+      Get.offAll(() => const KelolaSampahPage());
+      Get.snackbar(
+        'Success',
+        'Berhasil menghapus sampah',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+    } else {
+      isLoading.value = false;
+      Get.snackbar(
+        'Error',
+        'Gagal menghapus sampah',
         snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.red,
         colorText: Colors.white,
