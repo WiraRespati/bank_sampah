@@ -1,13 +1,19 @@
+import 'package:bank_sampah/controller/admin/total_points_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
+import 'package:bank_sampah/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class BannerHomeAdminWidget extends StatelessWidget {
   const BannerHomeAdminWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final TotalPointsController totalPointsController =
+        Get.put(TotalPointsController());
+    totalPointsController.getTotalPoints();
     return SizedBox(
       height: 390,
       width: double.infinity,
@@ -166,7 +172,9 @@ class BannerHomeAdminWidget extends StatelessWidget {
                                 width: 10,
                               ),
                               Text(
-                                "0",
+                                Helper.formatNumber(totalPointsController
+                                    .totalPoints.value
+                                    .toString()),
                                 style:
                                     TextStyleCollection.captionMedium.copyWith(
                                   fontSize: 16,
