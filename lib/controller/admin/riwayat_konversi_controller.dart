@@ -1,4 +1,3 @@
-import 'package:bank_sampah/models/barang_model.dart';
 import 'package:bank_sampah/models/user_model.dart';
 import 'package:bank_sampah/services/admin/show_riwayat_konversi_service.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ class RiwayatKonversiController extends GetxController {
   var selectedPeriod = '1 hari'.obs;
 
   Rxn<List<KonversiModel>> listRiwayat = Rxn<List<KonversiModel>>([]);
-  Rxn<List<BarangModel>> listBarang = Rxn<List<BarangModel>>([]);
   Rxn<List<UserModel>> listUser = Rxn<List<UserModel>>([]);
 
   void updatePeriod(String period) {
@@ -23,11 +21,7 @@ class RiwayatKonversiController extends GetxController {
           await ShowRiwayatKonversiService().getAllRiwayatKonversi();
       if (response['status'] == 'success') {
         listRiwayat.value = response['riwayat'];
-        listBarang.value = response['barang'];
         listUser.value = response['users'];
-        print(listRiwayat);
-        print(listBarang);
-        print(listUser);
       } else {
         Get.snackbar(
           'Error',
@@ -36,9 +30,6 @@ class RiwayatKonversiController extends GetxController {
           colorText: Colors.white,
           backgroundColor: Colors.red,
         );
-        print("listRiwayat: $listRiwayat");
-        print("listBarang: $listBarang");
-        print("listUser: $listUser");
       }
     } catch (e) {
       Get.snackbar(

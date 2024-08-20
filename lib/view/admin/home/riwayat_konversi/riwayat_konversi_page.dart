@@ -99,14 +99,14 @@ class RiwayatKonversiPage extends StatelessWidget {
                   date: Helper.formatTimestamp(riwayatKonversiController
                       .listRiwayat.value![index].createdAt!),
                   description: riwayatKonversiController
-                      .listBarang.value![index].description,
-                  image:
-                      riwayatKonversiController.listBarang.value![index].image,
+                      .listRiwayat.value![index].deskripsiBarang,
+                  image: riwayatKonversiController
+                      .listRiwayat.value![index].imageBarang,
                   point: riwayatKonversiController
-                      .listBarang.value![index].price
+                      .listRiwayat.value![index].hargaBarang
                       .toString(),
                   title: riwayatKonversiController
-                      .listBarang.value![index].description!
+                      .listRiwayat.value![index].deskripsiBarang!
                       .split(' ')
                       .first,
                 );

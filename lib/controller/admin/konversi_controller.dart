@@ -161,10 +161,10 @@ class KonversiController extends GetxController {
   void konversiBarang() async {
     final userModel = selectedUser.value!;
     final barangModel = selectedBarang.value!;
-    if (userModel.points! < barangModel.price!) {
+    if (userModel.points! < barangModel.price! || barangModel.stock! == 0) {
       Get.snackbar(
         'Error',
-        'Point tidak cukup',
+        'Point atau stock barang tidak cukup',
         snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.red,
         colorText: Colors.white,

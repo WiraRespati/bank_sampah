@@ -20,24 +20,6 @@ class ShowRiwayatKonversiService {
       }
 
       for (final konversi in listRiwayat) {
-        final barang =
-            await _firestore.collection('barang').doc(konversi.barangId).get();
-        if (barang.exists) {
-          listBarang.add(BarangModel.fromJson(barang.data()!));
-        } else {
-          listBarang.add(BarangModel(
-            name: 'Barang tidak ditemukan',
-            image: '',
-            price: 0,
-            stock: 0,
-            createdAt: null,
-            description: 'Barang tidak ditemukan',
-            id: 'data tidak ditemukan',
-          ));
-        }
-      }
-
-      for (final konversi in listRiwayat) {
         final user =
             await _firestore.collection('users').doc(konversi.userId).get();
         listUser.add(UserModel.fromJson(user.data()!));
