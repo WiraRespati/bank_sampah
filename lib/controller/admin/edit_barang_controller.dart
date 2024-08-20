@@ -1,3 +1,4 @@
+import 'package:bank_sampah/services/admin/delete_barang_service.dart';
 import 'package:bank_sampah/services/admin/edit_barang_service.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/kelola_barang_page.dart';
 import 'package:get/get.dart';
@@ -121,6 +122,32 @@ class EditBarangController extends GetxController {
       Get.snackbar(
         'Error',
         'Gagal mengedit barang',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
+  void deleteBarang() async {
+    isLoading.value = true;
+    final response = await DeleteBarangService().deleteBarang(barang.value!);
+    isLoading.value = false;
+    if (response['status'] == 'success') {
+      isLoading.value = false;
+      Get.offAll(() => const KelolaBarangPage());
+      Get.snackbar(
+        'Success',
+        'Berhasil menghapus barang',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+    } else {
+      isLoading.value = false;
+      Get.snackbar(
+        'Error',
+        'Gagal menghapus barang',
         snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.red,
         colorText: Colors.white,

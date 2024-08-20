@@ -20,7 +20,7 @@ class RiwayatMenabungController extends GetxController {
       } else {
         Get.snackbar(
           'Error',
-          'Gagal mengambil data riwayat',
+          'Gagal mengambil data riwayat menabung',
           snackPosition: SnackPosition.TOP,
           colorText: Colors.white,
           backgroundColor: Colors.red,
