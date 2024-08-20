@@ -168,7 +168,7 @@ class BannerHomeWidget extends StatelessWidget {
                               left: 18,
                             ),
                             child: Text(
-                              "Total Koin Anda",
+                              "Total Point Anda",
                               style: TextStyleCollection.captionMedium.copyWith(
                                 fontSize: 16,
                                 color: ColorCollection.black,
