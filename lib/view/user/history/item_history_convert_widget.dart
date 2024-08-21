@@ -15,13 +15,15 @@ class ItemHistoryConvertWidget extends StatelessWidget {
       this.description,
       this.image,
       this.date,
-      this.point});
+      this.point,
+      this.simbol});
 
   final String? title;
   final String? description;
   final String? image;
   final String? date;
   final String? point;
+  final String? simbol;
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +93,19 @@ class ItemHistoryConvertWidget extends StatelessWidget {
                     ),
                     Row(
                       children: [
+                        simbol != null
+                            ? Padding(
+                              padding: const EdgeInsets.only(right: 4),
+                              child: Text(
+                                  simbol!,
+                                  style:
+                                      TextStyleCollection.captionMedium.copyWith(
+                                    fontSize: 20,
+                                    color: const Color(0xFFF39E09),
+                                  ),
+                                ),
+                            )
+                            : Container(),
                         Image.asset(
                           'assets/images/koin.png',
                           height: 15,

@@ -92,8 +92,12 @@ class RiwayatMenabungPage extends StatelessWidget {
             Obx(() {
               if (riwayatMenabungController.listRiwayat.value == null ||
                   riwayatMenabungController.listRiwayat.value!.isEmpty) {
-                return const Center(
-                  child: Text('Belum ada riwayat menabung'),
+                return Center(
+                  child: Text('Belum ada riwayat menabung',
+                      style: TextStyleCollection.bodyMedium.copyWith(
+                        fontSize: 16,
+                        color: ColorPrimary.primary100,
+                      )),
                 );
               }
               return ListView.builder(

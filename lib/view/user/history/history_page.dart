@@ -56,62 +56,102 @@ class HistoryPage extends StatelessWidget {
                     Flexible(
                       child: TabBarView(
                         children: [
-                          ListView.builder(
-                            padding: EdgeInsets.zero,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: riwayatController
-                                    .listRiwayatKonversi.value?.length ??
-                                0,
-                            itemBuilder: (context, index) {
-                              return ItemHistoryConvertWidget(
-                                date: Helper.formatTimestamp(
-                                  riwayatController.listRiwayatKonversi
-                                      .value![index].createdAt,
+                          riwayatController
+                                      .listRiwayatKonversi.value?.isEmpty ??
+                                  true
+                              ? Center(
+                                  child: Text(
+                                    'Belum ada riwayat konversi',
+                                    style:
+                                        TextStyleCollection.bodyMedium.copyWith(
+                                      fontSize: 16,
+                                      color: ColorPrimary.primary100,
+                                    ),
+                                  ),
+                                )
+                              : ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: riwayatController
+                                          .listRiwayatKonversi.value?.length ??
+                                      0,
+                                  itemBuilder: (context, index) {
+                                    return ItemHistoryConvertWidget(
+                                      date: Helper.formatTimestamp(
+                                        riwayatController.listRiwayatKonversi
+                                            .value![index].createdAt,
+                                      ),
+                                      description: riwayatController
+                                          .listRiwayatKonversi
+                                          .value![index]
+                                          .deskripsiBarang,
+                                      image: riwayatController
+                                          .listRiwayatKonversi
+                                          .value![index]
+                                          .imageBarang,
+                                      point: riwayatController
+                                          .listRiwayatKonversi
+                                          .value![index]
+                                          .hargaBarang
+                                          .toString(),
+                                      title: riwayatController
+                                          .listRiwayatKonversi
+                                          .value![index]
+                                          .deskripsiBarang!
+                                          .split(' ')
+                                          .first,
+                                      simbol: '-',
+                                    );
+                                  },
                                 ),
-                                description: riwayatController
-                                    .listRiwayatKonversi
-                                    .value![index]
-                                    .deskripsiBarang,
-                                image: riwayatController.listRiwayatKonversi
-                                    .value![index].imageBarang,
-                                point: riwayatController.listRiwayatKonversi
-                                    .value![index].hargaBarang
-                                    .toString(),
-                                title: riwayatController.listRiwayatKonversi
-                                    .value![index].deskripsiBarang!
-                                    .split(' ')
-                                    .first,
-                              );
-                            },
-                          ),
-                          ListView.builder(
-                            padding: EdgeInsets.zero,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: riwayatController
-                                    .listRiwayatMenabung.value?.length ??
-                                0,
-                            itemBuilder: (context, index) {
-                              return ItemHistoryConvertWidget(
-                                date: Helper.formatTimestamp(
-                                  riwayatController.listRiwayatMenabung
-                                      .value![index].createdAt,
+                          riwayatController
+                                      .listRiwayatMenabung.value?.isEmpty ??
+                                  true
+                              ? Center(
+                                  child: Text(
+                                    'Belum ada riwayat menabung',
+                                    style:
+                                        TextStyleCollection.bodyMedium.copyWith(
+                                      fontSize: 16,
+                                      color: ColorPrimary.primary100,
+                                    ),
+                                  ),
+                                )
+                              : ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: riwayatController
+                                          .listRiwayatMenabung.value?.length ??
+                                      0,
+                                  itemBuilder: (context, index) {
+                                    return ItemHistoryConvertWidget(
+                                      date: Helper.formatTimestamp(
+                                        riwayatController.listRiwayatMenabung
+                                            .value![index].createdAt,
+                                      ),
+                                      description: riwayatController
+                                          .listRiwayatMenabung
+                                          .value![index]
+                                          .description,
+                                      image: riwayatController
+                                          .listRiwayatMenabung
+                                          .value![index]
+                                          .image,
+                                      point: riwayatController
+                                          .listRiwayatMenabung
+                                          .value![index]
+                                          .points
+                                          .toString(),
+                                      title: riwayatController
+                                          .listRiwayatMenabung
+                                          .value![index]
+                                          .description!
+                                          .split(' ')
+                                          .first,
+                                      simbol: '+',
+                                    );
+                                  },
                                 ),
-                                description: riwayatController
-                                    .listRiwayatMenabung
-                                    .value![index]
-                                    .description,
-                                image: riwayatController
-                                    .listRiwayatMenabung.value![index].image,
-                                point: riwayatController
-                                    .listRiwayatMenabung.value![index].points
-                                    .toString(),
-                                title: riwayatController.listRiwayatMenabung
-                                    .value![index].description!
-                                    .split(' ')
-                                    .first,
-                              );
-                            },
-                          ),
                         ],
                       ),
                     ),

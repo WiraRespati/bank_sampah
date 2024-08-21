@@ -27,6 +27,10 @@ class MapsPage extends StatelessWidget {
                 const Marker(
                   markerId: MarkerId('target'),
                   position: LatLng(-1.2338871, 116.8522995),
+                  infoWindow: InfoWindow(
+                    title: 'Gedung LPM',
+                    snippet: 'Lokasi Bank Sampah',
+                  ),
                 ),
               },
             ),

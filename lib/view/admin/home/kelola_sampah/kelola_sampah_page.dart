@@ -1,4 +1,6 @@
 import 'package:bank_sampah/controller/admin/edit_sampah_controller.dart';
+import 'package:bank_sampah/utils/color_constant.dart';
+import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:bank_sampah/view/admin/home/kelola_sampah/edit_sampah/edit_sampah_page.dart';
 import 'package:bank_sampah/view/admin/home/kelola_sampah/tambah_sampah/tambah_sampah_page.dart';
 import 'package:bank_sampah/view/admin/home/kelola_sampah/tambah_sampah_widget.dart';
@@ -29,7 +31,6 @@ class KelolaSampahPage extends StatelessWidget {
             ),
             LayoutBuilder(
               builder: (context, constraints) {
-                // Adjust crossAxisCount and childAspectRatio based on screen width
                 int crossAxisCount = constraints.maxWidth > 600 ? 4 : 2;
                 double childAspectRatio =
                     constraints.maxWidth > 600 ? 0.60 : 0.60;
@@ -37,37 +38,53 @@ class KelolaSampahPage extends StatelessWidget {
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: Obx(
-                    () => GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        mainAxisSpacing: 24,
-                        crossAxisSpacing: crossAxisCount == 4 ? 33 : 24,
-                        childAspectRatio: childAspectRatio,
-                      ),
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount:
-                          editSampahController.listSampah.value?.length ?? 0,
-                      itemBuilder: (context, index) {
+                    () {
+                      if (editSampahController.listSampah.value?.isEmpty ??
+                          true) {
                         return Center(
-                          child: ItemAdminWidget(
-                            buttonName: 'Edit',
-                            image: editSampahController
-                                .listSampah.value![index].gambar,
-                            title: editSampahController
-                                .listSampah.value![index].name,
-                            point: editSampahController
-                                .listSampah.value![index].points
-                                .toString(),
-                            onPressed: () {
-                              Get.to(() => const EditSampahPage());
-                              editSampahController.sampah.value =
-                                  editSampahController.listSampah.value![index];
-                            },
-                          ),
+                          child: Text('Belum ada data sampah tersedia',
+                              style: TextStyleCollection.bodyMedium.copyWith(
+                                fontSize: 16,
+                                color: ColorPrimary.primary100,
+                              )),
                         );
-                      },
-                    ),
+                      } else {
+                        return GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            mainAxisSpacing: 24,
+                            crossAxisSpacing: crossAxisCount == 4 ? 33 : 24,
+                            childAspectRatio: childAspectRatio,
+                          ),
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount:
+                              editSampahController.listSampah.value?.length ??
+                                  0,
+                          itemBuilder: (context, index) {
+                            return Center(
+                              child: ItemAdminWidget(
+                                buttonName: 'Edit',
+                                image: editSampahController
+                                    .listSampah.value![index].gambar,
+                                title: editSampahController
+                                    .listSampah.value![index].name,
+                                point: editSampahController
+                                    .listSampah.value![index].points
+                                    .toString(),
+                                onPressed: () {
+                                  Get.to(() => const EditSampahPage());
+                                  editSampahController.sampah.value =
+                                      editSampahController
+                                          .listSampah.value![index];
+                                },
+                              ),
+                            );
+                          },
+                        );
+                      }
+                    },
                   ),
                 );
               },
