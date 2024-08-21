@@ -1,3 +1,4 @@
+import 'package:bank_sampah/controller/admin/total_points_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/view/admin/home/banner_home_admin_widget.dart';
 import 'package:bank_sampah/view/admin/konversi/form_barang_widget.dart';
@@ -12,7 +13,8 @@ class KonversiPage extends StatelessWidget {
   KonversiPage({super.key});
 
   final KonversiController konversiController = Get.put(KonversiController());
-
+  final TotalPointsController totalPointsController =
+      Get.put(TotalPointsController());
   @override
   Widget build(BuildContext context) {
     konversiController.getAllUser();

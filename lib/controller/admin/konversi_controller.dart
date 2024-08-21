@@ -188,7 +188,7 @@ class KonversiController extends GetxController {
         clearForm();
         getAllBarang();
         getAllUser();
-        Get.to(() => BottomNavbarAdmin());
+        Get.offAll(() => BottomNavbarAdmin());
       } else {
         Get.snackbar(
           'Error',

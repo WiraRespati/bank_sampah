@@ -171,16 +171,16 @@ class BannerHomeAdminWidget extends StatelessWidget {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text(
-                                Helper.formatNumber(totalPointsController
-                                    .totalPoints.value
-                                    .toString()),
-                                style:
-                                    TextStyleCollection.captionMedium.copyWith(
-                                  fontSize: 16,
-                                  color: ColorCollection.black,
-                                ),
-                              )
+                              Obx(() => Text(
+                                    Helper.formatNumber(totalPointsController
+                                        .totalPoints.value
+                                        .toString()),
+                                    style: TextStyleCollection.captionMedium
+                                        .copyWith(
+                                      fontSize: 16,
+                                      color: ColorCollection.black,
+                                    ),
+                                  ))
                             ],
                           ),
                         )
