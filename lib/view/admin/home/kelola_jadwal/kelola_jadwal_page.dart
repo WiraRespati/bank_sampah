@@ -28,7 +28,7 @@ class KelolaJadwalPage extends StatelessWidget {
                 ),
                 TambahJadwalWidget(
                   onTap: () {
-                    Get.to(() => const TambahJadwalPage());
+                    Get.to(() => TambahJadwalPage());
                   },
                 ),
                 Obx(() {
