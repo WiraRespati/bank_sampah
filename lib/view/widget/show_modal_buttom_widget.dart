@@ -130,7 +130,7 @@ class ShowModalButtomWidget extends StatelessWidget {
                                 width: 2,
                               ),
                               Text(
-                                stok ?? '0',
+                                "$stok Unit",
                                 style:
                                     TextStyleCollection.captionMedium.copyWith(
                                   fontSize: 16,
@@ -140,6 +140,9 @@ class ShowModalButtomWidget extends StatelessWidget {
                             ],
                           )
                         : Container(),
+                    const SizedBox(
+                      height: 8,
+                    ),
                     Row(
                       children: [
                         Icon(Icons.date_range_rounded,

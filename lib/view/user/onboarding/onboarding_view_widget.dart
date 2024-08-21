@@ -26,6 +26,7 @@ class OnboardingViewWidget extends StatelessWidget {
           assets,
           height: height ?? 214,
           width: double.infinity,
+          fit: BoxFit.contain,
         ),
         const SizedBox(
           height: 31,

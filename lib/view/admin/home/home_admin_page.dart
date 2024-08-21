@@ -6,6 +6,7 @@ import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/view/admin/home/banner_home_admin_widget.dart';
 import 'package:bank_sampah/view/admin/home/item_home_admin_widget.dart';
 import 'package:bank_sampah/view/admin/home/kelola_barang/kelola_barang_page.dart';
+import 'package:bank_sampah/view/admin/home/kelola_jadwal/kelola_jadwal_page.dart';
 import 'package:bank_sampah/view/admin/home/kelola_sampah/kelola_sampah_page.dart';
 import 'package:bank_sampah/view/admin/home/riwayat_konversi/riwayat_konversi_page.dart';
 import 'package:bank_sampah/view/admin/home/riwayat_menabung/riwayat_menabung_page.dart';
@@ -59,6 +60,17 @@ class HomeAdminPage extends StatelessWidget {
               ),
               onTap: () {
                 Get.to(() => const KelolaSampahPage());
+              },
+            ),
+            ItemHomeAdminWidget(
+              title: 'Kelola Jadwal',
+              subtitle: 'Edit dan Tambahkan Jadwal',
+              image: Icon(
+                Icons.access_time,
+                color: ColorPrimary.primary100,
+              ),
+              onTap: () {
+                Get.to(() =>  const KelolaJadwalPage());
               },
             ),
             ItemHomeAdminWidget(
