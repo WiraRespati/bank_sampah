@@ -30,7 +30,7 @@ class DayPickerWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: ColorCollection.black),
+              border: Border.all(color: ColorCollection.black,width: 0.5),
             ),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(

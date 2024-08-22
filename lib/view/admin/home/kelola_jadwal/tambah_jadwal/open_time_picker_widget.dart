@@ -2,7 +2,6 @@ import 'package:bank_sampah/controller/admin/jadwal_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
 
@@ -23,14 +22,9 @@ class OpenTimePickerWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 4),
-        Container(
+        SizedBox(
           height: 48,
           width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: ColorCollection.black),
-          ),
           child: TimePickerSpinnerPopUp(
             mode: CupertinoDatePickerMode.time,
             initTime: DateTime.now(),
