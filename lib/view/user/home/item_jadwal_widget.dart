@@ -43,10 +43,7 @@ class ItemJadwalWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
-              'assets/images/banner_jadwal.png',
-              width: double.infinity,
-              height: double.infinity,
-              fit: BoxFit.cover,
+              'assets/images/gedunglpm.png',
             ),
           ),
           Positioned(

@@ -14,6 +14,7 @@ class BannerHomeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final UserController userController = Get.put(UserController());
     userController.getUserData();
+    final double screenWidth = MediaQuery.of(context).size.width;
 
     return SizedBox(
       height: 380,
@@ -61,7 +62,7 @@ class BannerHomeWidget extends StatelessWidget {
                     ),
                     SizedBox(
                       height: 37,
-                      width: 174,
+                      width: screenWidth * 0.5, 
                       child: SvgPicture.asset(
                         'assets/images/title_bank_sampah.svg',
                       ),
@@ -102,7 +103,8 @@ class BannerHomeWidget extends StatelessWidget {
                       right: 2,
                     ),
                     height: 110,
-                    width: 320,
+                    width:
+                        screenWidth - 40, 
                     decoration: BoxDecoration(
                       color: ColorNeutral.neutral50,
                       border: Border.all(
@@ -144,7 +146,8 @@ class BannerHomeWidget extends StatelessWidget {
                     top: 55,
                     child: Container(
                       height: 55,
-                      width: 320,
+                      width:
+                          screenWidth - 40, // Responsif width dengan padding 20
                       decoration: BoxDecoration(
                         color: ColorNeutral.neutral50,
                         border: Border.all(

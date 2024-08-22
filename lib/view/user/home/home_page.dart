@@ -42,19 +42,23 @@ class HomePage extends StatelessWidget {
           children: [
             const BannerHomeWidget(),
             Obx(() {
+              double screenHeight = MediaQuery.of(context).size.height;
+              double tinggi = screenHeight > 800 ? 200 : 180;
               return CarouselSlider.builder(
                 itemCount: jadwalController.jadwalList.length,
                 itemBuilder: (context, index, realIndex) {
                   final listJadwal = jadwalController.jadwalList[index];
-                  return ItemJadwalWidget(
-                    closedTime: listJadwal.closedTime,
-                    openTime: listJadwal.openTime,
-                    day: listJadwal.day,
+                  return Center(
+                    child: ItemJadwalWidget(
+                      closedTime: listJadwal.closedTime,
+                      openTime: listJadwal.openTime,
+                      day: listJadwal.day,
+                    ),
                   );
                 },
                 options: CarouselOptions(
                   onPageChanged: (index, reason) {},
-                  height: 200,
+                  height: tinggi,
                   autoPlay: true,
                   viewportFraction: 1,
                 ),
