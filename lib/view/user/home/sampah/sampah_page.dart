@@ -24,7 +24,7 @@ class SampahPage extends StatelessWidget {
             const SampahAppbar(),
             LayoutBuilder(
               builder: (context, constraints) {
-               int crossAxisCount = constraints.maxWidth > 600 ? 4 : 2;
+                int crossAxisCount = constraints.maxWidth > 600 ? 4 : 2;
                 double screenHeight = MediaQuery.of(context).size.height;
                 double childAspectRatio = screenHeight > 800 ? 0.69 : 0.60;
                 return Container(
@@ -59,13 +59,18 @@ class SampahPage extends StatelessWidget {
                             final sampah =
                                 sampahController.listSampah.value?[index];
                             return Center(
-                              child: ItemHomeWidget(
-                                image: sampah?.gambar,
-                                title: sampah?.name,
-                                point: Helper.formatNumber(
-                                    sampah!.points.toString()),
-                                description: sampah.description,
-                                date: Helper.formatTimestamp(sampah.createdAt),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: ItemHomeWidget(
+                                  image: sampah?.gambar,
+                                  title: sampah?.name,
+                                  point: Helper.formatNumber(
+                                      sampah!.points.toString()),
+                                  description: sampah.description,
+                                  date:
+                                      Helper.formatTimestamp(sampah.createdAt),
+                                ),
                               ),
                             );
                           },

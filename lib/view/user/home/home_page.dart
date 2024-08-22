@@ -43,8 +43,7 @@ class HomePage extends StatelessWidget {
             const BannerHomeWidget(),
             Obx(() {
               return CarouselSlider.builder(
-                itemCount: jadwalController.jadwalList
-                    .length,
+                itemCount: jadwalController.jadwalList.length,
                 itemBuilder: (context, index, realIndex) {
                   final listJadwal = jadwalController.jadwalList[index];
                   return ItemJadwalWidget(
@@ -55,7 +54,7 @@ class HomePage extends StatelessWidget {
                 },
                 options: CarouselOptions(
                   onPageChanged: (index, reason) {},
-                  height: 180,
+                  height: 200,
                   autoPlay: true,
                   viewportFraction: 1,
                 ),
@@ -85,12 +84,16 @@ class HomePage extends StatelessWidget {
                         top: 15,
                         bottom: 10,
                       ),
-                      child: ItemHomeWidget(
-                        image: sampah.gambar,
-                        title: sampah.name,
-                        point: Helper.formatNumber(sampah.points!.toString()),
-                        description: sampah.description,
-                        date: Helper.formatTimestamp(sampah.createdAt),
+                      child: SizedBox(
+                        height: 150,
+                        width: 150,
+                        child: ItemHomeWidget(
+                          image: sampah.gambar,
+                          title: sampah.name,
+                          point: Helper.formatNumber(sampah.points!.toString()),
+                          description: sampah.description,
+                          date: Helper.formatTimestamp(sampah.createdAt),
+                        ),
                       ),
                     );
                   },
@@ -122,13 +125,17 @@ class HomePage extends StatelessWidget {
                         top: 15,
                         bottom: 10,
                       ),
-                      child: ItemHomeWidget(
-                        image: barang.image,
-                        title: barang.name,
-                        point: Helper.formatNumber(barang.price!.toString()),
-                        description: barang.description,
-                        date: Helper.formatTimestamp(barang.createdAt),
-                        stok: barang.stock.toString(),
+                      child: SizedBox(
+                        height: 150,
+                        width: 150,
+                        child: ItemHomeWidget(
+                          image: barang.image,
+                          title: barang.name,
+                          point: Helper.formatNumber(barang.price!.toString()),
+                          description: barang.description,
+                          date: Helper.formatTimestamp(barang.createdAt),
+                          stok: barang.stock.toString(),
+                        ),
                       ),
                     );
                   },

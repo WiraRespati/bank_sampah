@@ -56,8 +56,8 @@ class ItemHomeWidget extends StatelessWidget {
             ),
           ],
         ),
-        width: 132,
-        height: 191,
+        // width: 132,
+        // height: 200,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -82,7 +82,7 @@ class ItemHomeWidget extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                       height: 132,
-                      width: 132,
+                      width: double.infinity,
                       fit: BoxFit.cover,
                     ),
                   )

@@ -48,7 +48,7 @@ class BarangPage extends StatelessWidget {
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: crossAxisCount,
-                            crossAxisSpacing: crossAxisCount == 4 ? 26 : 31,
+                            crossAxisSpacing: crossAxisCount == 4 ? 33 : 24,
                             childAspectRatio: childAspectRatio,
                           ),
                           itemCount:
@@ -59,14 +59,19 @@ class BarangPage extends StatelessWidget {
                             final barang =
                                 barangController.listBarang.value?[index];
                             return Center(
-                              child: ItemHomeWidget(
-                                image: barang?.image,
-                                title: barang?.name,
-                                point: Helper.formatNumber(
-                                    barang!.price.toString()),
-                                description: barang.description,
-                                date: Helper.formatTimestamp(barang.createdAt),
-                                stok: barang.stock.toString(),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: ItemHomeWidget(
+                                  image: barang?.image,
+                                  title: barang?.name,
+                                  point: Helper.formatNumber(
+                                      barang!.price.toString()),
+                                  description: barang.description,
+                                  date:
+                                      Helper.formatTimestamp(barang.createdAt),
+                                  stok: barang.stock.toString(),
+                                ),
                               ),
                             );
                           },
