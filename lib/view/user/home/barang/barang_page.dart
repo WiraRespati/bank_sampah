@@ -25,11 +25,11 @@ class BarangPage extends StatelessWidget {
             LayoutBuilder(
               builder: (context, constraints) {
                 int crossAxisCount = constraints.maxWidth > 600 ? 4 : 2;
-                double childAspectRatio =
-                    constraints.maxWidth > 600 ? 0.60 : 0.60;
-
+                double screenHeight = MediaQuery.of(context).size.height;
+                double childAspectRatio = screenHeight > 800 ? 0.69 : 0.60;
                 return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 31, vertical: 10),
                   child: Obx(
                     () {
                       if (barangController.listBarang.value?.isEmpty ?? true) {
@@ -48,7 +48,7 @@ class BarangPage extends StatelessWidget {
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: crossAxisCount,
-                            crossAxisSpacing: crossAxisCount == 4 ? 33 : 24,
+                            crossAxisSpacing: crossAxisCount == 4 ? 26 : 31,
                             childAspectRatio: childAspectRatio,
                           ),
                           itemCount:
