@@ -34,12 +34,10 @@ class JadwalController extends GetxController {
 
   void setOpenTime(String time) {
     openTime.value = time;
-    debugPrint("Open time set to: $time");
   }
 
   void setCloseTime(String time) {
     closeTime.value = time;
-    debugPrint("Close time set to: $time");
   }
 
   Future<void> addJadwal() async {

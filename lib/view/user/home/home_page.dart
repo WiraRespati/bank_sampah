@@ -12,7 +12,6 @@ import 'package:bank_sampah/view/user/home/title_item_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../controller/user/riwayat_controller.dart';
 
 class HomePage extends StatelessWidget {
@@ -42,6 +41,9 @@ class HomePage extends StatelessWidget {
           children: [
             const BannerHomeWidget(),
             Obx(() {
+              if (jadwalController.jadwalList.isEmpty) {
+                return const Center(child: Text('Tidak ada jadwal tersedia'));
+              }
               double screenHeight = MediaQuery.of(context).size.height;
               double tinggi = screenHeight > 800 ? 200 : 180;
               return CarouselSlider.builder(

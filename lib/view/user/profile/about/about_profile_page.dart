@@ -17,15 +17,14 @@ class AboutProfilePage extends StatelessWidget {
             ItemAboutWidget(
               title: 'Tentang Kami',
               description: """
-Bank Sampah Gunung Samarinda Kelompok 6 KKN Gunung Samarinda
-Introduction: Bank Sampah Gunung Samarinda adalah sebuah inisiatif yang diinisiasi oleh Kelompok 6 KKN Gunung Samarinda. Program ini bertujuan untuk meningkatkan kesadaran masyarakat tentang pentingnya pengelolaan sampah yang baik dan berkelanjutan. Melalui upaya ini, kami berharap dapat membantu menciptakan lingkungan yang lebih bersih dan sehat di Gunung Samarinda.
+Kami adalah mahasiswa dari Kelompok 6 Kuliah Kerja Nyata (KKN) Universitas Mulia, yang saat ini sedang menjalankan program KKN di Kelurahan Gunung Samarinda. Sebagai bagian dari pengabdian kami kepada masyarakat, kami menciptakan aplikasi bank sampah yang inovatif dengan tujuan meningkatkan kesadaran akan pentingnya menjaga lingkungan dan mengelola sampah dengan lebih baik.
+
 """,
             ),
             ItemAboutWidget(
               title: 'Harapan Kami',
               description: """
-Bank Sampah Gunung Samarinda Kelompok 6 KKN Gunung Samarinda
-Introduction: Bank Sampah Gunung Samarinda adalah sebuah inisiatif yang diinisiasi oleh Kelompok 6 KKN Gunung Samarinda. Program ini bertujuan untuk meningkatkan kesadaran masyarakat tentang pentingnya pengelolaan sampah yang baik dan berkelanjutan. Melalui upaya ini, kami berharap dapat membantu menciptakan lingkungan yang lebih bersih dan sehat di Gunung Samarinda.
+Kami berharap aplikasi ini tidak hanya mempermudah Masyarakat dan Lembaga Pemberdayaan Masyarakat Kelurahan Gunung Samarinda dalam mengelola sampah, tetapi juga dapat menjadi pemicu semangat untuk lebih peduli terhadap lingkungan. Dengan adanya sistem penghargaan melalui poin, kami ingin memberikan motivasi tambahan bagi warga untuk terus berpartisipasi aktif dalam program bank sampah ini.
 """,
             ),
             ItemAboutWidget(
