@@ -88,7 +88,7 @@ class JadwalController extends GetxController {
       clearData();
       fetchJadwalData();
 
-      Get.off(() => const KelolaJadwalPage());
+      Get.off(() =>  KelolaJadwalPage());
     } catch (e) {
       Get.snackbar(
         'Error',
@@ -141,7 +141,7 @@ class JadwalController extends GetxController {
         colorText: Colors.white,
       );
       fetchJadwalData();
-      Get.offAll(() => const KelolaJadwalPage());
+      Get.offAll(() =>  KelolaJadwalPage());
     } catch (e) {
       Get.snackbar(
         'Error',
