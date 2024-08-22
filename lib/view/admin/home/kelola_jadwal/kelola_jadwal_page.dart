@@ -10,12 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class KelolaJadwalPage extends StatelessWidget {
-  const KelolaJadwalPage({super.key});
+   KelolaJadwalPage({super.key});
+    final JadwalController controller = Get.put(JadwalController());
 
   @override
   Widget build(BuildContext context) {
-    final JadwalController controller = Get.put(JadwalController());
-    controller.fetchJadwalData();
 
     return Scaffold(
       body: Stack(

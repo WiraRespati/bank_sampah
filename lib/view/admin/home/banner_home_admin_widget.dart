@@ -14,6 +14,7 @@ class BannerHomeAdminWidget extends StatelessWidget {
     final TotalPointsController totalPointsController =
         Get.put(TotalPointsController());
     totalPointsController.getTotalPoints();
+    final double screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
       height: 390,
       width: double.infinity,
@@ -56,8 +57,7 @@ class BannerHomeAdminWidget extends StatelessWidget {
                       width: 10,
                     ),
                     SizedBox(
-                      height: 37,
-                      width: 174,
+                      height: 30,
                       child: SvgPicture.asset(
                         'assets/images/title_bank_sampah.svg',
                       ),
@@ -75,116 +75,122 @@ class BannerHomeAdminWidget extends StatelessWidget {
           child: Center(
             child: Stack(
               children: [
-                Container(
-                  padding: const EdgeInsets.only(
-                    left: 18,
-                    right: 2,
-                  ),
-                  height: 140,
-                  width: 320,
-                  decoration: BoxDecoration(
-                    color: ColorNeutral.neutral50,
-                    border: Border.all(
-                      color: const Color(0xFFB6E0B1),
-                      width: 1,
-                    ),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xFFB6E0B1).withOpacity(0.25),
-                        offset: const Offset(0, 4),
-                        blurRadius: 20,
-                        spreadRadius: 0,
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                      padding: const EdgeInsets.only(top: 18),
-                      child: Text(
-                        "Halo Admin Selamat Datang",
-                        style: TextStyleCollection.captionMedium.copyWith(
-                          fontSize: 16,
-                          color: ColorPrimary.primary100,
-                        ),
-                      )),
-                ),
-                Positioned(
-                  top: 55,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Container(
-                    height: 85,
-                    width: 320,
+                    padding: const EdgeInsets.only(
+                      left: 18,
+                      right: 2,
+                    ),
+                    height: 140,
+                    width: screenWidth - 40,
                     decoration: BoxDecoration(
                       color: ColorNeutral.neutral50,
                       border: Border.all(
                         color: const Color(0xFFB6E0B1),
                         width: 1,
                       ),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF000000).withOpacity(0.25),
+                          color: const Color(0xFFB6E0B1).withOpacity(0.25),
                           offset: const Offset(0, 4),
                           blurRadius: 20,
                           spreadRadius: 0,
                         ),
                       ],
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 18,
+                    child: Padding(
+                        padding: const EdgeInsets.only(top: 18),
+                        child: Text(
+                          "Halo Admin Selamat Datang",
+                          style: TextStyleCollection.captionMedium.copyWith(
+                            fontSize: 16,
+                            color: ColorPrimary.primary100,
                           ),
-                          child: Text(
-                            "Total Point User",
-                            style: TextStyleCollection.bodyBold.copyWith(
-                              fontSize: 12,
-                              color: ColorPrimary.primary100,
+                        )),
+                  ),
+                ),
+                Positioned(
+                  top: 55,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Container(
+                      height: 85,
+                      width: screenWidth - 40,
+                      decoration: BoxDecoration(
+                        color: ColorNeutral.neutral50,
+                        border: Border.all(
+                          color: const Color(0xFFB6E0B1),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF000000).withOpacity(0.25),
+                            offset: const Offset(0, 4),
+                            blurRadius: 20,
+                            spreadRadius: 0,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 18,
+                            ),
+                            child: Text(
+                              "Total Point User",
+                              style: TextStyleCollection.bodyBold.copyWith(
+                                fontSize: 12,
+                                color: ColorPrimary.primary100,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        const Divider(
-                          color: Color(0xFFB6E0B1),
-                          thickness: 1,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 18,
+                          const SizedBox(
+                            height: 4,
                           ),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                'assets/images/koin.png',
-                                height: 25,
-                                width: 25,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Obx(() => Text(
-                                    Helper.formatNumber(totalPointsController
-                                        .totalPoints.value
-                                        .toString()),
-                                    style: TextStyleCollection.captionMedium
-                                        .copyWith(
-                                      fontSize: 16,
-                                      color: ColorCollection.black,
-                                    ),
-                                  ))
-                            ],
+                          const Divider(
+                            color: Color(0xFFB6E0B1),
+                            thickness: 1,
                           ),
-                        )
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 18,
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/images/koin.png',
+                                  height: 25,
+                                  width: 25,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Obx(() => Text(
+                                      Helper.formatNumber(totalPointsController
+                                          .totalPoints.value
+                                          .toString()),
+                                      style: TextStyleCollection.captionMedium
+                                          .copyWith(
+                                        fontSize: 16,
+                                        color: ColorCollection.black,
+                                      ),
+                                    ))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 )

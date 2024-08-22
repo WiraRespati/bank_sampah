@@ -70,7 +70,7 @@ class HomeAdminPage extends StatelessWidget {
                 color: ColorPrimary.primary100,
               ),
               onTap: () {
-                Get.to(() =>  const KelolaJadwalPage());
+                Get.to(() => KelolaJadwalPage());
               },
             ),
             ItemHomeAdminWidget(
