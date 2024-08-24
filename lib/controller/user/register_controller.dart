@@ -94,6 +94,8 @@ class RegisterController extends GetxController {
             'Berhasil',
             'Pendaftaran berhasil, silahkan login',
             snackPosition: SnackPosition.TOP,
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
           );
           Get.offAll(() => LoginPage());
         } else if (value == 'weak-password') {
