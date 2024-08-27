@@ -38,6 +38,7 @@ class ClosedTimePickerWidget extends StatelessWidget {
                 "${dateTime.hour}:${dateTime.minute}",
               );
             },
+            isCancelTextLeft: true,
           ),
         ),
       ],

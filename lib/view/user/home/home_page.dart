@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bank_sampah/controller/admin/barang_controller.dart';
 import 'package:bank_sampah/controller/admin/edit_sampah_controller.dart';
 import 'package:bank_sampah/controller/admin/jadwal_controller.dart';
@@ -81,7 +83,7 @@ class HomePage extends StatelessWidget {
                 }
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 5,
+                  itemCount: max(1, min(5, listSampah.length)),
                   itemBuilder: (context, index) {
                     final sampah = listSampah[index];
                     return Container(
@@ -121,7 +123,7 @@ class HomePage extends StatelessWidget {
                 }
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 5,
+                  itemCount: max(1, min(5, listBarang.length)),
                   itemBuilder: (context, index) {
                     final barang = listBarang[index];
 

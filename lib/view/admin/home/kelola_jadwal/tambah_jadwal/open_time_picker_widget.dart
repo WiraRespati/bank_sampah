@@ -38,6 +38,8 @@ class OpenTimePickerWidget extends StatelessWidget {
                 "${dateTime.hour}:${dateTime.minute}",
               );
             },
+            isCancelTextLeft: true,
+            
           ),
         ),
         const SizedBox(height: 24),
