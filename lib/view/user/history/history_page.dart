@@ -22,7 +22,7 @@ class HistoryPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const BannerHomeWidget(),
+             BannerHomeWidget(),
             SizedBox(
               height: MediaQuery.of(context).size.height,
               child: DefaultTabController(

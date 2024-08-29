@@ -1,7 +1,7 @@
+import 'package:bank_sampah/controller/user/maps_controller.dart';
 import 'package:bank_sampah/controller/user/profile_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
-import 'package:bank_sampah/view/user/maps/maps_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -10,6 +10,7 @@ import 'package:shimmer/shimmer.dart';
 class BannerProfileWidget extends StatelessWidget {
   BannerProfileWidget({super.key});
   final ProfileController profileController = Get.put(ProfileController());
+  final MapsController mapsController = Get.put(MapsController());
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -74,7 +75,7 @@ class BannerProfileWidget extends StatelessWidget {
                     ),
                     child: IconButton(
                       onPressed: () {
-                        Get.to(() => const MapsPage());
+                        mapsController.openGoogleMaps(-1.2338871, 116.8522995);
                       },
                       icon: Icon(
                         Icons.location_on,

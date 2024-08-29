@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const BannerHomeWidget(),
+             BannerHomeWidget(),
             Obx(() {
               if (jadwalController.jadwalList.isEmpty) {
                 return const Center(child: Text('Tidak ada jadwal tersedia'));

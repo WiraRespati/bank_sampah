@@ -1,14 +1,16 @@
+import 'package:bank_sampah/controller/user/maps_controller.dart';
 import 'package:bank_sampah/controller/user/user_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:bank_sampah/utils/utils.dart';
-import 'package:bank_sampah/view/user/maps/maps_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class BannerHomeWidget extends StatelessWidget {
-  const BannerHomeWidget({super.key});
+   BannerHomeWidget({super.key});
+
+  final MapsController mapsController = Get.put(MapsController());
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +80,8 @@ class BannerHomeWidget extends StatelessWidget {
                     ),
                     child: IconButton(
                       onPressed: () {
-                        Get.to(() => const MapsPage());
+                        
+mapsController.openGoogleMaps(-1.2338871, 116.8522995);
                       },
                       icon: Icon(
                         Icons.location_on,
