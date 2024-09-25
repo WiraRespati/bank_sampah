@@ -23,8 +23,9 @@ class OnboardingButtonWidget extends StatelessWidget {
                 height: 48,
                 width: double.infinity,
                 child: ButtonWidget(
-                  onPressed: () {
-                    Get.to(() => LoginPage());
+                  onPressed: () async {
+                    Get.offAll(() => LoginPage());
+                    onboardingController.reset();
                   },
                   text: 'Mulai Menabung Sampah',
                   textColor: ColorCollection.white,

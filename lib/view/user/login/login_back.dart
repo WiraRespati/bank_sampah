@@ -16,7 +16,7 @@ class LoginBack extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8),
           child: IconButton(
             onPressed: () {
-              Get.to(() =>  const OnboardingPage());
+              Get.to(() => const OnboardingPage());
             },
             style: ButtonStyle(
               overlayColor: WidgetStatePropertyAll(ColorNeutral.neutral100),

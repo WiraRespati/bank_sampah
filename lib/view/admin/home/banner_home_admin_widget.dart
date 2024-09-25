@@ -43,11 +43,13 @@ class BannerHomeAdminWidget extends StatelessWidget {
             ),
           ),
           child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
-                child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
                   children: [
+                    const SizedBox(
+                      width: 18,
+                    ),
                     Image.asset(
                       'assets/images/logobs.png',
                       height: 40,
@@ -57,16 +59,18 @@ class BannerHomeAdminWidget extends StatelessWidget {
                       width: 10,
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 37,
+                      width: screenWidth * 0.5,
                       child: SvgPicture.asset(
                         'assets/images/title_bank_sampah.svg',
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
+                
+              ],
+            ),
         ),
         Positioned(
           top: 250,

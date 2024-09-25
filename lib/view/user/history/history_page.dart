@@ -22,7 +22,7 @@ class HistoryPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-             BannerHomeWidget(),
+            BannerHomeWidget(),
             SizedBox(
               height: MediaQuery.of(context).size.height,
               child: DefaultTabController(
@@ -35,7 +35,7 @@ class HistoryPage extends StatelessWidget {
                       tabs: [
                         Tab(
                           child: Text(
-                            'Tukar Koin',
+                            'Tukar Point',
                             style: TextStyleCollection.bodyMedium.copyWith(
                               fontSize: 16,
                               color: ColorPrimary.primary100,
@@ -44,7 +44,7 @@ class HistoryPage extends StatelessWidget {
                         ),
                         Tab(
                           child: Text(
-                            'Kumpul Sampah',
+                            'Tabung Sampah',
                             style: TextStyleCollection.bodyMedium.copyWith(
                               fontSize: 16,
                               color: ColorPrimary.primary100,
@@ -53,15 +53,22 @@ class HistoryPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Flexible(
+                    Expanded(
                       child: TabBarView(
                         children: [
                           riwayatController
                                       .listRiwayatKonversi.value?.isEmpty ??
                                   true
-                              ? Center(
+                              ? Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical:
+                                        MediaQuery.of(context).size.height / 6,
+                                    horizontal:
+                                        MediaQuery.of(context).size.width / 8,
+                                  ),
                                   child: Text(
-                                    'Belum ada riwayat konversi',
+                                    'Tidak ada riwayat Tukar Point',
+                                    maxLines: 1,
                                     style:
                                         TextStyleCollection.bodyMedium.copyWith(
                                       fontSize: 16,
@@ -107,9 +114,16 @@ class HistoryPage extends StatelessWidget {
                           riwayatController
                                       .listRiwayatMenabung.value?.isEmpty ??
                                   true
-                              ? Center(
+                              ? Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical:
+                                        MediaQuery.of(context).size.height / 6,
+                                    horizontal:
+                                        MediaQuery.of(context).size.width / 8,
+                                  ),
                                   child: Text(
                                     'Belum ada riwayat menabung',
+                                    maxLines: 1,
                                     style:
                                         TextStyleCollection.bodyMedium.copyWith(
                                       fontSize: 16,

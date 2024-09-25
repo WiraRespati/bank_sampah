@@ -8,7 +8,7 @@
 
          <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC1KfZ4n6rM1zk7NLNDiMMh0I6pZ1VJONQ" />
+            android:value="AIzaSyBLezviNC1GBtKHKZ4TXtNJnL8Jk3c-0tQ" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

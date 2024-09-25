@@ -2,6 +2,7 @@ import 'package:bank_sampah/controller/user/maps_controller.dart';
 import 'package:bank_sampah/controller/user/profile_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
+import 'package:bank_sampah/view/user/maps/maps_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -11,8 +12,10 @@ class BannerProfileWidget extends StatelessWidget {
   BannerProfileWidget({super.key});
   final ProfileController profileController = Get.put(ProfileController());
   final MapsController mapsController = Get.put(MapsController());
+   
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
       height: 340,
       width: double.infinity,
@@ -59,9 +62,10 @@ class BannerProfileWidget extends StatelessWidget {
                     ),
                     SizedBox(
                       height: 37,
-                      width: 174,
+                      width: screenWidth * 0.5,
                       child: SvgPicture.asset(
                         'assets/images/title_bank_sampah.svg',
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ],
@@ -75,7 +79,7 @@ class BannerProfileWidget extends StatelessWidget {
                     ),
                     child: IconButton(
                       onPressed: () {
-                        mapsController.openGoogleMaps(-1.2338871, 116.8522995);
+                       Get.to(const MapsPage());
                       },
                       icon: Icon(
                         Icons.location_on,

@@ -3,12 +3,13 @@ import 'package:bank_sampah/controller/user/user_controller.dart';
 import 'package:bank_sampah/utils/color_constant.dart';
 import 'package:bank_sampah/utils/text_style_constant.dart';
 import 'package:bank_sampah/utils/utils.dart';
+import 'package:bank_sampah/view/user/maps/maps_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class BannerHomeWidget extends StatelessWidget {
-   BannerHomeWidget({super.key});
+  BannerHomeWidget({super.key});
 
   final MapsController mapsController = Get.put(MapsController());
 
@@ -64,7 +65,7 @@ class BannerHomeWidget extends StatelessWidget {
                     ),
                     SizedBox(
                       height: 37,
-                      width: screenWidth * 0.5, 
+                      width: screenWidth * 0.5,
                       child: SvgPicture.asset(
                         'assets/images/title_bank_sampah.svg',
                       ),
@@ -80,8 +81,7 @@ class BannerHomeWidget extends StatelessWidget {
                     ),
                     child: IconButton(
                       onPressed: () {
-                        
-mapsController.openGoogleMaps(-1.2338871, 116.8522995);
+                        Get.to(const MapsPage());
                       },
                       icon: Icon(
                         Icons.location_on,
@@ -106,8 +106,7 @@ mapsController.openGoogleMaps(-1.2338871, 116.8522995);
                       right: 2,
                     ),
                     height: 110,
-                    width:
-                        screenWidth - 40, 
+                    width: screenWidth - 40,
                     decoration: BoxDecoration(
                       color: ColorNeutral.neutral50,
                       border: Border.all(
